@@ -64,4 +64,12 @@ export class Menu implements OnInit {
   isTester() {
     return this.role === 'TESTER';
   }
+
+  isComprador() {
+    return this.role === 'COMPRADOR';
+  }
+
+  isCliente() {
+    return this.role === 'CLIENTE';
+  }
 }

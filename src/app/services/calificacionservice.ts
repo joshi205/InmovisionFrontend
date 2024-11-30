@@ -19,6 +19,7 @@ export class CalificacionService {
 
   list() {
     return this.http.get<Calificacion[]>(this.url);
+    
   }
 
   insert(c: Calificacion) {

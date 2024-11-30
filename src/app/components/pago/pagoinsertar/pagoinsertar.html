@@ -1,31 +1,30 @@
+<!-- pagoinsertar.component.html -->
 <div class="container">
-  <div style="text-align: center; margin: 5%">
-    <h2>{{ edicion ? 'Edición de pago' : 'Registrar pago' }}</h2>
-  </div>
+  <h2>{{ edicion ? 'Edición de pago' : 'Registrar pago' }}</h2>
 
-  <div style="text-align: center; margin: 5%">
+  <div>
     <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+      
+      <!-- ID (solo en edición) -->
       @if (edicion) {
       <mat-form-field class="example-full-width">
         <mat-label>ID:</mat-label>
         <input matInput formControlName="codigo" readonly="true" />
       </mat-form-field>
       }
-      <br />
 
       <!-- Usuario -->
       <mat-form-field class="example-full-width">
         <mat-label>Usuario</mat-label>
         <mat-select formControlName="usuario">
-          @for (u of listaUsuarios; track u) {
-          <mat-option [value]="u.idUser"> {{ u.nombre }} {{ u.apellido }} </mat-option>
+          @for (u of listaUsuarios; track u.idUser) {
+          <mat-option [value]="u.idUser">{{ u.nombre }} {{ u.apellido }}</mat-option>
           }
         </mat-select>
         <mat-error>
           @if (form.get('usuario')?.hasError('required')) { Seleccione un usuario!! }
         </mat-error>
       </mat-form-field>
-      <br />
 
       <!-- Monto -->
       <mat-form-field class="example-full-width">
@@ -33,15 +32,10 @@
         <input matInput type="number" formControlName="monto" />
         <mat-error>
           @if (form.get('monto')?.hasError('required')) { Ingrese el monto!! }
-          @if (form.get('monto')?.hasError('min')) {
-            El monto debe ser mayor a 0.
-          }
-          @if (form.get('monto')?.hasError('pattern')) {
-            Solo se permiten números con hasta 2 decimales.
-          }
+          @if (form.get('monto')?.hasError('min')) { El monto debe ser mayor a 0. }
+          @if (form.get('monto')?.hasError('pattern')) { Solo se permiten números con hasta 2 decimales. }
         </mat-error>
       </mat-form-field>
-      <br />
 
       <!-- Fecha de pago -->
       <mat-form-field class="example-full-width">
@@ -54,29 +48,27 @@
           @if (form.get('fecha')?.hasError('required')) { La fecha de pago es obligatoria. }
         </mat-error>
       </mat-form-field>
-      <br />
 
       <!-- Método de pago -->
       <mat-form-field class="example-full-width">
         <mat-label>Método de pago</mat-label>
         <mat-select formControlName="metodo">
-          <mat-option value="EFECTIVO">Efectivo</mat-option>
-          <mat-option value="TARJETA">Tarjeta</mat-option>
-          <mat-option value="TRANSFERENCIA">Transferencia</mat-option>
+          <mat-option value="EFECTIVO">💵 Efectivo</mat-option>
+          <mat-option value="TARJETA">💳 Tarjeta</mat-option>
+          <mat-option value="TRANSFERENCIA">🏦 Transferencia</mat-option>
         </mat-select>
         <mat-error>
           @if (form.get('metodo')?.hasError('required')) { Seleccione un método de pago!! }
         </mat-error>
       </mat-form-field>
-      <br />
 
       <!-- Contrato -->
       <mat-form-field class="example-full-width">
         <mat-label>Contrato</mat-label>
         <mat-select formControlName="contrato">
-          @for (c of listaContratos; track c) {
+          @for (c of listaContratos; track c.idContrato) {
           <mat-option [value]="c.idContrato">
-             {{ c.propiedad.titulo }} - {{ c.tipo }} - Monto: {{c.monto}}
+            {{ c.propiedad.titulo }} - {{ c.tipo }} - S/. {{ c.monto }}
           </mat-option>
           }
         </mat-select>
@@ -84,17 +76,14 @@
           @if (form.get('contrato')?.hasError('required')) { Seleccione un contrato!! }
         </mat-error>
       </mat-form-field>
-      <br />
 
+      <!-- Botones -->
       <div class="actions">
         <button mat-raised-button color="primary" type="submit">
           {{ edicion ? 'Editar' : 'Registrar' }}
         </button>
-
         <button mat-raised-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
       </div>
-
-      <br />
 
     </form>
   </div>

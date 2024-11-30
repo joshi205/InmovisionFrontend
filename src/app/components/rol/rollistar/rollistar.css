@@ -1,125 +1,286 @@
-/* ====== CONTENEDOR GENERAL ====== */
-div {
-  padding: 30px;
-  margin: 0 auto;
+/* ================================
+   ROL LISTAR - INMOVISION UI
+   ================================ */
+
+:host {
+  display: block;
+  min-height: 100vh;
+  padding: 16px 20px;
+  box-sizing: border-box;
+  background: radial-gradient(circle at top left, #102545 5%, #050816 50%, #02030a 100%);
+  font-family: 'Poppins', sans-serif;
+  color: #e5f0ff;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.roles-container {
   max-width: 1100px;
-  font-family: 'Roboto', sans-serif;
+  margin: 0 auto;
 }
 
-/* ====== TÍTULO ====== */
-h2 {
+/* HEADER */
+.roles-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.roles-header h2 {
+  margin: 0;
+  font-size: 20px;
   font-weight: 600;
-  color: #212121;
-  text-align: center;
-  margin-bottom: 25px;
-  letter-spacing: 0.5px;
+  color: #ffffff;
 }
 
-/* ====== TABLA ====== */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: #ffffff;
-  border-radius: 12px;
+/* BOTÓN REGISTRAR */
+.btn-register {
+  background-color: #105590 !important;
+  color: #ffffff !important;
+  border-radius: 999px !important;
+  padding: 6px 16px !important;
+  font-size: 0.84rem !important;
+  font-weight: 600 !important;
+  border: 1px solid rgba(180, 221, 255, 0.55);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.7);
+}
+
+.btn-register mat-icon {
+  margin-right: 6px;
+  font-size: 18px;
+}
+
+.btn-register:hover {
+  background-color: #1470c1 !important;
+}
+
+/* GRID DE CARDS */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+/* CARD */
+.role-card {
+  background: #041528;
+  border-radius: 16px;
+  border: 1px solid rgba(124, 194, 255, 0.22);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8);
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
   overflow: hidden;
-  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.16s ease, box-shadow 0.16s ease,
+    border-color 0.16s ease;
 }
 
-/* Cabecera */
-th {
+.role-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(124, 194, 255, 0.14), transparent 55%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+}
+
+.role-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.9);
+  border-color: rgba(124, 194, 255, 0.55);
+}
+
+.role-card:hover::before {
+  opacity: 1;
+}
+
+/* CHIP DEL ROL */
+.role-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
   font-weight: 600;
-  background-color: #ffffff; /* Rojo institucional Inmovision */
-  color: #251818;
-  text-align: center;
-  padding: 14px 10px;
-  letter-spacing: 0.3px;
-  font-size: 15px;
+  align-self: flex-start;
+  background: rgba(12, 42, 80, 0.9);
+  color: #dce8ff;
+  border: 1px solid rgba(124, 194, 255, 0.55);
 }
 
-/* Filas */
-td {
-  text-align: center;
-  padding: 12px 10px;
-  color: #424242;
-  font-size: 14px;
-  border-bottom: 1px solid #f0f0f0;
+.role-icon {
+  font-size: 18px;
 }
 
-/* Filas alternadas */
-tr:nth-child(even) {
-  background-color: #fafafa;
+/* Colores por tipo de rol */
+.role-chip.role-admin {
+  background: rgba(255, 100, 100, 0.12);
+  border-color: rgba(255, 140, 140, 0.8);
+  color: #ffd0d0;
 }
 
-/* Hover fila */
-tr:hover,
-.mat-mdc-row:hover,
-.mat-row:hover {
-  background-color: #D6E4FF !important;
-  transition: background-color 0.25s ease-in-out;
+.role-chip.role-admin .role-icon {
+  color: #ff8b8b;
 }
 
-/* Quitar sombra extra del mat-table */
-.mat-elevation-z8 {
-  box-shadow: none;
+.role-chip.role-owner {
+  background: rgba(124, 194, 255, 0.12);
+  border-color: rgba(124, 194, 255, 0.85);
+  color: #d7ecff;
 }
 
-/* ====== BOTÓN ====== */
-.actions {
+.role-chip.role-owner .role-icon {
+  color: #7cc2ff;
+}
+
+.role-chip.role-client {
+  background: rgba(141, 220, 155, 0.12);
+  border-color: rgba(141, 220, 155, 0.8);
+  color: #e1ffe7;
+}
+
+.role-chip.role-client .role-icon {
+  color: #8dde9b;
+}
+
+/* fallback */
+.role-chip.role-default {
+  /* se combina con los anteriores, pero asegura un fondo base */
+}
+
+/* BODY */
+.role-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* INFO DE USUARIO */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: radial-gradient(circle at 30% 20%, #7cc2ff, #105590);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #ffffff;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.7);
+  flex-shrink: 0;
+}
+
+.user-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.user-label {
+  margin: 0;
+  font-size: 0.74rem;
+  color: #9fb4d4;
+}
+
+/* META */
+.role-meta {
+  font-size: 0.75rem;
+  color: #8fa6c5;
+}
+
+/* ACCIONES */
+.role-actions {
   display: flex;
   justify-content: flex-end;
-  margin-top: 25px;
+  gap: 6px;
+  margin-top: 4px;
 }
 
-/* Botón "Registrar Distrito" */
-button[mat-menu-item],
-button[mat-flat-button] {
-  background-color: #25415e; /* Rojo Inmovision */
-  color: white;
+.role-actions button {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px !important;
+  border: 1px solid rgba(124, 194, 255, 0.6);
+  background: rgba(4, 21, 40, 0.95);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.75);
+  transition: all 0.18s ease;
+  padding: 0;
+}
+
+.btn-edit mat-icon {
+  color: #7cc2ff;
+  font-size: 18px;
+}
+
+.btn-delete mat-icon {
+  color: #ff6b6b;
+  font-size: 18px;
+}
+
+.role-actions button:hover {
+  background: #105590;
+  box-shadow: 0 0 12px rgba(124, 194, 255, 0.7);
+}
+
+/* EMPTY STATE */
+.empty-state {
+  margin-top: 40px;
+  padding: 40px 20px;
+  text-align: center;
+  background: #041528;
+  border-radius: 18px;
+  border: 1px solid rgba(124, 194, 255, 0.3);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.75);
+}
+
+.empty-state mat-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+  color: #7cc2ff;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 0.95rem;
   font-weight: 500;
-  border-radius: 6px;
-  padding: 10px 22px;
-  font-size: 14px;
-  letter-spacing: 0.4px;
-  transition: all 0.25s ease;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* Hover del botón */
-button[mat-menu-item]:hover,
-button[mat-flat-button]:hover {
-  background-color: #25415e;
-  transform: translateY(-2px);
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+.empty-state span {
+  font-size: 0.8rem;
+  color: #9fb4d4;
 }
 
-/* ====== RESPONSIVE ====== */
-@media (max-width: 768px) {
-  table {
-    font-size: 13px;
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  :host {
+    padding: 12px;
   }
 
-  th,
-  td {
-    padding: 8px;
+  .roles-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .actions {
+  .btn-register {
+    align-self: stretch;
     justify-content: center;
-  }
-
-  button[mat-menu-item],
-  button[mat-flat-button] {
-    width: 100%;
-    max-width: 250px;
-    text-align: center;
-  }
-}
-
-/* ====== SCROLL HORIZONTAL (si hay muchas columnas) ====== */
-@media (max-width: 600px) {
-  table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
+    display: inline-flex;
   }
 }
