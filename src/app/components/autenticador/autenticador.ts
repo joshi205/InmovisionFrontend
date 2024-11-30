@@ -9,7 +9,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { LoginService } from '../../services/login-service';
 import { MatCheckboxModule } from '@angular/material/checkbox'; // 👈 NUEVO
 
-
 @Component({
   selector: 'app-autenticador',
   imports: [MatFormFieldModule, FormsModule, MatInputModule, MatButtonModule, MatCheckboxModule],
@@ -33,7 +32,7 @@ export class Autenticador implements OnInit {
     this.loginService.login(request).subscribe(
       (data: any) => {
         sessionStorage.setItem('token', data.jwttoken);
-        this.router.navigate(['homes']);
+        this.router.navigateByUrl('/homes');
       },
       (error) => {
         this.mensaje = 'Credenciales incorrectas!!!';
@@ -43,6 +42,6 @@ export class Autenticador implements OnInit {
   }
 
   goToRegister(): void {
-  this.router.navigate(['usuarios/nuevo']);
+    this.router.navigate(['registro']);
   }
 }
