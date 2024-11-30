@@ -103,6 +103,12 @@ h2 {
   color: white !important;
 }
 
+.btn-ubicacion {
+  background-color: #4e8cff !important;
+  color: white !important;
+}
+
+
 /* ====== BOTÓN REGISTRAR ====== */
 .register-box {
   text-align: center;
@@ -115,3 +121,4 @@ h2 {
   padding: 10px 25px;
   border-radius: 8px;
 }
+
