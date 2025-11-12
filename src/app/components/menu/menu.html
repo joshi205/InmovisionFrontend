@@ -1,0 +1,17 @@
+<div class="container">
+  <mat-toolbar class="custom-toolbar">
+    <button 
+    matButton 
+    class="btn-rojo" 
+    aria-label="Example icon-button with menu icon"
+    [matMenuTriggerFor]="menuDevice">
+      <mat-icon>menu</mat-icon>Inmovision
+    </button>
+  </mat-toolbar>
+  <mat-menu #menuDevice="matMenu">
+  <button mat-menu-item routerLink="/distritos">Distritos</button>
+  <button mat-menu-item routerLink="/usuarios">Usuarios</button>
+  <button mat-menu-item routerLink="/roles">Roles</button>
+  <button mat-menu-item routerLink="/propiedades">Propiedades</button>
+</mat-menu>
+</div>

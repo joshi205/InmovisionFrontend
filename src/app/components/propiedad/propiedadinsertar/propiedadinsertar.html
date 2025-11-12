@@ -1,0 +1,175 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h2>{{ edicion ? 'Edición de Propiedad' : 'Registrar Propiedad' }}</h2>
+  </div>
+
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+
+      @if (edicion) {
+      <mat-form-field class="example-full-width">
+        <mat-label>ID:</mat-label>
+        <input matInput formControlName="idPropiedad" readonly="true" />
+      </mat-form-field>
+      }
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Título</mat-label>
+        <input matInput formControlName="titulo" />
+        <mat-error>
+          @if (form.get('titulo')?.hasError('required')) { Ingrese el título!! }
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Descripción</mat-label>
+        <textarea matInput formControlName="descripcion"></textarea>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Precio (USD)</mat-label>
+        <input type="number" matInput formControlName="precio" />
+        <mat-error>
+          @if (form.get('precio')?.hasError('required')) { Ingrese el precio!! }
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Tipo</mat-label>
+        <mat-select formControlName="tipo" required>
+          @for (t of typeOptions; track t) {
+          <mat-option [value]="t.value">{{ t.viewValue }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>
+          @if (form.get('tipo')?.hasError('required')) { Seleccione el tipo!! }
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Categoría</mat-label>
+        <mat-select formControlName="categoria" required>
+          @for (c of categoryOptions; track c) {
+          <mat-option [value]="c.value">{{ c.viewValue }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>
+          @if (form.get('categoria')?.hasError('required')) { Seleccione la categoría!! }
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Dirección</mat-label>
+        <input matInput formControlName="direccion" />
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Fecha de Publicación</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaPublicacion" />
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="estado">
+          @for (e of estadoOptions; track e) {
+          <mat-option [value]="e.value">{{ e.viewValue }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Metros Cuadrados</mat-label>
+        <input type="number" matInput formControlName="metrosCuadrados" />
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Habitaciones</mat-label>
+        <input type="number" matInput formControlName="habitaciones" />
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Baños</mat-label>
+        <input type="number" matInput formControlName="banos" />
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Destacada</mat-label>
+        <mat-select formControlName="destacada">
+          @for (d of destacadaOptions; track d) {
+          <mat-option [value]="d.value">{{ d.viewValue }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>URL Visita Virtual</mat-label>
+        <input matInput formControlName="urlVr" />
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Notas</mat-label>
+        <textarea matInput formControlName="notas"></textarea>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="usuarioFK">
+          @for (us of listaUsuarios; track us) {
+          <mat-option [value]="us.idUser">{{ us.nombre }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Distrito</mat-label>
+        <mat-select formControlName="distritoFK">
+          @for (d of listaDistritos; track d) {
+          <mat-option [value]="d.idDistrito">{{ d.nombreDistrito }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <br />
+      <div style="margin-top: 20px">
+        <button matButton="elevated">
+          {{ edicion ? 'Editar' : 'Registrar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

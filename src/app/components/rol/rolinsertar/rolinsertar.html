@@ -1,0 +1,69 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h2>{{ edicion ? 'Editar Rol' : 'Registro de Rol' }}</h2>
+  </div>
+
+  <div>
+    <form [formGroup]="form" (ngSubmit)="aceptar()">
+      
+      <!-- Campo ID (solo visible si está en modo edición) -->
+      @if (edicion) {
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="codigo" readonly />
+        </mat-form-field>
+      }
+
+      <!-- Nombre del rol -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre del rol</mat-label>
+        <input matInput formControlName="nombre" placeholder="Ejemplo: ADMIN, CLIENTE, PROPIETARIO" />
+        <mat-error>
+          @if (form.get('nombre')?.hasError('required')) {
+            Ingrese el nombre del rol!!
+          }
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Usuario asociado -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Usuario asignado</mat-label>
+        <mat-select formControlName="usuario">
+          @for (u of listaUsuarios; track u) {
+            <mat-option [value]="u">
+              {{ u.nombre }} {{ u.apellido }}
+            </mat-option>
+          }
+        </mat-select>
+        <mat-error>
+          @if (form.get('usuario')?.hasError('required')) {
+            Seleccione un usuario!!
+          }
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Botones de acción -->
+      <div class="button-group">
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+          [disabled]="!form.valid"
+        >
+          {{ edicion ? 'Actualizar' : 'Guardar' }}
+        </button>
+
+        <button
+          mat-stroked-button
+          color="warn"
+          type="button"
+          (click)="cancelar()"
+        >
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

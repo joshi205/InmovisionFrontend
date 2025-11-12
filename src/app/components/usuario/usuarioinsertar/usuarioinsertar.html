@@ -1,0 +1,131 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h2>{{ edicion ? 'Editar usuario' : 'Registro de usuarios' }}</h2>
+  </div>
+
+  <div>
+    <form [formGroup]="form" (ngSubmit)="aceptar()">
+
+      <!-- ID (solo visible en edición) -->
+      @if (edicion) {
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="codigo" readonly />
+        </mat-form-field>
+      }
+
+      <!-- Nombre -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" />
+        <mat-error>
+          @if (form.get('nombre')?.hasError('required')) {
+            Ingrese el nombre!!
+          }
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Apellido -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="apellido" />
+        <mat-error>
+          @if (form.get('apellido')?.hasError('required')) {
+            Ingrese el apellido!!
+          }
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Correo -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Correo</mat-label>
+        <input matInput type="email" formControlName="correo" />
+        <mat-error>
+          @if (form.get('correo')?.hasError('required')) {
+            Ingrese el correo!!
+          }
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Username -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre de usuario</mat-label>
+        <input matInput formControlName="username" />
+        <mat-error>
+          @if (form.get('username')?.hasError('required')) {
+            Ingrese el nombre de usuario!!
+          }
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Contraseña -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" formControlName="password" />
+        <mat-error>
+          @if (form.get('password')?.hasError('required')) {
+            Ingrese la contraseña!!
+          }
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Teléfono -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Teléfono</mat-label>
+        <input matInput type="tel" formControlName="telefono" />
+        <mat-error>
+          @if (form.get('telefono')?.hasError('required')) {
+            Ingrese el teléfono!!
+          }
+        </mat-error>
+      </mat-form-field>
+
+      <!-- URL de foto -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Foto (URL)</mat-label>
+        <input matInput formControlName="fotourl" />
+        <mat-error>
+          @if (form.get('fotourl')?.hasError('required')) {
+            Ingrese la URL de la foto!!
+          }
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Fecha de registro -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Fecha de registro</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fecha_registro" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error>
+          @if (form.get('fecha_registro')?.hasError('required')) {
+            Seleccione una fecha!!
+          }
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- Botones -->
+      <div class="button-group">
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+          [disabled]="!form.valid"
+        >
+          {{ edicion ? 'Actualizar' : 'Guardar' }}
+        </button>
+
+        <button
+          mat-stroked-button
+          color="warn"
+          type="button"
+          (click)="cancelar()"
+        >
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
