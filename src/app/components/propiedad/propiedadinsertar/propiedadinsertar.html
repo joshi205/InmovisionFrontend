@@ -1,174 +1,158 @@
-<div class="container">
-  <div style="text-align: center; margin: 5%">
-    <h2>{{ edicion ? 'Edición de Propiedad' : 'Registrar Propiedad' }}</h2>
-  </div>
+<div class="card-container">
+  <div class="card">
+    <h2 class="title">
+      {{ edicion ? 'Editar Propiedad' : 'Registrar Propiedad' }}
+    </h2>
 
-  <div style="text-align: center; margin: 5%">
-    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+    <form [formGroup]="form" (ngSubmit)="aceptar()" class="grid">
+      <!-- IZQUIERDA -->
+      <div class="col">
+        <mat-form-field appearance="fill" class="small">
+          <mat-label>Título</mat-label>
+          <input matInput formControlName="titulo" />
+        </mat-form-field>
 
-      @if (edicion) {
-      <mat-form-field class="example-full-width">
-        <mat-label>ID:</mat-label>
-        <input matInput formControlName="idPropiedad" readonly="true" />
-      </mat-form-field>
-      }
+        <mat-form-field appearance="fill" class="small">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput rows="2" formControlName="descripcion"></textarea>
+        </mat-form-field>
 
-      <br />
+        <mat-form-field appearance="fill" class="small">
+          <mat-label>Precio</mat-label>
+          <input matInput type="number" formControlName="precio" />
+        </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Título</mat-label>
-        <input matInput formControlName="titulo" />
-        <mat-error>
-          @if (form.get('titulo')?.hasError('required')) { Ingrese el título!! }
-        </mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="fill" class="small">
+          <mat-label>Tipo</mat-label>
+          <mat-select formControlName="tipo">
+            <mat-option value="Casa">Casa</mat-option>
+            <mat-option value="Departamento">Departamento</mat-option>
+            <mat-option value="Terreno">Terreno</mat-option>
+            <mat-option value="Local">Local</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-      <br />
+        <mat-form-field appearance="fill" class="small">
+          <mat-label>Categoría</mat-label>
+          <mat-select formControlName="categoria">
+            <mat-option value="Venta">Venta</mat-option>
+            <mat-option value="Alquiler">Alquiler</mat-option>
+            <mat-option value="Proyecto">Proyecto</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-      <mat-form-field>
-        <mat-label>Descripción</mat-label>
-        <textarea matInput formControlName="descripcion"></textarea>
-      </mat-form-field>
+      <!-- DERECHA -->
+      <div class="col">
+        <mat-form-field appearance="fill" class="small">
+          <mat-label>Dirección</mat-label>
+          <input matInput formControlName="direccion" />
+        </mat-form-field>
 
-      <br />
+        <mat-form-field appearance="fill" class="small">
+          <mat-label>Estado</mat-label>
+          <mat-select formControlName="estado">
+            <mat-option value="Disponible">Disponible</mat-option>
+            <mat-option value="No disponible">No disponible</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Precio (USD)</mat-label>
-        <input type="number" matInput formControlName="precio" />
-        <mat-error>
-          @if (form.get('precio')?.hasError('required')) { Ingrese el precio!! }
-        </mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="fill" class="small">
+          <mat-label>Fecha publicación</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fechaPublicacion" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
 
-      <br />
+        <mat-form-field appearance="fill" class="small">
+          <mat-label>Metros cuadrados</mat-label>
+          <input matInput type="number" formControlName="metrosCuadrados" />
+        </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Tipo</mat-label>
-        <mat-select formControlName="tipo" required>
-          @for (t of typeOptions; track t) {
-          <mat-option [value]="t.value">{{ t.viewValue }}</mat-option>
-          }
-        </mat-select>
-        <mat-error>
-          @if (form.get('tipo')?.hasError('required')) { Seleccione el tipo!! }
-        </mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="fill" class="small">
+          <mat-label>Habitaciones</mat-label>
+          <input matInput type="number" formControlName="habitaciones" />
+        </mat-form-field>
 
-      <br />
+        <mat-form-field appearance="fill" class="small">
+          <mat-label>Baños</mat-label>
+          <input matInput type="number" formControlName="banos" />
+        </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Categoría</mat-label>
-        <mat-select formControlName="categoria" required>
-          @for (c of categoryOptions; track c) {
-          <mat-option [value]="c.value">{{ c.viewValue }}</mat-option>
-          }
-        </mat-select>
-        <mat-error>
-          @if (form.get('categoria')?.hasError('required')) { Seleccione la categoría!! }
-        </mat-error>
-      </mat-form-field>
+        <!-- DESTACADA -->
+        <mat-slide-toggle formControlName="destacada" color="primary"> Destacada </mat-slide-toggle>
+      </div>
 
-      <br />
+      <!-- FILA FULL -->
+      <div class="col-full">
+        <mat-form-field appearance="fill" class="small">
+          <mat-label>Latitud</mat-label>
+          <input matInput type="number" formControlName="latitud" />
+        </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Dirección</mat-label>
-        <input matInput formControlName="direccion" />
-      </mat-form-field>
+        <mat-form-field appearance="fill" class="small">
+          <mat-label>Longitud</mat-label>
+          <input matInput type="number" formControlName="longitud" />
+        </mat-form-field>
 
-      <br />
+        <mat-form-field appearance="fill" class="small">
+          <mat-label>URL VR</mat-label>
+          <input matInput formControlName="urlVr" />
+        </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Fecha de Publicación</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="fechaPublicacion" />
-        <mat-hint>DD/MM/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
+        <mat-form-field appearance="fill" class="small">
+          <mat-label>Notas</mat-label>
+          <textarea matInput rows="2" formControlName="notas"></textarea>
+        </mat-form-field>
+      </div>
 
-      <br />
+      <!-- USUARIO / DISTRITO -->
+      <div class="col-full">
+        <mat-form-field appearance="fill" class="small">
+          <mat-label>Usuario</mat-label>
+          <mat-select formControlName="usuario">
+            <mat-option *ngFor="let u of listaUsuarios" [value]="u.idUser">
+              {{ u.nombre }} {{ u.apellido }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Estado</mat-label>
-        <mat-select formControlName="estado">
-          @for (e of estadoOptions; track e) {
-          <mat-option [value]="e.value">{{ e.viewValue }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
+        <mat-form-field appearance="fill" class="small">
+          <mat-label>Distrito</mat-label>
+          <mat-select formControlName="distrito">
+            <mat-option *ngFor="let d of listaDistritos" [value]="d.idDistrito">
+              {{ d.nombreDistrito }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-      <br />
+      <!-- IMÁGENES -->
+      <div class="col-full">
+        <span class="subtitle">Imágenes</span>
 
-      <mat-form-field>
-        <mat-label>Metros Cuadrados</mat-label>
-        <input type="number" matInput formControlName="metrosCuadrados" />
-      </mat-form-field>
+        <!-- BOTÓN ESTILIZADO -->
+        <label class="btn-upload">
+          <input type="file" multiple (change)="onFileSelected($event)" />
+          📁 Elegir archivos
+        </label>
 
-      <br />
+        <div class="preview-row">
+          <div class="preview-card" *ngFor="let img of previewImages">
+            <img [src]="img" />
+          </div>
+        </div>
+      </div>
 
-      <mat-form-field>
-        <mat-label>Habitaciones</mat-label>
-        <input type="number" matInput formControlName="habitaciones" />
-      </mat-form-field>
+      
 
-      <br />
-
-      <mat-form-field>
-        <mat-label>Baños</mat-label>
-        <input type="number" matInput formControlName="banos" />
-      </mat-form-field>
-
-      <br />
-
-      <mat-form-field>
-        <mat-label>Destacada</mat-label>
-        <mat-select formControlName="destacada">
-          @for (d of destacadaOptions; track d) {
-          <mat-option [value]="d.value">{{ d.viewValue }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-
-      <br />
-
-      <mat-form-field>
-        <mat-label>URL Visita Virtual</mat-label>
-        <input matInput formControlName="urlVr" />
-      </mat-form-field>
-
-      <br />
-
-      <mat-form-field>
-        <mat-label>Notas</mat-label>
-        <textarea matInput formControlName="notas"></textarea>
-      </mat-form-field>
-
-      <br />
-
-      <mat-form-field>
-        <mat-label>Usuario</mat-label>
-        <mat-select formControlName="usuarioFK">
-          @for (us of listaUsuarios; track us) {
-          <mat-option [value]="us.idUser">{{ us.nombre }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-
-      <br />
-
-      <mat-form-field>
-        <mat-label>Distrito</mat-label>
-        <mat-select formControlName="distritoFK">
-          @for (d of listaDistritos; track d) {
-          <mat-option [value]="d.idDistrito">{{ d.nombreDistrito }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-
-      <br />
-      <div style="margin-top: 20px">
-        <button matButton="elevated">
-          {{ edicion ? 'Editar' : 'Registrar' }}
+      <!-- BOTONES -->
+      <div class="actions">
+        <button mat-raised-button color="primary" type="submit">
+          {{ edicion ? 'Actualizar' : 'Registrar' }}
         </button>
+
+        <button mat-raised-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
       </div>
     </form>
   </div>
