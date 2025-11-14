@@ -12,7 +12,7 @@ import { Recomendacion } from './components/recomendacion/recomendacion';
 import { Comparacion } from './components/comparacion/comparacion';
 import { Comparacioninsertar } from './components/comparacion/comparacioninsertar/comparacioninsertar';
 
-export const routes: Routes = [] = [
+export const routes: Routes = [
 
     {path:'distritos',component:Distrito,
           children:[

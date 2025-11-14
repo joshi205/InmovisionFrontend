@@ -81,7 +81,7 @@ export class Propiedadinsertar implements OnInit {
     this.form = this.formBuilder.group({
       id: [''],
       titulo: ['', Validators.required],
-      descripcion: ['', Validators.required],
+      descripcion: [''],
       precio: [0, Validators.required],
       tipo: ['', Validators.required],
       categoria: ['', Validators.required],
