@@ -1,0 +1,59 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h2>{{ edicion ? 'Edición de idRecomendacion' : 'Registrar recomendacion' }}</h2>
+  </div>
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+      @if (edicion) {
+      <mat-form-field class="example-full-width">
+        <mat-label>ID:</mat-label>
+        <input matInput formControlName="codigo" readonly="true" />
+        <mat-error> @if (form.get('id')?.hasError('required')) { Ingrese ID!! } </mat-error>
+      </mat-form-field>
+      }
+      <br>
+      <mat-form-field>
+        <mat-label>Recomendacion</mat-label>
+        <input matInput formControlName="motivo" />
+        <mat-error>
+          @if (form.get('motivo')?.hasError('required')) { Ingrese motivo!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+      <div>
+        <mat-form-field>
+          <mat-label>Fecha</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fecha" />
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error>
+            @if (form.get('fecha')?.hasError('required')) { La fecha es obligatoria. }
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <br />
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="usuarioFK">
+          @for (us of listaUsuarios; track us) {
+          <mat-option [value]="us.idUser">{{ us.nombre }} {{ us.apellido }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Propiedad</mat-label>
+        <mat-select formControlName="propiedadFK">
+          @for (p of listaPropiedades; track p) {
+          <mat-option [value]="p.idPropiedad">{{ p.titulo }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <br />
+      <div>
+        <button matButton="elevated">{{ edicion ? 'Editar' : 'Registrar' }}</button>
+      </div>
+    </form>
+  </div>
+</div>
