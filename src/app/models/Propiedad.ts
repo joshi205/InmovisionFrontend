@@ -2,7 +2,7 @@ import { Distrito } from "./Distrito"
 import { Usuario } from "./Usuario"
 
 export class Propiedad{
-    idPropiedad:number=0
+    idPropiedad?:number
     titulo:string=""
     descripcion:string=""
     precio: number=0
@@ -21,4 +21,5 @@ export class Propiedad{
     notas:string=""
     usuario: Usuario = new Usuario();
     distrito: Distrito = new Distrito();
+
 }

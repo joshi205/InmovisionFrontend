@@ -11,6 +11,10 @@ import { Rolinsertar } from './components/rol/rolinsertar/rolinsertar';
 
 import { Propiedad } from './components/propiedad/propiedad';
 import { Propiedadinsertar } from './components/propiedad/propiedadinsertar/propiedadinsertar';
+import { Recomendacioninsertar } from './components/recomendacion/recomendacioninsertar/recomendacioninsertar';
+import { Recomendacion } from './components/recomendacion/recomendacion';
+import { Comparacion } from './components/comparacion/comparacion';
+import { Comparacioninsertar } from './components/comparacion/comparacioninsertar/comparacioninsertar';
 
 import { Mensaje } from './components/mensaje/mensaje';
 import { Mensajeinsertar } from './components/mensaje/mensajeinsertar/mensajeinsertar';
@@ -56,6 +60,7 @@ export const routes: Routes = [
         ]  
     },
 
+
     {path: 'mensajes',
     component: Mensaje,
         children: [
@@ -78,5 +83,21 @@ export const routes: Routes = [
             {path: 'nuevo', component: Calificacioninsertar},
             {path: 'edits/:id', component: Calificacioninsertar }
         ]
+    
+    {path:'recomendaciones',component:Recomendacion,
+          children:[
+            {path:'nuevo',component:Recomendacioninsertar},
+            {path:'edits/:id',component:Recomendacioninsertar}
+
+        ]  
+    },
+    
+    {path:'comparaciones',component:Comparacion,
+          children:[
+            {path:'nuevo',component:Comparacioninsertar},
+            {path:'edits/:id',component:Comparacioninsertar}
+            
+        ]  
+
     },
 ];
