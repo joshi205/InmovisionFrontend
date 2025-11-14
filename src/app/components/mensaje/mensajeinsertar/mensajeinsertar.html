@@ -1,0 +1,84 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+<h2>{{ edicion ? 'Edición de mensaje' : 'Registrar mensaje' }}</h2>
+  </div>
+
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+
+      @if (edicion) {
+      <mat-form-field class="example-full-width">
+        <mat-label>ID:</mat-label>
+        <input matInput formControlName="idMensaje" readonly="true" />
+      </mat-form-field>
+      }
+      <br />
+
+      <!-- Enviado por -->
+      <mat-form-field>
+        <mat-label>Enviado por</mat-label>
+        <input matInput formControlName="enviado_por" />
+        <mat-error>
+          @if (form.get('enviado_por')?.hasError('required')) { Ingrese quién envía!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <!-- Contenido -->
+      <mat-form-field>
+        <mat-label>Contenido</mat-label>
+        <textarea matInput formControlName="contenido"></textarea>
+        <mat-error>
+          @if (form.get('contenido')?.hasError('required')) { Ingrese el contenido!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <!-- Fecha -->
+      <mat-form-field>
+        <mat-label>Fecha de envío</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="enviado_en" />
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error>
+          @if (form.get('enviado_en')?.hasError('required')) { La fecha es obligatoria. }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <!-- Usuario -->
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="idUsuario">
+          @for (u of listaUsuarios; track u) {
+          <mat-option [value]="u.idUser">{{ u.nombre }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>
+          @if (form.get('idUsuario')?.hasError('required')) { Seleccione un usuario!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <!-- Propiedad -->
+      <mat-form-field>
+        <mat-label>Propiedad</mat-label>
+        <mat-select formControlName="idPropiedad">
+          @for (p of listaPropiedades; track p) {
+          <mat-option [value]="p.idPropiedad">{{ p.titulo }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>
+          @if (form.get('idPropiedad')?.hasError('required')) { Seleccione una propiedad!! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <div>
+        <button matButton="elevated">{{ edicion ? 'Editar' : 'Registrar' }}</button>
+      </div>
+
+    </form>
+  </div>
+</div>
