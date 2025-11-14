@@ -25,6 +25,11 @@ import { Calificacion } from './components/calificacion/calificacion';
 import { VisitaInsert } from './components/visita/visitainsertar/visitainsertar';
 import { CalificacionInsert } from './components/calificacion/calificacioninsertar/calificacioninsertar';
 
+import { Favorito } from './components/favorito/favorito';
+import { Favoritoinsertar } from './components/favorito/favoritoinsertar/favoritoinsertar';
+import { Lista_favoritos } from './components/lista_favoritos/lista_favoritos';
+import { Lista_favoritosinsertar } from './components/lista_favoritos/lista_favoritosinsertar/lista_favoritosinsertar';
+
 
 export const routes: Routes = [
 
@@ -100,5 +105,19 @@ export const routes: Routes = [
             
         ]  
 
+    },
+
+    {path:'favoritos',component:Favorito,
+          children:[
+            {path:'nuevo',component:Favoritoinsertar},
+            {path:'edit/:id',component:Favoritoinsertar}
+        ]  
+    },
+
+    {path:'listas-favoritos',component:Lista_favoritos,
+          children:[
+            {path:'nuevo',component:Lista_favoritosinsertar},
+            {path:'edit/:id',component:Lista_favoritosinsertar}
+        ]  
     },
 ];
