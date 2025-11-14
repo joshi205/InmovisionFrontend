@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { Propiedad } from "../models/Propiedad";
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
 
 const base_url = environment.base;
 
@@ -12,8 +12,10 @@ const base_url = environment.base;
 export class Propiedadservice{
     private url = `${base_url}/propiedades`;
     private listaCambio = new Subject<Propiedad[]>();
+    
     constructor(private http: HttpClient){}
-    list(){
+    
+    list(): Observable<Propiedad[]> {
         return this.http.get<Propiedad[]>(this.url);
     }
 
@@ -40,4 +42,6 @@ export class Propiedadservice{
     delete(id: number) {
         return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
     }
+
+    
 }
