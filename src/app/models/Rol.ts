@@ -1,8 +1,8 @@
 import { Usuario } from './Usuario';
 
 export class Rol {
-  idRol?: number;
-  nombre: string = "";
-  usuario: Usuario = new Usuario();
+  idRol: number=0
+  nombre: string = ""
+  usuario: Usuario = new Usuario()
 
 }
