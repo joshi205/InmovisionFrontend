@@ -1,0 +1,75 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h2>Lista de Comparaciones</h2>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- ID -->
+    <ng-container matColumnDef="c1">
+      <th mat-header-cell *matHeaderCellDef> # </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.idComparacion }}
+      </td>
+    </ng-container>
+
+    <!-- Usuario -->
+    <ng-container matColumnDef="c2">
+      <th mat-header-cell *matHeaderCellDef> Usuario </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.usuario.nombre }} {{ element.usuario.apellido }}
+      </td>
+    </ng-container>
+
+    <!-- Propiedad 1 -->
+    <ng-container matColumnDef="c3">
+      <th mat-header-cell *matHeaderCellDef> Propiedad 1 </th>
+      <td mat-cell *matCellDef="let element">
+        <strong>{{ element.propiedad1.titulo }}</strong><br>
+        Precio: {{ element.propiedad1.precio }} <br>
+        Distrito: {{ element.propiedad1.distrito.nombre }}
+      </td>
+    </ng-container>
+
+    <!-- Propiedad 2 -->
+    <ng-container matColumnDef="c4">
+      <th mat-header-cell *matHeaderCellDef> Propiedad 2 </th>
+      <td mat-cell *matCellDef="let element">
+        <strong>{{ element.propiedad2.titulo }}</strong><br>
+        Precio: {{ element.propiedad2.precio }} <br>
+        Distrito: {{ element.propiedad2.distrito.nombre }}
+      </td>
+    </ng-container>
+
+    <!-- Editar -->
+    <ng-container matColumnDef="c5">
+      <th mat-header-cell *matHeaderCellDef> Actualizar </th>
+      <td mat-cell *matCellDef="let element">
+        <button matButton [routerLink]="['edits', element.idComparacion]">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Eliminar -->
+    <ng-container matColumnDef="c6">
+      <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+      <td mat-cell *matCellDef="let element">
+        <button matButton (click)="eliminar(element.idComparacion)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Render de filas -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+    
+    <div class="actions">
+
+        <button mat-menu-item routerLink="/comparaciones/nuevo">Comparar</button>
+    </div>
+
+</div>
