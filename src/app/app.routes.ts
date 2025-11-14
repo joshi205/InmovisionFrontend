@@ -20,10 +20,10 @@ import { Mensaje } from './components/mensaje/mensaje';
 import { Mensajeinsertar } from './components/mensaje/mensajeinsertar/mensajeinsertar';
 
 import { Visita } from './components/visita/visita';
-import { Visitainsertar } from './components/visita/visitainsertar/visitainsertar';
 
 import { Calificacion } from './components/calificacion/calificacion';
-import { Calificacioninsertar } from './components/calificacion/calificacioninsertar/calificacioninsertar';
+import { VisitaInsert } from './components/visita/visitainsertar/visitainsertar';
+import { CalificacionInsert } from './components/calificacion/calificacioninsertar/calificacioninsertar';
 
 
 export const routes: Routes = [
@@ -72,17 +72,18 @@ export const routes: Routes = [
     {path: 'visitas',
     component: Visita,
         children: [
-            {path: 'nuevo', component: Visitainsertar },
-            {path: 'edits/:id', component: Visitainsertar }
+            {path: 'nuevo', component: VisitaInsert },
+            {path: 'edits/:id', component: VisitaInsert }
         ]
     },
 
     {path: 'calificacion',
     component: Calificacion,
         children: [
-            {path: 'nuevo', component: Calificacioninsertar},
-            {path: 'edits/:id', component: Calificacioninsertar }
+            {path: 'nuevo', component: CalificacionInsert},
+            {path: 'edits/:id', component: CalificacionInsert }
         ]
+    },
     
     {path:'recomendaciones',component:Recomendacion,
           children:[
