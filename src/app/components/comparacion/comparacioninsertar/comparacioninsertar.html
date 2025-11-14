@@ -1,0 +1,61 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h2>{{ edicion ? 'Editar Comparación' : 'Registrar Comparación' }}</h2>
+  </div>
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+
+        <!-- ID solo en edición -->
+        @if (edicion) {
+        <mat-form-field class="example-full-width">
+            <mat-label>ID</mat-label>
+            <input matInput formControlName="codigo" readonly />
+        </mat-form-field>
+        }
+
+        <br>
+
+        <!-- Usuario -->
+        <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="usuario">
+            @for (u of listaUsuarios; track u) {
+            <mat-option [value]="u.idUser">{{ u.nombre }} {{ u.apellido }}</mat-option>
+            }
+        </mat-select>
+        <mat-error>Seleccione un usuario</mat-error>
+        </mat-form-field>
+
+        <br />
+
+        <!-- Propiedad 1 -->
+        <mat-form-field>
+        <mat-label>Propiedad 1</mat-label>
+        <mat-select formControlName="propiedad1">
+            @for (p of listaPropiedades; track p) {
+            <mat-option [value]="p.idPropiedad">{{ p.titulo }}</mat-option>
+            }
+        </mat-select>
+        <mat-error>Seleccione una propiedad</mat-error>
+        </mat-form-field>
+
+        <br />
+
+        <!-- Propiedad 2 -->
+        <mat-form-field>
+        <mat-label>Propiedad 2</mat-label>
+        <mat-select formControlName="propiedad2">
+            @for (p of listaPropiedades; track p) {
+            <mat-option [value]="p.idPropiedad">{{ p.titulo }}</mat-option>
+            }
+        </mat-select>
+        <mat-error>Seleccione una propiedad</mat-error>
+        </mat-form-field>
+
+        <br />
+        <div>
+            <button matButton="elevated">{{ edicion ? 'Editar' : 'Registrar' }}</button>
+        </div>
+        </form>
+    </div>
+</div>
