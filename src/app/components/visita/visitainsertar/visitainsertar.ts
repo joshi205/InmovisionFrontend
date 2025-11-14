@@ -25,7 +25,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
+
   selector: 'app-visitainsertar',
+
   imports: [
     MatSelectModule,
     MatInputModule,
@@ -38,7 +40,9 @@ import { MatNativeDateModule } from '@angular/material/core';
   templateUrl: './visitainsertar.html',
   styleUrl: './visitainsertar.css',
 })
+
 export class Visitainsertar implements OnInit {
+
   form: FormGroup = new FormGroup({});
 
   edicion: boolean = false;

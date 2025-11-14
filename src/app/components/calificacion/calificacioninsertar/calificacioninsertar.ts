@@ -36,7 +36,10 @@ import { MatNativeDateModule } from '@angular/material/core';
   templateUrl: './calificacioninsertar.html',
   styleUrl: './calificacioninsertar.css',
 })
+
 export class Calificacioninsertar implements OnInit {
+
+export class CalificacionInsert implements OnInit {
   form: FormGroup = new FormGroup({});
   calificacion: Calificacion = new Calificacion();
 
