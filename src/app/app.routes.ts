@@ -25,6 +25,8 @@ import { Calificacion } from './components/calificacion/calificacion';
 import { VisitaInsert } from './components/visita/visitainsertar/visitainsertar';
 import { CalificacionInsert } from './components/calificacion/calificacioninsertar/calificacioninsertar';
 
+import { Propiedadmostrar } from './components/propiedad/propiedadmostrar/propiedadmostrar';
+
 
 export const routes: Routes = [
 
@@ -55,7 +57,8 @@ export const routes: Routes = [
     {path:'propiedades',component:Propiedad,
         children:[
             {path:'nuevo',component:Propiedadinsertar},
-            {path:'edits/:id',component:Propiedadinsertar}
+            {path:'edits/:id',component:Propiedadinsertar},
+            {path:'mostrar',component:Propiedadmostrar}
 
         ]  
     },
@@ -84,6 +87,12 @@ export const routes: Routes = [
             {path: 'edits/:id', component: CalificacionInsert }
         ]
     },
+<<<<<<< HEAD
+
+    {path: 'propiedad/:id',component: Propiedadmostrar,
+    }
+
+=======
     
     {path:'recomendaciones',component:Recomendacion,
           children:[
@@ -101,4 +110,5 @@ export const routes: Routes = [
         ]  
 
     },
+>>>>>>> 1eff8b61fc3e2adadf7b7107946d6e4abc07a9de
 ];
