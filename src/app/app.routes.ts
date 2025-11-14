@@ -25,7 +25,13 @@ import { Calificacion } from './components/calificacion/calificacion';
 import { VisitaInsert } from './components/visita/visitainsertar/visitainsertar';
 import { CalificacionInsert } from './components/calificacion/calificacioninsertar/calificacioninsertar';
 
+
 import { Propiedadmostrar } from './components/propiedad/propiedadmostrar/propiedadmostrar';
+import { Favorito } from './components/favorito/favorito';
+import { Favoritoinsertar } from './components/favorito/favoritoinsertar/favoritoinsertar';
+import { Lista_favoritos } from './components/lista_favoritos/lista_favoritos';
+import { Lista_favoritosinsertar } from './components/lista_favoritos/lista_favoritosinsertar/lista_favoritosinsertar';
+
 
 
 export const routes: Routes = [
@@ -87,12 +93,43 @@ export const routes: Routes = [
             {path: 'edits/:id', component: CalificacionInsert }
         ]
     },
-<<<<<<< HEAD
 
     {path: 'propiedad/:id',component: Propiedadmostrar,
     }
 
-=======
+   
+    {path:'recomendaciones',component:Recomendacion,
+          children:[
+            {path:'nuevo',component:Recomendacioninsertar},
+            {path:'edits/:id',component:Recomendacioninsertar}
+
+        ]  
+    },
+
+
+    {path: 'mensajes',
+    component: Mensaje,
+        children: [
+            {path: 'nuevo', component: Mensajeinsertar },
+            {path: 'edits/:id', component: Mensajeinsertar }
+        ]
+    },
+
+    {path: 'visitas',
+    component: Visita,
+        children: [
+            {path: 'nuevo', component: VisitaInsert },
+            {path: 'edits/:id', component: VisitaInsert }
+        ]
+    },
+
+    {path: 'calificacion',
+    component: Calificacion,
+        children: [
+            {path: 'nuevo', component: CalificacionInsert},
+            {path: 'edits/:id', component: CalificacionInsert }
+        ]
+    },
     
     {path:'recomendaciones',component:Recomendacion,
           children:[
@@ -110,5 +147,20 @@ export const routes: Routes = [
         ]  
 
     },
->>>>>>> 1eff8b61fc3e2adadf7b7107946d6e4abc07a9de
+
+
+    {path:'favoritos',component:Favorito,
+          children:[
+            {path:'nuevo',component:Favoritoinsertar},
+            {path:'edit/:id',component:Favoritoinsertar}
+        ]  
+    },
+
+    {path:'listas-favoritos',component:Lista_favoritos,
+          children:[
+            {path:'nuevo',component:Lista_favoritosinsertar},
+            {path:'edit/:id',component:Lista_favoritosinsertar}
+        ]  
+    },
+
 ];
