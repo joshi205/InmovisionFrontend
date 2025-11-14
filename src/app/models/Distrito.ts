@@ -1,5 +1,5 @@
 export class Distrito{
-    idDistrito?: number
+    idDistrito: number=0
     nombreDistrito:string=""
     provinciaDistrito:string=""
     departamentoDistrito:string=""
