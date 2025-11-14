@@ -25,10 +25,13 @@ import { Calificacion } from './components/calificacion/calificacion';
 import { VisitaInsert } from './components/visita/visitainsertar/visitainsertar';
 import { CalificacionInsert } from './components/calificacion/calificacioninsertar/calificacioninsertar';
 
+
+import { Propiedadmostrar } from './components/propiedad/propiedadmostrar/propiedadmostrar';
 import { Favorito } from './components/favorito/favorito';
 import { Favoritoinsertar } from './components/favorito/favoritoinsertar/favoritoinsertar';
 import { Lista_favoritos } from './components/lista_favoritos/lista_favoritos';
 import { Lista_favoritosinsertar } from './components/lista_favoritos/lista_favoritosinsertar/lista_favoritosinsertar';
+
 
 
 export const routes: Routes = [
@@ -60,7 +63,45 @@ export const routes: Routes = [
     {path:'propiedades',component:Propiedad,
         children:[
             {path:'nuevo',component:Propiedadinsertar},
-            {path:'edits/:id',component:Propiedadinsertar}
+            {path:'edits/:id',component:Propiedadinsertar},
+            {path:'mostrar',component:Propiedadmostrar}
+
+        ]  
+    },
+
+
+    {path: 'mensajes',
+    component: Mensaje,
+        children: [
+            {path: 'nuevo', component: Mensajeinsertar },
+            {path: 'edits/:id', component: Mensajeinsertar }
+        ]
+    },
+
+    {path: 'visitas',
+    component: Visita,
+        children: [
+            {path: 'nuevo', component: VisitaInsert },
+            {path: 'edits/:id', component: VisitaInsert }
+        ]
+    },
+
+    {path: 'calificacion',
+    component: Calificacion,
+        children: [
+            {path: 'nuevo', component: CalificacionInsert},
+            {path: 'edits/:id', component: CalificacionInsert }
+        ]
+    },
+
+    {path: 'propiedad/:id',component: Propiedadmostrar,
+    }
+
+   
+    {path:'recomendaciones',component:Recomendacion,
+          children:[
+            {path:'nuevo',component:Recomendacioninsertar},
+            {path:'edits/:id',component:Recomendacioninsertar}
 
         ]  
     },
@@ -107,6 +148,7 @@ export const routes: Routes = [
 
     },
 
+
     {path:'favoritos',component:Favorito,
           children:[
             {path:'nuevo',component:Favoritoinsertar},
@@ -120,4 +162,5 @@ export const routes: Routes = [
             {path:'edit/:id',component:Lista_favoritosinsertar}
         ]  
     },
+
 ];
