@@ -11,15 +11,19 @@ import { Rolinsertar } from './components/rol/rolinsertar/rolinsertar';
 
 import { Propiedad } from './components/propiedad/propiedad';
 import { Propiedadinsertar } from './components/propiedad/propiedadinsertar/propiedadinsertar';
+import { Recomendacioninsertar } from './components/recomendacion/recomendacioninsertar/recomendacioninsertar';
+import { Recomendacion } from './components/recomendacion/recomendacion';
+import { Comparacion } from './components/comparacion/comparacion';
+import { Comparacioninsertar } from './components/comparacion/comparacioninsertar/comparacioninsertar';
 
 import { Mensaje } from './components/mensaje/mensaje';
 import { Mensajeinsertar } from './components/mensaje/mensajeinsertar/mensajeinsertar';
 
 import { Visita } from './components/visita/visita';
-import { Visitainsertar } from './components/visita/visitainsertar/visitainsertar';
 
 import { Calificacion } from './components/calificacion/calificacion';
-import { Calificacioninsertar } from './components/calificacion/calificacioninsertar/calificacioninsertar';
+import { VisitaInsert } from './components/visita/visitainsertar/visitainsertar';
+import { CalificacionInsert } from './components/calificacion/calificacioninsertar/calificacioninsertar';
 
 import { Propiedadmostrar } from './components/propiedad/propiedadmostrar/propiedadmostrar';
 
@@ -59,6 +63,7 @@ export const routes: Routes = [
         ]  
     },
 
+
     {path: 'mensajes',
     component: Mensaje,
         children: [
@@ -70,20 +75,40 @@ export const routes: Routes = [
     {path: 'visitas',
     component: Visita,
         children: [
-            {path: 'nuevo', component: Visitainsertar },
-            {path: 'edits/:id', component: Visitainsertar }
+            {path: 'nuevo', component: VisitaInsert },
+            {path: 'edits/:id', component: VisitaInsert }
         ]
     },
 
     {path: 'calificacion',
     component: Calificacion,
         children: [
-            {path: 'nuevo', component: Calificacioninsertar},
-            {path: 'edits/:id', component: Calificacioninsertar }
+            {path: 'nuevo', component: CalificacionInsert},
+            {path: 'edits/:id', component: CalificacionInsert }
         ]
     },
+<<<<<<< HEAD
 
     {path: 'propiedad/:id',component: Propiedadmostrar,
     }
 
+=======
+    
+    {path:'recomendaciones',component:Recomendacion,
+          children:[
+            {path:'nuevo',component:Recomendacioninsertar},
+            {path:'edits/:id',component:Recomendacioninsertar}
+
+        ]  
+    },
+    
+    {path:'comparaciones',component:Comparacion,
+          children:[
+            {path:'nuevo',component:Comparacioninsertar},
+            {path:'edits/:id',component:Comparacioninsertar}
+            
+        ]  
+
+    },
+>>>>>>> 1eff8b61fc3e2adadf7b7107946d6e4abc07a9de
 ];
