@@ -1,0 +1,44 @@
+<div class="container">
+  <div style="text-align: center; margin: 5%">
+    <h2>{{ edicion ? 'Edición de Lista de Favoritos' : 'Registrar Lista de Favoritos' }}</h2>
+  </div>
+
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+
+      @if (edicion) {
+      <mat-form-field class="example-full-width">
+        <mat-label>ID:</mat-label>
+        <input matInput formControlName="id" readonly="true" />
+      </mat-form-field>
+      }
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" />
+        <mat-error>
+          @if (form.get('nombre')?.hasError('required')) { 
+            Ingrese el nombre de la lista!!
+          }
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Descripción</mat-label>
+        <textarea matInput formControlName="descripcion"></textarea>
+      </mat-form-field>
+
+      <br />
+
+      <div style="margin-top: 20px">
+        <button matButton="elevated">
+          {{ edicion ? 'Editar' : 'Registrar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
