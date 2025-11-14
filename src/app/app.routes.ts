@@ -29,6 +29,7 @@ import { Favorito } from './components/favorito/favorito';
 import { Favoritoinsertar } from './components/favorito/favoritoinsertar/favoritoinsertar';
 import { Lista_favoritos } from './components/lista_favoritos/lista_favoritos';
 import { Lista_favoritosinsertar } from './components/lista_favoritos/lista_favoritosinsertar/lista_favoritosinsertar';
+import { Propiedadmostrar } from './components/propiedad/propiedadmostrar/propiedadmostrar';
 
 
 export const routes: Routes = [
@@ -60,7 +61,8 @@ export const routes: Routes = [
     {path:'propiedades',component:Propiedad,
         children:[
             {path:'nuevo',component:Propiedadinsertar},
-            {path:'edits/:id',component:Propiedadinsertar}
+            {path:'edits/:id',component:Propiedadinsertar},
+            {path:'mostrar',component:Propiedadmostrar}
 
         ]  
     },
@@ -89,6 +91,10 @@ export const routes: Routes = [
             {path: 'edits/:id', component: CalificacionInsert }
         ]
     },
+
+    {path: 'propiedad/:id',component: Propiedadmostrar,
+    }
+
     
     {path:'recomendaciones',component:Recomendacion,
           children:[
