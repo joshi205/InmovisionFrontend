@@ -1,134 +1,117 @@
 /* ====== CONTENEDOR GENERAL ====== */
-.container {
-  padding: 30px;
-  margin: 0 auto;
-  max-width: 1100px;
+.list-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 25px;
   font-family: 'Roboto', sans-serif;
 }
 
-/* ====== TÍTULO ====== */
 h2 {
-  font-weight: 600;
-  color: #2c3e50;
   text-align: center;
-  margin-bottom: 30px;
-  letter-spacing: 0.5px;
-}
-
-/* ====== TABLA ====== */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: #ffffff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-/* Cabecera */
-th {
-  font-weight: 600;
-  background-color: #f4f6f8;
   color: #25415e;
-  text-align: center;
-  padding: 14px 10px;
-  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 25px;
 }
 
-/* Filas */
-td {
-  text-align: center;
-  padding: 12px 10px;
-  color: #424242;
+/* ====== GRID DE CARDS ====== */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 25px;
+}
+
+/* ====== CARD ====== */
+.property-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.12);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.property-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.18);
+}
+
+/* ====== IMAGEN ====== */
+.image-box img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* ====== CONTENIDO ====== */
+.content-box {
+  padding: 15px 18px;
+}
+
+.content-box h3 {
+  color: #25415e;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.precio {
+  color: #1c2a38;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.info {
   font-size: 14px;
-  border-bottom: 1px solid #f0f0f0;
+  color: #555;
+  line-height: 20px;
+  margin-bottom: 15px;
 }
 
-/* Filas alternadas */
-tr:nth-child(even) {
-  background-color: #fafafa;
+/* ====== ESTADO BADGE ====== */
+.estado {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
 }
 
-/* Hover fila */
-tr:hover,
-.mat-mdc-row:hover,
-.mat-row:hover {
-  background-color: #e3f2fd !important;
-  transition: background-color 0.25s ease-in-out;
+.disponible {
+  background-color: #D6E4FF; /* color secundario */
+  color: #25415e; /* color principal */
 }
 
-/* Quitar sombra extra del mat-table */
-.mat-elevation-z8 {
-  box-shadow: none;
+.no-disponible {
+  background-color: #ffdddd;
+  color: #a30000;
 }
 
-/* ====== BOTÓN DE ACCIÓN ====== */
+/* ====== BOTONES ====== */
 .actions {
   display: flex;
-  justify-content: flex-end;
-  margin-top: 25px;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 
-/* Botón "Registrar Propiedad" */
-button[mat-menu-item],
-button[mat-flat-button] {
-  background-color: #25415e; /* Rojo Inmovision */
-  color: white;
-  font-weight: 500;
-  border-radius: 6px;
-  padding: 10px 22px;
-  font-size: 14px;
-  letter-spacing: 0.4px;
-  transition: all 0.25s ease;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+.btn-edit {
+  background-color: #25415e !important;
+  color: white !important;
 }
 
-/* Hover del botón */
-button[mat-flat-button]:hover,
-button[mat-menu-item]:hover {
-  background-color: #1b3148;
-  transform: translateY(-2px);
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+.btn-delete {
+  background-color: #d9534f !important;
+  color: white !important;
 }
 
-/* ====== ICONOS EN CELDAS ====== */
-button[mat-icon-button] {
-  color: #25415e;
-  transition: transform 0.2s;
+/* ====== BOTÓN REGISTRAR ====== */
+.register-box {
+  text-align: center;
+  margin-top: 35px;
 }
 
-button[mat-icon-button]:hover {
-  transform: scale(1.2);
-}
-
-/* ====== RESPONSIVE ====== */
-@media (max-width: 768px) {
-  table {
-    font-size: 13px;
-  }
-
-  th,
-  td {
-    padding: 8px;
-  }
-
-  .actions {
-    justify-content: center;
-  }
-
-  button[mat-flat-button],
-  button[mat-menu-item] {
-    width: 100%;
-    max-width: 250px;
-    text-align: center;
-  }
-}
-
-/* ====== SCROLL HORIZONTAL ====== */
-@media (max-width: 600px) {
-  table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
+.btn-register {
+  background-color: #25415e !important;
+  color: white !important;
+  padding: 10px 25px;
+  border-radius: 8px;
 }
