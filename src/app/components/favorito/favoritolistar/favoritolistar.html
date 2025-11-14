@@ -1,0 +1,78 @@
+<div>
+  <h2>Lista de Favoritos</h2>
+
+  <div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!-- ID -->
+      <ng-container matColumnDef="c1">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{ element.idFavorito }} </td>
+      </ng-container>
+
+      <!-- Fecha Agregado -->
+      <ng-container matColumnDef="c2">
+        <th mat-header-cell *matHeaderCellDef> Fecha Agregado </th>
+        <td mat-cell *matCellDef="let element"> {{ element.fechaAgregado | date }} </td>
+      </ng-container>
+
+      <!-- Usuario -->
+      <ng-container matColumnDef="c3">
+        <th mat-header-cell *matHeaderCellDef> Usuario </th>
+        <td mat-cell *matCellDef="let element"> {{ element.usuario?.nombre }} </td>
+      </ng-container>
+
+      <!-- Propiedad -->
+      <ng-container matColumnDef="c4">
+        <th mat-header-cell *matHeaderCellDef> Propiedad </th>
+        <td mat-cell *matCellDef="let element"> {{ element.propiedad?.titulo }} </td>
+      </ng-container>
+
+      <!-- Lista Favorito -->
+      <ng-container matColumnDef="c5">
+        <th mat-header-cell *matHeaderCellDef> Lista </th>
+        <td mat-cell *matCellDef="let element"> {{ element.listaFavorito?.nombre }} </td>
+      </ng-container>
+
+      <!-- Actualizar -->
+      <ng-container matColumnDef="c6">
+        <th mat-header-cell *matHeaderCellDef> Actualizar </th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-raised-button
+            color="primary"
+            [routerLink]="['edit', element.idFavorito]"
+          >
+            <mat-icon>edit</mat-icon>
+            Actualizar
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Eliminar -->
+      <ng-container matColumnDef="c7">
+        <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="eliminar(element.idFavorito)"
+          >
+            <mat-icon>delete</mat-icon>
+            Eliminar
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Encabezado y filas -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <div class="actions">
+    <button mat-menu-item routerLink="/favoritos/nuevo">
+      Registrar Favorito
+    </button>
+  </div>
+</div>
