@@ -9,7 +9,7 @@ export class Usuario {
   password: string = ""
   telefono: string = ""
   fotourl: string = ""
-  fecha_registro: string = "" // formato 'YYYY-MM-DD'
+  fecha_registro: string = "" 
   enabled: boolean = true
   roles: Rol[] = []
 }
