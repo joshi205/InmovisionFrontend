@@ -1,1 +1,4 @@
-<p>calificacion works!</p>
+<router-outlet></router-outlet>
+<div [hidden]="route.children.length !==0">
+    <app-calificacion-insert></app-calificacion-insert>
+</div>
