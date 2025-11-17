@@ -23,7 +23,7 @@ import { Visita } from './components/visita/visita';
 
 import { Calificacion } from './components/calificacion/calificacion';
 import { VisitaInsert } from './components/visita/visitainsertar/visitainsertar';
-import { CalificacionInsert } from './components/calificacion/calificacioninsertar/calificacioninsertar';
+import { Calificacioninsertar } from './components/calificacion/calificacioninsertar/calificacioninsertar';
 
 
 import { Propiedadmostrar } from './components/propiedad/propiedadmostrar/propiedadmostrar';
@@ -188,6 +188,11 @@ export const routes: Routes = [
         ]
     },
 
+    {path: 'calificaciones',
+    component: Calificacion,
+        children: [
+            {path: 'nuevo', component: Calificacioninsertar},
+            {path: 'edits/:id', component: Calificacioninsertar },
     // Tablas agregadas jorge //
 
     {
