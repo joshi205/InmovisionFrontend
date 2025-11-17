@@ -23,7 +23,7 @@ import { Visita } from './components/visita/visita';
 
 import { Calificacion } from './components/calificacion/calificacion';
 import { VisitaInsert } from './components/visita/visitainsertar/visitainsertar';
-import { CalificacionInsert } from './components/calificacion/calificacioninsertar/calificacioninsertar';
+import { Calificacioninsertar } from './components/calificacion/calificacioninsertar/calificacioninsertar';
 
 
 export const routes: Routes = [
@@ -77,11 +77,11 @@ export const routes: Routes = [
         ]
     },
 
-    {path: 'calificacion',
+    {path: 'calificaciones',
     component: Calificacion,
         children: [
-            {path: 'nuevo', component: CalificacionInsert},
-            {path: 'edits/:id', component: CalificacionInsert }
+            {path: 'nuevo', component: Calificacioninsertar},
+            {path: 'edits/:id', component: Calificacioninsertar }
         ]
     },
     

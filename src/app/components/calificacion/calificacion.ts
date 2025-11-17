@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { Calificacioninsertar } from "./calificacioninsertar/calificacioninsertar";
+import { Calificacionlistar } from './calificacionlistar/calificacionlistar';
 
 @Component({
   selector: 'app-calificacion',
-  imports: [Calificacioninsertar, RouterOutlet],
+  imports: [Calificacionlistar, RouterOutlet],
   templateUrl: './calificacion.html',
   styleUrl: './calificacion.css',
 })
