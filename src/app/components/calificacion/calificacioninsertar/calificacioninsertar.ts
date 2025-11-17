@@ -7,16 +7,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-
 import { Calificacion } from '../../../models/Calificacion';
 import { CalificacionService } from '../../../services/calificacionservice';
-
 import { Usuario } from '../../../models/Usuario';
 import { Usuarioservice } from '../../../services/usuarioservice';
-
 import { Propiedad } from '../../../models/Propiedad';
 import { Propiedadservice } from '../../../services/propiedadservice';
-
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,7 +20,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
-  selector: 'app-calificacion-insert',
+  selector: 'app-calificacion-insertar',
   imports: [
     MatSelectModule,
     MatInputModule,
@@ -36,7 +32,8 @@ import { MatNativeDateModule } from '@angular/material/core';
   templateUrl: './calificacioninsertar.html',
   styleUrl: './calificacioninsertar.css',
 })
-export class CalificacionInsert implements OnInit {
+
+export class Calificacioninsertar implements OnInit {
   form: FormGroup = new FormGroup({});
   calificacion: Calificacion = new Calificacion();
 
@@ -68,8 +65,8 @@ export class CalificacionInsert implements OnInit {
     this.form = this.formBuilder.group({
       codigo: [''],
       puntuacion: ['', Validators.required],
+      comentario: ['', Validators.required],
       fecha: ['', Validators.required],
-      estado: ['', Validators.required],
       usuario: ['', Validators.required],
       propiedad: ['', Validators.required],
     });
@@ -79,8 +76,8 @@ export class CalificacionInsert implements OnInit {
     if (this.form.valid) {
       this.calificacion.idCalificacion = this.form.value.codigo;
       this.calificacion.puntuacion = this.form.value.puntuacion;
-      this.calificacion.fecha_hora = this.form.value.fecha;
-      this.calificacion.estado = this.form.value.estado;
+      this.calificacion.comentario = this.form.value.comentario;
+      this.calificacion.fecha = this.form.value.fecha;
 
       this.calificacion.usuario.idUser = this.form.value.usuario;
       this.calificacion.propiedad.idPropiedad = this.form.value.propiedad;
@@ -99,14 +96,18 @@ export class CalificacionInsert implements OnInit {
     }
   }
 
+  cancelar(): void {
+    this.router.navigate(['propiedades']);
+  }
+
   init(): void {
     if (this.edicion) {
       this.cS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
           codigo: new FormControl(data.idCalificacion),
           puntuacion: new FormControl(data.puntuacion),
-          fecha: new FormControl(data.fecha_hora),
-          estado: new FormControl(data.estado),
+          comentario: new FormControl(data.comentario),  
+          fecha: new FormControl(data.fecha),
           usuario: new FormControl(data.usuario.idUser),
           propiedad: new FormControl(data.propiedad.idPropiedad),
         });
