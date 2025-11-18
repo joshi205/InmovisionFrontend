@@ -8,6 +8,6 @@ import { Contratolistar } from './contratolistar/contratolistar';
   templateUrl: './contrato.html',
   styleUrl: './contrato.css',
 })
-export class ContratoComponent {
+export class Contrato {
   constructor(public route: ActivatedRoute) { }
 }

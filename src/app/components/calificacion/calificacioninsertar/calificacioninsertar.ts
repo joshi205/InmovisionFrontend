@@ -97,7 +97,7 @@ export class Calificacioninsertar implements OnInit {
   }
 
   cancelar(): void {
-    this.router.navigate(['propiedades']);
+    this.router.navigate(['calificaciones']);
   }
 
   init(): void {

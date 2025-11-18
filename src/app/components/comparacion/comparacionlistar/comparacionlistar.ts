@@ -19,6 +19,7 @@ export class Comparacionlistar implements OnInit{
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4','c5','c6'];
 
   constructor(private cS:  Comparacionservice) {}
+  
   ngOnInit(): void {
 
     this.cS.list().subscribe(data=>{

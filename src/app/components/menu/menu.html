@@ -1,28 +1,29 @@
 <div class="container">
   <mat-toolbar class="custom-toolbar">
-    <button 
-    matButton 
-    class="btn-rojo" 
-    aria-label="Example icon-button with menu icon"
-    [matMenuTriggerFor]="menuDevice">
+    <button
+      matButton
+      class="btn-rojo"
+      aria-label="Example icon-button with menu icon"
+      [matMenuTriggerFor]="menuDevice"
+    >
       <mat-icon>menu</mat-icon>Inmovision
     </button>
   </mat-toolbar>
   <mat-menu #menuDevice="matMenu">
-  <button mat-menu-item routerLink="/distritos">Distritos</button>
-  <button mat-menu-item routerLink="/usuarios">Usuarios</button>
-  <button mat-menu-item routerLink="/roles">Roles</button>
-  <button mat-menu-item routerLink="/propiedades">Propiedades</button>
-  <button mat-menu-item routerLink="/mensajes">Mensajes</button>
-  <button mat-menu-item routerLink="/visita">Visitas</button>
-  <button mat-menu-item routerLink="/calificaciones">Calificaciones</button>
+    <button mat-menu-item routerLink="/distritos">Distritos</button>
+    <button mat-menu-item routerLink="/usuarios">Usuarios</button>
+    <button mat-menu-item routerLink="/roles">Roles</button>
+    <button mat-menu-item routerLink="/propiedades">Propiedades</button>
+    <button mat-menu-item routerLink="/mensajes">Mensajes</button>
+    <button mat-menu-item routerLink="/visita">Visitas</button>
+    <button mat-menu-item routerLink="/calificaciones">Calificaciones</button>
 
+    <button mat-menu-item routerLink="/contratos">Contratos</button>
 
-  <button mat-menu-item routerLink="/favoritos">Favotiros</button>
-  <button mat-menu-item routerLink="/listas-favoritos">Lista favoritos</button>
+    <button mat-menu-item routerLink="/favoritos">Favotiros</button>
+    <button mat-menu-item routerLink="/listas-favoritos">Lista favoritos</button>
 
-  <button mat-menu-item routerLink="/recomendaciones">Recomendaciones</button>
-  <button mat-menu-item routerLink="/comparaciones">Comparaciones</button>
-
-</mat-menu>
+    <button mat-menu-item routerLink="/recomendaciones">Recomendaciones</button>
+    <button mat-menu-item routerLink="/comparaciones">Comparaciones</button>
+  </mat-menu>
 </div>

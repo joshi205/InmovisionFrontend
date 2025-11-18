@@ -8,6 +8,6 @@ import { Pagolistar } from './pagolistar/pagolistar';
   templateUrl: './pago.html',
   styleUrl: './pago.css',
 })
-export class PagoComponent {
+export class Pago {
   constructor(public route: ActivatedRoute) { }
 }
