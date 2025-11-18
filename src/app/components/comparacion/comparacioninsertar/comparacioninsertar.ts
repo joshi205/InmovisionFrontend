@@ -89,6 +89,10 @@ export class Comparacioninsertar implements OnInit{
     }
   }
 
+  cancelar(): void {
+    this.router.navigate(['comparaciones']);
+  }
+
   init() {
     if (this.edicion) {
       this.cS.listId(this.id).subscribe((data) => {

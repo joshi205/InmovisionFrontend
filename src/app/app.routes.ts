@@ -22,202 +22,142 @@ import { Mensajeinsertar } from './components/mensaje/mensajeinsertar/mensajeins
 import { Visita } from './components/visita/visita';
 
 import { Calificacion } from './components/calificacion/calificacion';
-import { VisitaInsert } from './components/visita/visitainsertar/visitainsertar';
 import { Calificacioninsertar } from './components/calificacion/calificacioninsertar/calificacioninsertar';
 
-
-import { Propiedadmostrar } from './components/propiedad/propiedadmostrar/propiedadmostrar';
 import { Favorito } from './components/favorito/favorito';
 import { Favoritoinsertar } from './components/favorito/favoritoinsertar/favoritoinsertar';
 import { Lista_favoritos } from './components/lista_favoritos/lista_favoritos';
 import { Lista_favoritosinsertar } from './components/lista_favoritos/lista_favoritosinsertar/lista_favoritosinsertar';
 
-
-import { Pago } from './components/pago/pago';
 import { Pagoinsertar } from './components/pago/pagoinsertar/pagoinsertar';
 
-import { Contrato } from './components/contrato/contrato';
 import { Contratoinsertar } from './components/contrato/contratoinsertar/contratoinsertar';
-
 import { SimulacionDePrecios } from './components/simulacion-de-precios/simulacion-de-precios';
-import { SimulacionDePreciosInsertar } from './components/simulacion-de-precios/simulacion-de-precios-insertar/simulacion-de-precios-insertar';
-
+import { Simulacioninsertar } from './components/simulacion-de-precios/simulacion-de-precios-insertar/simulacion-de-precios-insertar';
+import { Contrato } from './components/contrato/contrato';
+import { Pago } from './components/pago/pago';
+import { Visitainsertar } from './components/visita/visitainsertar/visitainsertar';
 
 export const routes: Routes = [
+  {
+    path: 'distritos',
+    component: Distrito,
+    children: [
+      { path: 'nuevo', component: Distritoinsertar },
+      { path: 'edits/:id', component: Distritoinsertar },
+    ],
+  },
+  {
+    path: 'usuarios',
+    component: Usuario,
+    children: [
+      { path: 'nuevo', component: Usuarioinsertar },
+      { path: 'edits/:id', component: Usuarioinsertar },
+    ],
+  },
+  {
+    path: 'roles',
+    component: Rol,
+    children: [
+      { path: 'nuevo', component: Rolinsertar },
+      { path: 'edits/:id', component: Rolinsertar },
+    ],
+  },
+  {
+    path: 'propiedades',
+    component: Propiedad,
+    children: [
+      { path: 'nuevo', component: Propiedadinsertar },
+      { path: 'edits/:id', component: Propiedadinsertar },
+    ],
+  },
 
-    {
-        path: 'distritos', component: Distrito,
-        children: [
-            { path: 'nuevo', component: Distritoinsertar },
-            { path: 'edits/:id', component: Distritoinsertar }
+  {
+    path: 'mensajes',
+    component: Mensaje,
+    children: [
+      { path: 'nuevo', component: Mensajeinsertar },
+      { path: 'edits/:id', component: Mensajeinsertar },
+    ],
+  },
 
-        ]
-    },
+  {
+    path: 'visitas',
+    component: Visita,
+    children: [
+      { path: 'nuevo', component: Visitainsertar },
+      { path: 'edits/:id', component: Visitainsertar },
+    ],
+  },
 
-    {
-        path: 'usuarios', component: Usuario,
-        children: [
-            { path: 'nuevo', component: Usuarioinsertar },
-            { path: 'edits/:id', component: Usuarioinsertar }
-
-        ]
-    },
-
-    {
-        path: 'roles', component: Rol,
-        children: [
-            { path: 'nuevo', component: Rolinsertar },
-            { path: 'edits/:id', component: Rolinsertar }
-
-        ]
-    },
-
-    {
-        path: 'propiedades', component: Propiedad,
-        children: [
-            { path: 'nuevo', component: Propiedadinsertar },
-            { path: 'edits/:id', component: Propiedadinsertar },
-            { path: 'mostrar', component: Propiedadmostrar }
-
-        ]
-    },
-
-
-    {
-        path: 'mensajes',
-        component: Mensaje,
-        children: [
-            { path: 'nuevo', component: Mensajeinsertar },
-            { path: 'edits/:id', component: Mensajeinsertar }
-        ]
-    },
-
-    {
-        path: 'visitas',
-        component: Visita,
-        children: [
-            { path: 'nuevo', component: VisitaInsert },
-            { path: 'edits/:id', component: VisitaInsert }
-        ]
-    },
-
-    {
-        path: 'calificacion',
-        component: Calificacion,
-        children: [
-            { path: 'nuevo', component: CalificacionInsert },
-            { path: 'edits/:id', component: CalificacionInsert }
-        ]
-    },
-
-    {
-        path: 'propiedad/:id', component: Propiedadmostrar,
-    }
-
-   
-    {
-        path: 'recomendaciones', component: Recomendacion,
-        children: [
-            { path: 'nuevo', component: Recomendacioninsertar },
-            { path: 'edits/:id', component: Recomendacioninsertar }
-
-        ]
-    },
-
-
-    {
-        path: 'mensajes',
-        component: Mensaje,
-        children: [
-            { path: 'nuevo', component: Mensajeinsertar },
-            { path: 'edits/:id', component: Mensajeinsertar }
-        ]
-    },
-
-    {
-        path: 'visitas',
-        component: Visita,
-        children: [
-            { path: 'nuevo', component: VisitaInsert },
-            { path: 'edits/:id', component: VisitaInsert }
-        ]
-    },
-
-    {
-        path: 'calificacion',
-        component: Calificacion,
-        children: [
-            { path: 'nuevo', component: CalificacionInsert },
-            { path: 'edits/:id', component: CalificacionInsert }
-        ]
-    },
-
-    {
-        path: 'recomendaciones', component: Recomendacion,
-        children: [
-            { path: 'nuevo', component: Recomendacioninsertar },
-            { path: 'edits/:id', component: Recomendacioninsertar }
-
-        ]
-    },
-
-    {
-        path: 'comparaciones', component: Comparacion,
-        children: [
-            { path: 'nuevo', component: Comparacioninsertar },
-            { path: 'edits/:id', component: Comparacioninsertar }
-
-        ]
-
-    },
-
-
-    {
-        path: 'favoritos', component: Favorito,
-        children: [
-            { path: 'nuevo', component: Favoritoinsertar },
-            { path: 'edit/:id', component: Favoritoinsertar }
-        ]
-    },
-
-    {
-        path: 'listas-favoritos', component: Lista_favoritos,
-        children: [
-            { path: 'nuevo', component: Lista_favoritosinsertar },
-            { path: 'edit/:id', component: Lista_favoritosinsertar }
-        ]
-    },
-
-    {path: 'calificaciones',
+  {
+    path: 'calificaciones',
     component: Calificacion,
-        children: [
-            {path: 'nuevo', component: Calificacioninsertar},
-            {path: 'edits/:id', component: Calificacioninsertar },
-    // Tablas agregadas jorge //
+    children: [
+      { path: 'nuevo', component: Calificacioninsertar },
+      { path: 'edits/:id', component: Calificacioninsertar },
+    ],
+  },
 
-    {
-        path: 'pagos', component: Pago,
-        children: [
-            { path: 'nuevo', component: Pagoinsertar },
-            { path: 'edits/:id', component: Pagoinsertar }
-        ]
-    },
+  {
+    path: 'recomendaciones',
+    component: Recomendacion,
+    children: [
+      { path: 'nuevo', component: Recomendacioninsertar },
+      { path: 'edits/:id', component: Recomendacioninsertar },
+    ],
+  },
 
-    {
-        path: 'contratos', component: Contrato,
-        children: [
-            { path: 'nuevo', component: Contratoinsertar },
-            { path: 'edits/:id', component: Contratoinsertar }
-        ]
-    },
+  {
+    path: 'comparaciones',
+    component: Comparacion,
+    children: [
+      { path: 'nuevo', component: Comparacioninsertar },
+      { path: 'edits/:id', component: Comparacioninsertar },
+    ],
+  },
+  {
+    path: 'favoritos',
+    component: Favorito,
+    children: [
+      { path: 'nuevo', component: Favoritoinsertar },
+      { path: 'edit/:id', component: Favoritoinsertar },
+    ],
+  },
 
-    {
-        path: 'simulaciones-de-precios', component: SimulacionDePrecios,
-        children: [
-            { path: 'nuevo', component: SimulacionDePreciosInsertar },
-            { path: 'edits/:id', component: SimulacionDePreciosInsertar }
-        ]
-    },
+  {
+    path: 'listas-favoritos',
+    component: Lista_favoritos,
+    children: [
+      { path: 'nuevo', component: Lista_favoritosinsertar },
+      { path: 'edit/:id', component: Lista_favoritosinsertar },
+    ],
+  },
 
+  {
+    path: 'pagos',
+    component: Pago,
+    children: [
+      { path: 'nuevo', component: Pagoinsertar },
+      { path: 'edits/:id', component: Pagoinsertar },
+    ],
+  },
 
+  {
+    path: 'contratos',
+    component: Contrato,
+    children: [
+      { path: 'nuevo', component: Contratoinsertar },
+      { path: 'edits/:id', component: Contratoinsertar },
+    ],
+  },
+
+  {
+    path: 'simulaciones-de-precios',
+    component: SimulacionDePrecios,
+    children: [
+      { path: 'nuevo', component: Simulacioninsertar },
+      { path: 'edits/:id', component: Simulacioninsertar },
+    ],
+  },
 ];

@@ -8,6 +8,6 @@ import { SimulacionDePreciosListar } from './simulacion-de-precios-listar/simula
   templateUrl: './simulacion-de-precios.html',
   styleUrl: './simulacion-de-precios.css',
 })
-export class SimulacionDePreciosComponent {
+export class SimulacionDePrecios {
   constructor(public route: ActivatedRoute) { }
 }
