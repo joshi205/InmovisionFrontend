@@ -1,5 +1,5 @@
+import { Contrato } from "./Contrato";
 import { Usuario } from "./Usuario";
-import { Contrato } from "./contrato";
 
 export class Pago {
     pago_id: number = 0;

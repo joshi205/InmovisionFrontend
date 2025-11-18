@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
-import { Contrato } from '../../../models/contrato';
+import { Contrato } from '../../../models/Contrato';
 import { Contratoservice } from '../../../services/contratoservice';
 
 @Component({
@@ -17,7 +17,7 @@ export class Contratolistar implements OnInit {
 
   dataSource: MatTableDataSource<Contrato> = new MatTableDataSource();
   displayedColumns: string[] = [
-    'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'acciones'
+    'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10'
   ];
 
   constructor(private cS: Contratoservice, public route: ActivatedRoute) { }
