@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { environment } from "../../environments/environment"
 import { Subject } from "rxjs"
-import { Contrato } from "../models/Contrato"
+import { Contrato } from "../models/contrato"
 
 const base_url = environment.base
 

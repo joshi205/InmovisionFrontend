@@ -15,7 +15,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 
-import { Contrato } from '../../../models/Contrato';
+import { Contrato } from '../../../models/contrato';
 import { Contratoservice } from '../../../services/contratoservice';
 import { Propiedadservice } from '../../../services/propiedadservice';
 import { Propiedad } from '../../../models/Propiedad';
