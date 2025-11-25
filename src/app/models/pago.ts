@@ -1,4 +1,4 @@
-import { Contrato } from "./Contrato";
+import { Contrato } from "./contrato";
 import { Usuario } from "./Usuario";
 
 export class Pago {
