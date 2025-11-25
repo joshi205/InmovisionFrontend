@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
-import { Contrato } from '../../../models/Contrato';
+import { Contrato } from '../../../models/contrato';
 import { Contratoservice } from '../../../services/contratoservice';
 
 @Component({
