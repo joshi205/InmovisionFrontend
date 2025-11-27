@@ -63,9 +63,9 @@ export class Rolinsertar implements OnInit{
   }
   aceptar(): void {
     if(this.form.valid){  
-      this.dis.idRol = this.id ? this.id : this.form.value.codigo;
+      this.dis.idRol = this.form.value.codigo;
       this.dis.nombre=this.form.value.nombre
-      this.dis.usuario=this.form.value.usuario
+      this.dis.usuario.idUser=this.form.value.usuario
       if (this.edicion) {
         this.rS.update(this.dis).subscribe((data) => {
           this.rS.list().subscribe((data) => {
@@ -95,7 +95,7 @@ export class Rolinsertar implements OnInit{
         this.form = new FormGroup({
           codigo: new FormControl(data.idRol),
           nombre: new FormControl(data.nombre),
-          usuario: new FormControl(data.usuario),
+          usuario: new FormControl(data.usuario.idUser),
           
         });
       });

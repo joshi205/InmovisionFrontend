@@ -6,10 +6,11 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { A11yModule } from "@angular/cdk/a11y";
 
 @Component({
   selector: 'app-visitalistar',
-  imports: [MatTableModule, CommonModule, MatIconModule, MatButtonModule, RouterLink],
+  imports: [MatTableModule, CommonModule, MatIconModule, MatButtonModule, RouterLink, A11yModule],
   templateUrl: './visitalistar.html',
   styleUrl: './visitalistar.css',
 })
