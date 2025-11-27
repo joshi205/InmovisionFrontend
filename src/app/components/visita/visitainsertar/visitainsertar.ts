@@ -25,7 +25,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
-
   selector: 'app-visitainsertar',
 
   imports: [
@@ -40,9 +39,7 @@ import { MatNativeDateModule } from '@angular/material/core';
   templateUrl: './visitainsertar.html',
   styleUrl: './visitainsertar.css',
 })
-
 export class Visitainsertar implements OnInit {
-
   form: FormGroup = new FormGroup({});
 
   edicion: boolean = false;
@@ -73,22 +70,24 @@ export class Visitainsertar implements OnInit {
     this.pS.list().subscribe((data) => (this.listaPropiedades = data));
 
     this.pS.list().subscribe((data: Propiedad[]) => {
-  this.listaPropiedades = data;
-});
+      this.listaPropiedades = data;
+    });
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      fecha: ['', Validators.required],
+      fechaHora: ['', Validators.required],
       estado: ['', Validators.required],
       usuario: ['', Validators.required],
       propiedad: ['', Validators.required],
     });
   }
-
+  cancelar(): void {
+    this.router.navigate(['visitas']);
+  }
   aceptar(): void {
     if (this.form.valid) {
       this.visita.idVisita = this.form.value.codigo;
-      this.visita.fecha_hora = this.form.value.fecha;
+      this.visita.fechaHora = this.form.value.fechaHora;
       this.visita.estado = this.form.value.estado;
       this.visita.usuario.idUser = this.form.value.usuario;
       this.visita.propiedad.idPropiedad = this.form.value.propiedad;
@@ -112,7 +111,7 @@ export class Visitainsertar implements OnInit {
       this.vS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
           codigo: new FormControl(data.idVisita),
-          fecha: new FormControl(data.fecha_hora),
+          fechaHora: new FormControl(data.fechaHora),
           estado: new FormControl(data.estado),
           usuario: new FormControl(data.usuario.idUser),
           propiedad: new FormControl(data.propiedad.idPropiedad),
