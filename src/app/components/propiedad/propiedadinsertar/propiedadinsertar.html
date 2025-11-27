@@ -10,16 +10,40 @@
         <mat-form-field appearance="fill" class="small">
           <mat-label>Título</mat-label>
           <input matInput formControlName="titulo" />
+          <mat-error>
+            @if (form.get('titulo')?.hasError('required')) {
+              Ingrese titulo!!
+            }
+            @if (form.get('titulo')?.hasError('minlength')) {
+              Mínimo 5 caracteres
+            }
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="small">
           <mat-label>Descripción</mat-label>
           <textarea matInput rows="2" formControlName="descripcion"></textarea>
+          <mat-error>
+              @if (form.get('descripcion')?.hasError('required')) {
+                Ingrese descripción!!
+              }
+              @if (form.get('descripcion')?.hasError('minlength')) {
+                Mínimo 10 caracteres
+              }
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="small">
           <mat-label>Precio</mat-label>
           <input matInput type="number" formControlName="precio" />
+          <mat-error>
+            @if (form.get('precio')?.hasError('required')) {
+              Ingrese precio!!
+            }
+            @if (form.get('precio')?.hasError('min')) {
+              Debe ser mayor a 0
+            }
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="small">
@@ -47,6 +71,11 @@
         <mat-form-field appearance="fill" class="small">
           <mat-label>Dirección</mat-label>
           <input matInput formControlName="direccion" />
+          <mat-error>
+            @if (form.get('direccion')?.hasError('required')) {
+              Ingrese dirección!!
+            }
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="small">
@@ -55,28 +84,68 @@
             <mat-option value="Disponible">Disponible</mat-option>
             <mat-option value="No disponible">No disponible</mat-option>
           </mat-select>
+         <mat-error>
+            @if (form.get('estado')?.hasError('required')) {
+              Selccione estado!!
+            }
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="small">
           <mat-label>Fecha publicación</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="fechaPublicacion" />
+          <input 
+            matInput 
+            [matDatepicker]="picker" 
+            [min]="hoy"
+            [max]="hoy"
+            formControlName="fechaPublicacion" 
+          />
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
+          <mat-error>
+            @if (form.get('fechaPublicacion')?.hasError('required')) {
+              Seleccione una fecha!!
+            }
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="small">
           <mat-label>Metros cuadrados</mat-label>
           <input matInput type="number" formControlName="metrosCuadrados" />
+          <mat-error>
+            @if (form.get('metrosCuadrados')?.hasError('required')) {
+              Ingrese m2!!
+            }
+            @if (form.get('metrosCuadrados')?.hasError('min')) {
+              Debe ser mayor a 0
+            }
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="small">
           <mat-label>Habitaciones</mat-label>
           <input matInput type="number" formControlName="habitaciones" />
+          <mat-error>
+            @if (form.get('habitaciones')?.hasError('required')) {
+              Ingrese número de habitaciones!!
+            }
+            @if (form.get('habitaciones')?.hasError('min')) {
+              Debe ser mayor a 0
+            }
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="small">
           <mat-label>Baños</mat-label>
           <input matInput type="number" formControlName="banos" />
+          <mat-error>
+            @if (form.get('banos')?.hasError('required')) {
+              Ingrese número de baños!!
+            }
+            @if (form.get('banos')?.hasError('min')) {
+              Debe ser mayor a 0
+            }
+          </mat-error>
         </mat-form-field>
 
         <!-- DESTACADA -->
@@ -88,22 +157,48 @@
         <mat-form-field appearance="fill" class="small">
           <mat-label>Latitud</mat-label>
           <input matInput type="number" formControlName="latitud" />
+          <mat-error>
+            @if (form.get('latitud')?.hasError('required')) {
+              Ingrese latitud!!
+            }
+            @if (form.get('latitud')?.hasError('min') || form.get('latitud')?.hasError('max')) {
+              Valor entre -90 y 90
+            }
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="small">
           <mat-label>Longitud</mat-label>
           <input matInput type="number" formControlName="longitud" />
+          <mat-error>
+            @if (form.get('longitud')?.hasError('required')) {
+              Ingrese longitud!!
+            }
+            @if (form.get('longitud')?.hasError('min') || form.get('longitud')?.hasError('max')) {
+              Valor entre -180 y 180
+            }
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="small">
           <mat-label>URL VR</mat-label>
           <input matInput formControlName="urlVr" />
+          <mat-error>
+            @if (form.get('urlVr')?.hasError('required')) {
+              Ingrese URL de VR!!
+            }
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="small">
           <mat-label>Notas</mat-label>
           <textarea matInput rows="2" formControlName="notas"></textarea>
         </mat-form-field>
+        <mat-error>
+            @if (form.get('notas')?.hasError('required')) {
+              Ingrese notas!!
+            }
+          </mat-error>
       </div>
 
       <!-- USUARIO / DISTRITO -->

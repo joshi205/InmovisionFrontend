@@ -44,9 +44,7 @@ export class Visitainsertar implements OnInit {
 
   edicion: boolean = false;
   id: number = 0;
-
   visita: Visita = new Visita();
-
   listaUsuarios: Usuario[] = [];
   listaPropiedades: Propiedad[] = [];
 
@@ -73,14 +71,33 @@ export class Visitainsertar implements OnInit {
       this.listaPropiedades = data;
     });
 
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
     this.form = this.formBuilder.group({
       codigo: [''],
-      fechaHora: ['', Validators.required],
+      fechaHora: ['', [Validators.required, this.validarFechaFutura(hoy)]],
       estado: ['', Validators.required],
       usuario: ['', Validators.required],
       propiedad: ['', Validators.required],
     });
   }
+
+  validarFechaFutura(minDate: Date) {
+    return (control: FormControl) => {
+      const value = control.value;
+
+      if (!value) return null;
+
+      const fechaSeleccionada = new Date(value);
+      fechaSeleccionada.setHours(0, 0, 0, 0);
+
+      return fechaSeleccionada >= minDate
+        ? null
+        : { fechaInvalida: true };
+    };
+  }
+
   cancelar(): void {
     this.router.navigate(['visitas']);
   }

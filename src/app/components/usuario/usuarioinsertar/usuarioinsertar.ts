@@ -28,7 +28,7 @@ export class Usuarioinsertar {
     us: Usuario = new Usuario();
     edicion: boolean = false;
     id: number = 0;
-  
+    hoy: Date = new Date();
      departamentoDistrito: { value: string; viewValue: string }[] = [
         { value: 'Amazonas', viewValue: 'Amazonas' },    
      ];
@@ -50,14 +50,43 @@ export class Usuarioinsertar {
   
       this.form = this.formBuilder.group({
         codigo: [''],
-        nombre: ['', Validators.required],
-        apellido: ['', Validators.required],
-        correo: ['', Validators.required],
-        username: ['', Validators.required],
-        password: ['', Validators.required],
-        telefono: ['', Validators.required],
+        nombre: ['', [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)
+          ]
+        ],
+        apellido: ['', [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)
+          ]
+        ],
+        correo: ['', 
+          [
+            Validators.required,
+            Validators.email
+          ]
+        ],
+        username: ['', 
+          [
+            Validators.required,
+            Validators.minLength(4)
+          ]
+        ],
+        password: ['', [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/)
+          ]
+        ],
+        telefono: ['', [
+            Validators.required,
+            Validators.pattern('^[0-9]{9}$') 
+          ]
+        ],
         fotourl: ['', Validators.required],
-        fecha_registro: ['', Validators.required],
+        fecha_registro: [this.hoy, Validators.required],
 
 
       });
