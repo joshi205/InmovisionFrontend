@@ -79,8 +79,18 @@ export class Distritoinsertar implements OnInit{
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      nombreDistrito: ['', Validators.required],
-      provinciaDistrito: ['', Validators.required],
+      nombreDistrito: ['', [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)
+        ]
+      ],
+      provinciaDistrito: ['', [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)
+        ]
+      ],
       departamentoDistrito: ['', Validators.required],
     });
   }

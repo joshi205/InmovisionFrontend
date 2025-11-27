@@ -39,7 +39,7 @@ export class Calificacioninsertar implements OnInit {
 
   edicion: boolean = false;
   id: number = 0;
-
+  hoy: Date = new Date();
   listaUsuarios: Usuario[] = [];
   listaPropiedades: Propiedad[] = [];
 
@@ -64,9 +64,9 @@ export class Calificacioninsertar implements OnInit {
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      puntuacion: ['', Validators.required],
-      comentario: ['', Validators.required],
-      fecha: ['', Validators.required],
+      puntuacion: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
+      comentario: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
+      fecha: ['', this.hoy, Validators.required],
       usuario: ['', Validators.required],
       propiedad: ['', Validators.required],
     });

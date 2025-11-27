@@ -32,7 +32,7 @@ export class Rolinsertar implements OnInit{
     edicion: boolean = false;
     id: number = 0;
     listaUsuarios: Usuario[] = [];
-
+    listaRoles = ['ADMIN', 'PROPIETARIO', 'CLIENTE'];
 
   constructor(
       private rS: Rolservice,
