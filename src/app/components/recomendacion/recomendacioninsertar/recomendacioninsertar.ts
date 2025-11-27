@@ -26,7 +26,7 @@ export class Recomendacioninsertar implements OnInit{
   edicion: boolean = false;
   id: number = 0;
   rec: Recomendacion = new Recomendacion();
-
+  hoy: Date = new Date();
   listaUsuarios: Usuario[]=[];
   listaPropiedades: Propiedad[]=[];
 
@@ -57,8 +57,8 @@ export class Recomendacioninsertar implements OnInit{
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      motivo: ['', Validators.required],
-      fecha: ['', Validators.required],
+      motivo: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
+      fecha: [this.hoy, Validators.required],
       usuarioFK: ['', Validators.required],
       propiedadFK: ['', Validators.required],
     });

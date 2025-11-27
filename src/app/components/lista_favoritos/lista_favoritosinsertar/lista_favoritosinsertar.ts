@@ -48,8 +48,8 @@ export class Lista_favoritosinsertar implements OnInit {
 
     this.form = this.formBuilder.group({
       id: [''],
-      nombre: ['', Validators.required],
-      descripcion: [''],
+      nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      descripcion: ['',[Validators.maxLength(200)]],
     });
   }
 

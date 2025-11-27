@@ -16,8 +16,8 @@
       <mat-select formControlName="tipo">
         <mat-option value="Alquiler">Alquiler</mat-option>
         <mat-option value="Venta">Venta</mat-option>
-        <mat-error> @if (form.get('tipo')?.hasError('required')) { Complete Tipo!! } </mat-error>
       </mat-select>
+        <mat-error> @if (form.get('tipo')?.hasError('required')) { Complete Tipo!! } </mat-error>
     </mat-form-field>
 
     <!-- Campo Fecha Inicio -->
@@ -28,6 +28,7 @@
       <mat-datepicker #pickerInicio></mat-datepicker>
       <mat-error>
         @if (form.get('fechaInicio')?.hasError('required')) { Complete fecha!! }
+        @if (form.get('fechaInicio')?.hasError('fechaPasada')) { La fecha no puede ser pasada. }
       </mat-error>
     </mat-form-field>
 
@@ -37,14 +38,20 @@
       <input matInput [matDatepicker]="pickerFin" formControlName="fechaFin" />
       <mat-datepicker-toggle matIconSuffix [for]="pickerFin"></mat-datepicker-toggle>
       <mat-datepicker #pickerFin></mat-datepicker>
-      <mat-error> @if (form.get('fechaFin')?.hasError('required')) { Complete fecha!! } </mat-error>
+      <mat-error> 
+        @if (form.get('fechaFin')?.hasError('required')&& form.get('fechaFin')?.touched) { Complete fecha!! } 
+        @if (form.hasError('rangoInvalido') && (form.get('fechaFin')?.touched || form.get('fechaInicio')?.touched)) { Fecha fin debe ser mayor que fecha inicio. }
+      </mat-error>
     </mat-form-field>
 
     <!-- Campo Monto -->
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Monto</mat-label>
       <input matInput type="number" formControlName="monto" placeholder="Monto del contrato" />
-      <mat-error> @if (form.get('monto')?.hasError('required')) { Rellene monto!! } </mat-error>
+      <mat-error> 
+        @if (form.get('monto')?.hasError('required')) { Rellene monto!! } 
+        @if (form.get('monto')?.hasError('min')) { El monto mínimo es 0. }
+      </mat-error>
     </mat-form-field>
 
     <mat-radio-group formControlName="estado" class="full-width">
@@ -65,6 +72,9 @@
       <mat-error>
         @if (form.get('terminosYCondiciones')?.hasError('required')) { Rellene terminos y
         condiciones!! }
+        @if (form.get('terminosYCondiciones')?.hasError('minlength')) {
+          Mínimo 10 caracteres
+        }
       </mat-error>
     </mat-form-field>
 

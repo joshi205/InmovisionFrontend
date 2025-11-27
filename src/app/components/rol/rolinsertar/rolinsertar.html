@@ -17,10 +17,14 @@
       <!-- Nombre del rol -->
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Nombre del rol</mat-label>
-        <input matInput formControlName="nombre" placeholder="Ejemplo: ADMIN, CLIENTE, PROPIETARIO" />
+        <mat-select formControlName="nombre">
+          @for (r of listaRoles; track r) {
+            <mat-option [value]="r">{{ r }}</mat-option>
+          }
+        </mat-select>
         <mat-error>
           @if (form.get('nombre')?.hasError('required')) {
-            Ingrese el nombre del rol!!
+            Seleccione un rol!!
           }
         </mat-error>
       </mat-form-field>

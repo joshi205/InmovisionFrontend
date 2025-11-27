@@ -48,6 +48,7 @@ export class Propiedadinsertar implements OnInit {
   dis: Propiedad = new Propiedad();
   edicion: boolean = false;
   id: number = 0;
+  hoy: Date = new Date();
   listaUsuarios: Usuario[] = [];
   listaDistritos: Distrito[] = [];
   selectedFiles: File[] = [];
@@ -73,20 +74,20 @@ export class Propiedadinsertar implements OnInit {
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      titulo: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      precio: ['', Validators.required],
+      titulo: ['', [Validators.required, Validators.minLength(5)]],
+      descripcion: ['', [Validators.required, Validators.minLength(10)]],
+      precio: ['', [Validators.required, Validators.min(0.01)]],
       tipo: ['', Validators.required],
       categoria: ['', Validators.required],
       direccion: ['', Validators.required],
-      fechaPublicacion: ['', Validators.required],
+      fechaPublicacion: [this.hoy, Validators.required],
       estado: ['', Validators.required],
-      metrosCuadrados: ['', Validators.required],
-      habitaciones: ['', Validators.required],
-      banos: ['', Validators.required],
+      metrosCuadrados: ['', [Validators.required, Validators.min(1)]],
+      habitaciones: ['', [Validators.required, Validators.min(0)]],
+      banos: ['', [Validators.required, Validators.min(0)]],
       destacada: ['', Validators.required],
-      latitud: ['', Validators.required],
-      longitud: ['', Validators.required],
+      latitud: ['', [Validators.required, Validators.min(-90), Validators.max(90)]],
+      longitud: ['', [Validators.required, Validators.min(-180), Validators.max(180)]],
       urlVr: ['', Validators.required],
       notas: ['', Validators.required],
       usuario: ['', Validators.required],

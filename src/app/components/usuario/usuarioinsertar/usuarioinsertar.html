@@ -22,6 +22,12 @@
           @if (form.get('nombre')?.hasError('required')) {
             Ingrese el nombre!!
           }
+          @if (form.get('nombre')?.hasError('minlength')) {
+            Mínimo 2 caracteres.
+          }
+          @if (form.get('nombre')?.hasError('pattern')) {
+            Solo se permiten letras.
+          }
         </mat-error>
       </mat-form-field>
 
@@ -32,6 +38,12 @@
         <mat-error>
           @if (form.get('apellido')?.hasError('required')) {
             Ingrese el apellido!!
+          }
+          @if (form.get('apellido')?.hasError('minlength')) {
+            Mínimo 2 caracteres.
+          }
+          @if (form.get('apellido')?.hasError('pattern')) {
+            Solo se permiten letras.
           }
         </mat-error>
       </mat-form-field>
@@ -44,6 +56,9 @@
           @if (form.get('correo')?.hasError('required')) {
             Ingrese el correo!!
           }
+          @if (form.get('correo')?.hasError('email')) {
+            Correo inválido.
+          }
         </mat-error>
       </mat-form-field>
 
@@ -54,6 +69,9 @@
         <mat-error>
           @if (form.get('username')?.hasError('required')) {
             Ingrese el nombre de usuario!!
+          }
+          @if (form.get('username')?.hasError('minlength')) {
+            Debe tener al menos 4 caracteres.
           }
         </mat-error>
       </mat-form-field>
@@ -66,6 +84,12 @@
           @if (form.get('password')?.hasError('required')) {
             Ingrese la contraseña!!
           }
+          @if (form.get('password')?.hasError('minlength')) {
+            Mínimo 6 caracteres.
+          }
+          @if (form.get('password')?.hasError('pattern')) {
+            Debe incluir mayúscula, minúscula y número.
+          }
         </mat-error>
       </mat-form-field>
 
@@ -76,6 +100,9 @@
         <mat-error>
           @if (form.get('telefono')?.hasError('required')) {
             Ingrese el teléfono!!
+          }
+          @if (form.get('telefono')?.hasError('pattern')) {
+            El teléfono debe tener 9 dígitos.
           }
         </mat-error>
       </mat-form-field>
@@ -94,12 +121,18 @@
       <!-- Fecha de registro -->
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Fecha de registro</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="fecha_registro" />
+        <input 
+          matInput 
+          [matDatepicker]="picker" 
+          formControlName="fecha_registro"
+          [min]="hoy"
+          [max]="hoy"
+        />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error>
           @if (form.get('fecha_registro')?.hasError('required')) {
-            Seleccione una fecha!!
+            La fecha es obligatoria.
           }
         </mat-error>
       </mat-form-field>

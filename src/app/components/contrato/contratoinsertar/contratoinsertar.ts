@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -41,6 +42,7 @@ export class Contratoinsertar implements OnInit {
   con: Contrato = new Contrato();
   edicion: boolean = false;
   id: number = 0;
+  hoy: Date = new Date();
   listaPropiedades: Propiedad[] = [];
 
   constructor(
@@ -65,13 +67,38 @@ export class Contratoinsertar implements OnInit {
     this.form = this.formBuilder.group({
       codigo: [''],
       tipo: ['', Validators.required],
-      fechaInicio: ['', Validators.required],
+      fechaInicio: ['', [Validators.required, this.validarFechaNoPasada]],
       fechaFin: ['', Validators.required],
-      monto: ['', Validators.required],
+      monto: ['', [Validators.required, Validators.min(1)]],
       estado: ['', Validators.required],
-      terminosYCondiciones: ['', Validators.required],
+      terminosYCondiciones: ['', [Validators.required, Validators.minLength(10)]],
       propiedad: ['', Validators.required],
-    });
+    },
+    {
+      validators: this.validarRangoFechas.bind(this)
+    }
+  );
+  }
+
+  validarFechaNoPasada(control: AbstractControl) {
+    if (!control.value) return null;
+
+    const fechaElegida = new Date(control.value);
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
+    return fechaElegida >= hoy ? null : { fechaPasada: true };
+  }
+
+  validarRangoFechas(group: AbstractControl) {
+    const inicio = group.get('fechaInicio')?.value;
+    const fin = group.get('fechaFin')?.value;
+
+    if (!inicio || !fin) return null;
+
+    return new Date(fin) > new Date(inicio)
+      ? null
+      : { rangoInvalido: true };
   }
 
   aceptar(): void {
