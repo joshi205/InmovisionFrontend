@@ -68,9 +68,8 @@ export class Mensajeinsertar implements OnInit {
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      enviado_por: ['', Validators.required],
       contenido: ['', Validators.required],
-      enviado_en: ['', Validators.required],
+      enviadoEn: ['', Validators.required],
       usuario: ['', Validators.required],
       propiedad: ['', Validators.required],
     });
@@ -79,9 +78,8 @@ export class Mensajeinsertar implements OnInit {
   aceptar(): void {
     if (this.form.valid) {
       this.men.idMensaje = this.form.value.codigo;
-      this.men.enviado_por = this.form.value.enviado_por;
       this.men.contenido = this.form.value.contenido;
-      this.men.enviado_en = this.form.value.enviado_en;
+      this.men.enviadoEn = this.form.value.enviadoEn;
       this.men.usuario.idUser = this.form.value.usuario;
       this.men.propiedad.idPropiedad = this.form.value.propiedad;
 
@@ -99,8 +97,12 @@ export class Mensajeinsertar implements OnInit {
         });
       }
 
-      this.router.navigate(['mensaje']);
+      this.router.navigate(['mensajes']);
     }
+  }
+
+  cancelar(): void {
+    this.router.navigate(['mensajes']);
   }
 
   init() {
@@ -108,9 +110,8 @@ export class Mensajeinsertar implements OnInit {
       this.mS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
           codigo: new FormControl(data.idMensaje),
-          enviado_por: new FormControl(data.enviado_por),
           contenido: new FormControl(data.contenido),
-          enviado_en: new FormControl(data.enviado_en),
+          enviadoEn: new FormControl(data.enviadoEn),
           usuario: new FormControl(data.usuario.idUser),
           propiedad: new FormControl(data.propiedad.idPropiedad),
         });

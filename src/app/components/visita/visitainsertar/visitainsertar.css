@@ -1,0 +1,96 @@
+/* ====== CUADRO PRINCIPAL ====== */
+.container {
+  width: 360px;
+  margin: 0 auto;
+  padding: 12px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  border-top: 4px solid #e63946; /* línea roja superior */
+}
+
+/* ====== TÍTULO ====== */
+h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #25415e;
+  margin-bottom: 8px;
+}
+
+/* ====== FORM GRID (pequeño) ====== */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ====== CAMPOS MÁS CHICOS ====== */
+mat-form-field {
+  width: 100%;
+  transform: scale(0.85);
+  margin-bottom: -6px;
+}
+
+/* Inputs pequeños */
+input, textarea {
+  font-size: 13px;
+}
+
+/* Textarea pequeño */
+textarea {
+  resize: none;
+  min-height: 50px;
+}
+
+/* ====== SELECT STYLES ====== */
+.mat-mdc-select {
+  font-size: 13px;
+}
+
+/* ====== BOTONES ====== */
+button[matButton="elevated"] {
+  background: #e63946 !important;
+  color: white !important;
+  font-size: 13px;
+  padding: 6px 22px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: 0.2s;
+  margin-right: 6px;
+}
+
+button[matButton="elevated"]:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+button[color="warn"] {
+  background: #25415e !important;
+  color: white !important;
+  font-size: 13px;
+  padding: 6px 18px;
+  border-radius: 8px;
+  font-weight: 500;
+  opacity: 0.85;
+  transition: 0.2s;
+}
+
+button[color="warn"]:hover {
+  opacity: 1;
+  transform: scale(1.04);
+  background: #1b3046 !important;
+}
+
+/* ===== FOCUS HOVER INPUTS ===== */
+input:focus, mat-select:focus {
+  border-color: #25415e !important;
+  box-shadow: 0 0 4px rgba(37,65,94,0.3);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 380px) {
+  .container {
+    width: 95%;
+  }
+}

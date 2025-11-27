@@ -4,7 +4,6 @@
   </div>
 
   <form [formGroup]="form" (submit)="aceptar()">
-
     @if (edicion) {
     <mat-form-field>
       <mat-label>ID</mat-label>
@@ -13,8 +12,8 @@
     }
 
     <mat-form-field>
-      <mat-label>Fecha / Hora</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="fecha" />
+      <mat-label>Fecha </mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="fechaHora" />
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
@@ -46,8 +45,11 @@
       </mat-select>
     </mat-form-field>
 
-    <button matButton="elevated">
-      {{ edicion ? 'Editar' : 'Registrar' }}
-    </button>
+    
+    <div>
+      <button matButton="elevated">{{ edicion ? 'Editar' : 'Registrar' }}</button>
+      <button mat-raised-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+    </div>
+
   </form>
 </div>
