@@ -17,6 +17,12 @@
         <input matInput formControlName="motivo" />
         <mat-error>
           @if (form.get('motivo')?.hasError('required')) { Ingrese motivo!! }
+          @if (form.get('motivo')?.hasError('minlength')) {
+              Mínimo 5 caracteres
+            }
+            @if (form.get('motivo')?.hasError('maxlength')) {
+              Máximo 200 caracteres
+            }
         </mat-error>
       </mat-form-field>
       <br />
@@ -40,6 +46,9 @@
           <mat-option [value]="us.idUser">{{ us.nombre }} {{ us.apellido }}</mat-option>
           }
         </mat-select>
+        <mat-error>
+          @if (form.get('usuarioFK')?.hasError('required')) { Seleccione usuario!! }
+        </mat-error>
       </mat-form-field>
       <br />
       <mat-form-field>
@@ -49,6 +58,9 @@
           <mat-option [value]="p.idPropiedad">{{ p.titulo }}</mat-option>
           }
         </mat-select>
+        <mat-error>
+          @if (form.get('propiedadFK')?.hasError('required')) { Seleccione propiedad!! }
+        </mat-error>
       </mat-form-field>
       <br />
       <div>

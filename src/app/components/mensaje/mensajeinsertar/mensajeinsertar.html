@@ -17,7 +17,7 @@
         <mat-label>Usuario</mat-label>
         <mat-select formControlName="usuario">
           @for (u of listaUsuarios; track u) {
-          <mat-option [value]="u.idUser">{{ u.nombre }}</mat-option>
+          <mat-option [value]="u.idUser">{{ u.nombre }} {{ u.apellido }}</mat-option>
           }
         </mat-select>
         <mat-error>
@@ -32,6 +32,8 @@
         <textarea matInput formControlName="contenido"></textarea>
         <mat-error>
           @if (form.get('contenido')?.hasError('required')) { Ingrese el contenido!! }
+          @if (form.get('contenido')?.hasError('minlength')) { Debe tener al menos 5 caracteres. }
+          @if (form.get('contenido')?.hasError('maxlength')) { Máximo 300 caracteres permitidos. }
         </mat-error>
       </mat-form-field>
       <br />
@@ -39,12 +41,18 @@
       <!-- Fecha -->
       <mat-form-field>
         <mat-label>Fecha de envío</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="enviadoEn" />
+        <input 
+          matInput 
+          [matDatepicker]="picker" 
+          formControlName="enviadoEn"
+          [min]="hoy"
+          [max]="hoy"
+        />
         <mat-hint>DD/MM/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error>
-          @if (form.get('enviado_en')?.hasError('required')) { La fecha es obligatoria. }
+          @if (form.get('enviadoEn')?.hasError('required')) { La fecha es obligatoria. }
         </mat-error>
       </mat-form-field>
       <br />

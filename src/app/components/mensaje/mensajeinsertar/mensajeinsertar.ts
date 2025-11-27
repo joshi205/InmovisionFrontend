@@ -41,7 +41,7 @@ export class Mensajeinsertar implements OnInit {
   form: FormGroup = new FormGroup({});
   edicion: boolean = false;
   id: number = 0;
-
+  hoy: Date = new Date();
   men: Mensaje = new Mensaje();
 
   listaUsuarios: Usuario[] = [];
@@ -68,8 +68,13 @@ export class Mensajeinsertar implements OnInit {
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      contenido: ['', Validators.required],
-      enviadoEn: ['', Validators.required],
+      contenido: ['', [
+          Validators.required,
+          Validators.minLength(5),   
+          Validators.maxLength(300)  
+        ]
+      ],
+      enviadoEn: [this.hoy, Validators.required],
       usuario: ['', Validators.required],
       propiedad: ['', Validators.required],
     });

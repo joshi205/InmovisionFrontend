@@ -44,7 +44,7 @@ export class Favoritoinsertar implements OnInit {
   fav: Favorito = new Favorito();
   edicion: boolean = false;
   id: number = 0;
-
+  hoy: Date = new Date();
   listaUsuarios: Usuario[] = [];
   listaPropiedades: Propiedad[] = [];
   listaListasFavoritos: ListaFavorito[] = [];
@@ -80,7 +80,7 @@ export class Favoritoinsertar implements OnInit {
 
     this.form = this.formBuilder.group({
       id: [''],
-      fechaAgregado: ['', Validators.required],
+      fechaAgregado: [this.hoy, Validators.required],
       usuarioFK: ['', Validators.required],
       propiedadFK: ['', Validators.required],
       listaFavoritoFK: ['', Validators.required],

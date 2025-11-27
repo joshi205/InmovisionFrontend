@@ -34,7 +34,7 @@ export class Simulacioninsertar implements OnInit {
   sim: SimulacionPrecios = new SimulacionPrecios();
   edicion: boolean = false;
   id: number = 0;
-
+  hoy: Date = new Date();
   constructor(
     private sS: SimulacionDePreciosService,
     private router: Router,
@@ -53,11 +53,11 @@ export class Simulacioninsertar implements OnInit {
       codigo: [''],
       usuario: ['', Validators.required],
       propiedad: ['', Validators.required],
-      monto_inicial: ['', Validators.required],
-      tasa_intereses: ['', Validators.required],
-      plazo_meses: ['', Validators.required],
-      cuota_mensual: ['', Validators.required],
-      fecha: ['', Validators.required],
+      monto_inicial: ['', [Validators.required, Validators.min(1)]],
+      tasa_intereses: ['', [Validators.required, Validators.min(0.1), Validators.max(100)]],
+      plazo_meses: ['', [Validators.required, Validators.min(1), Validators.max(360)]],
+      cuota_mensual: ['', [Validators.required, Validators.min(1)]],
+      fecha: [this.hoy, Validators.required],
     });
   }
 
