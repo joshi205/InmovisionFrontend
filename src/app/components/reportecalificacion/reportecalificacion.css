@@ -1,0 +1,52 @@
+.reporte-wrapper {
+  padding: 24px;
+  background-color: #c6e4ff; /* fondo suave como el home */
+  min-height: calc(100vh - 64px);
+  box-sizing: border-box;
+  font-family: "Lexend Deca", Arial, sans-serif;
+}
+
+.reporte-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  color: #105590;
+}
+
+.reporte-header mat-icon {
+  font-size: 32px;
+}
+
+.reporte-header h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.chart-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  height: 420px;
+}
+
+.chart-card canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.no-data {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #105590;
+  font-family: "Exo 2", Arial, sans-serif;
+}
+
+.no-data mat-icon {
+  font-size: 40px;
+}
