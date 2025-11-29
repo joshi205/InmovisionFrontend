@@ -1,120 +1,83 @@
-/* --- Toolbar --- */
+.menu-container {
+  width: 100%;
+}
 
+/* Barra superior */
 .custom-toolbar {
-
- background-color: #25415e; /* verde principal */
-
- display: flex;
-
- align-items: center;
-
- padding: 0 8px;
-
+  background-color: #105590; /* azul Inmovision */
+  color: #ffffff;
+  padding: 0 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
 }
 
-
-
-/* --- Botón principal --- */
-
-.btn-rojo {
-
- border: none;
- font-size: smaller;
- border-radius: 4px;
- margin: 4px;
- padding: 6px 10px;
- display: flex;
- align-items: center;
- gap: 6px;
- cursor: pointer;
- transition: background-color 0.2s ease;
-
+/* Botones principales */
+.btn-nav {
+  color: #ffffff;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.03em;
+  border-radius: 999px;
+  padding: 0 16px;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
 }
 
-
-
-.btn-rojo:hover {
- background-color: rgb(113, 118, 115);
-
+.btn-nav mat-icon {
+  margin-right: 6px;
 }
 
-
-
-/* --- Icono --- */
-
-.btn-rojo mat-icon,
-
-.btn-rojo .material-symbols-outlined {
-
- font-size: 1.3rem;
-
- vertical-align: middle;
-
- line-height: 1;
-
+/* Marca */
+.brand-btn {
+  font-weight: 600;
+  font-size: 16px;
 }
 
-
-
-/* --- Texto dentro del botón --- */
-
-.btn-rojo span:not(.material-symbols-outlined),
-
-.btn-rojo {
-
- vertical-align: middle;
-
+.brand-title {
+  margin-left: 4px;
 }
 
+/* Hover bonito */
+.btn-nav:hover {
+  background-color: rgba(255, 255, 255, 0.14);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
 
+/* Botón usuario un poco destacado */
+.user-btn {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
 
-/* --- Asegurar color blanco --- */
+/* Separador para empujar usuario a la derecha */
+.spacer {
+  flex: 1 1 auto;
+}
 
+/* Asegurar texto blanco en toolbar */
+.custom-toolbar .mat-mdc-button .mdc-button__label,
+.custom-toolbar .mat-mdc-icon-button .mdc-button__label,
+.custom-toolbar .mat-icon {
+  color: #ffffff;
+}
+/* === BOTONES DEL TOOLBAR (texto e iconos blancos) === */
 .custom-toolbar button,
+.custom-toolbar .mat-mdc-button,
+.custom-toolbar .mat-mdc-icon-button {
+  color: #ffffff !important; /* texto blanco */
+  font-weight: 600;
+}
 
+/* Íconos dentro del toolbar */
 .custom-toolbar mat-icon {
-
- color: rgb(255, 255, 255);
-
+  color: #ffffff !important;
 }
 
-
-
-/* --- Menú desplegable translúcido verde claro --- */
-
-.mat-mdc-menu-panel {
-
- background-color: #D6E4FF !important; /* verde claro translúcido (lightgreen con transparencia) */
-
- backdrop-filter: blur(6px); /* efecto suave de vidrio */
-
- border: 1px solid #D6E4FF;
-
- border-radius: 8px;
-
- padding: 4px 0;
-
+/* Efecto hover moderno */
+.custom-toolbar button:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  border-radius: 8px;
 }
 
-
-
-/* --- Opciones del menú --- */
-
-.mat-mdc-menu-item {
-
- color: #000000 !important; /* texto verde oscuro */
-
- font-size: 0.85rem;
-
- font-weight: 500;
-
+/* Qtia el fondo negro por defecto del botón */
+.mat-mdc-button:not(:disabled) {
+  background: transparent !important;
 }
-
-
-
-.mat-mdc-menu-item:hover {
-
- background-color: #D6E4FF !important; /* un verde más visible al pasar el mouse */
-
-}
-
