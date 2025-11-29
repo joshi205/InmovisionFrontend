@@ -11,6 +11,10 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { SimulacionPrecios } from '../../../models/simulacion-de-precios';
 import { SimulacionDePreciosService } from '../../../services/simulacion-de-precios';
+import { Usuarioservice } from '../../../services/usuarioservice';
+import { Propiedadservice } from '../../../services/propiedadservice';
+import { Propiedad } from '../../../models/Propiedad';
+import { Usuario } from '../../../models/Usuario';
 
 @Component({
   selector: 'app-simulacioninsertar',
@@ -29,60 +33,74 @@ import { SimulacionDePreciosService } from '../../../services/simulacion-de-prec
 
 })
 export class Simulacioninsertar implements OnInit {
-
   form: FormGroup = new FormGroup({});
-  sim: SimulacionPrecios = new SimulacionPrecios();
   edicion: boolean = false;
   id: number = 0;
   hoy: Date = new Date();
+  sim: SimulacionPrecios = new SimulacionPrecios();
+
+  listaUsuarios: Usuario[] = [];
+  listaPropiedades: Propiedad[] = [];
+
   constructor(
     private sS: SimulacionDePreciosService,
+    private uS: Usuarioservice,
+    private pS: Propiedadservice,
     private router: Router,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
-      this.edicion = this.id != null;
+      this.edicion = data['id'] != null;
       this.init();
     });
+
+    this.uS.list().subscribe((data) => (this.listaUsuarios = data));
+    this.pS.list().subscribe((data) => (this.listaPropiedades = data));
 
     this.form = this.formBuilder.group({
       codigo: [''],
       usuario: ['', Validators.required],
       propiedad: ['', Validators.required],
-      monto_inicial: ['', [Validators.required, Validators.min(1)]],
-      tasa_intereses: ['', [Validators.required, Validators.min(0.1), Validators.max(100)]],
-      plazo_meses: ['', [Validators.required, Validators.min(1), Validators.max(360)]],
-      cuota_mensual: ['', [Validators.required, Validators.min(1)]],
+      montoInicial: ['', Validators.required],
+      tasaIntereses: ['', Validators.required],
+      plazoMeses: ['', Validators.required],
+      cuotaMensual: ['', Validators.required],
       fecha: [this.hoy, Validators.required],
     });
   }
 
   aceptar(): void {
     if (this.form.valid) {
-      this.sim.simulacion_id = this.id ? this.id : this.form.value.codigo;
-
-      this.sim.usuario.idUser = this.form.value.usuario;
-      this.sim.propiedad.idPropiedad = this.form.value.propiedad;
-
-      this.sim.monto_inicial = this.form.value.monto_inicial;
-      this.sim.tasa_intereses = this.form.value.tasa_intereses;
-      this.sim.plazo_meses = this.form.value.plazo_meses;
-      this.sim.cuota_mensual = this.form.value.cuota_mensual;
+      this.sim.idSimulacion = this.form.value.codigo;
+      this.sim.montoInicial = this.form.value.montoInicial;
+      this.sim.tasaIntereses = this.form.value.tasaIntereses;
+      this.sim.plazoMeses = this.form.value.plazoMeses;
+      this.sim.cuotaMensual = this.form.value.cuotaMensual;
       this.sim.fecha = this.form.value.fecha;
+
+      // FK usuario
+      this.sim.usuario.idUser = this.form.value.usuario;
+      // FK propiedad
+      this.sim.propiedad.idPropiedad = this.form.value.propiedad;
 
       if (this.edicion) {
         this.sS.update(this.sim).subscribe(() => {
-          this.sS.list().subscribe(data => this.sS.setList(data));
+          this.sS.list().subscribe((data) => {
+            this.sS.setList(data);
+          });
         });
       } else {
         this.sS.insert(this.sim).subscribe(() => {
-          this.sS.list().subscribe(data => this.sS.setList(data));
+          this.sS.list().subscribe((data) => {
+            this.sS.setList(data);
+          });
         });
       }
+
       this.router.navigate(['simulacion-de-precios']);
     }
   }
@@ -94,14 +112,16 @@ export class Simulacioninsertar implements OnInit {
   init() {
     if (this.edicion) {
       this.sS.listId(this.id).subscribe((data) => {
+        this.sim = data;
+
         this.form = new FormGroup({
-          codigo: new FormControl(data.simulacion_id),
+          codigo: new FormControl(data.idSimulacion),
           usuario: new FormControl(data.usuario.idUser),
           propiedad: new FormControl(data.propiedad.idPropiedad),
-          monto_inicial: new FormControl(data.monto_inicial),
-          tasa_intereses: new FormControl(data.tasa_intereses),
-          plazo_meses: new FormControl(data.plazo_meses),
-          cuota_mensual: new FormControl(data.cuota_mensual),
+          montoInicial: new FormControl(data.montoInicial),
+          tasaIntereses: new FormControl(data.tasaIntereses),
+          plazoMeses: new FormControl(data.plazoMeses),
+          cuotaMensual: new FormControl(data.cuotaMensual),
           fecha: new FormControl(data.fecha),
         });
       });

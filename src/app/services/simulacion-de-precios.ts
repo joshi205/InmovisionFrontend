@@ -11,7 +11,7 @@ const base_url = environment.base;
 })
 export class SimulacionDePreciosService {
 
-  private url = `${base_url}/simulacion-de-precios`;
+  private url = `${base_url}/simulacionprecios`;
   private listaCambio = new Subject<SimulacionPrecios[]>();
 
   constructor(private http: HttpClient) { }
