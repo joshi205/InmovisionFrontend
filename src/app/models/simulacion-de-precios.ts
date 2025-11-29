@@ -2,12 +2,12 @@ import { Usuario } from "./Usuario";
 import { Propiedad } from "./Propiedad";
 
 export class SimulacionPrecios {
-    simulacion_id: number = 0;
+    idSimulacion: number = 0;
+    montoInicial: number = 0;
+    tasaIntereses: number = 0;
+    plazoMeses: number = 0;
+    cuotaMensual: number = 0;
+    fecha: Date = new Date();
     usuario: Usuario = new Usuario();
     propiedad: Propiedad = new Propiedad();
-    monto_inicial: number = 0;
-    tasa_intereses: number = 0;
-    plazo_meses: number = 0;
-    cuota_mensual: number = 0;
-    fecha: Date = new Date();
 }
