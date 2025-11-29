@@ -1,0 +1,55 @@
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Para que ocupe todo el ancho de la pantalla */
+    z-index: 1000; /* Asegúrate de que el header esté por encima del resto del contenido */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Añadir sombra para distinguirlo mejor */
+}
+.logo_container img{
+    width: 40px;
+    height: 40px;
+}
+.logo_container p{
+    font-size: 25px;
+    color:white;
+    font-weight: bold;
+    margin-left: 15px;
+    font-family: "Lexend Deca",sans-serif;
+}
+.logo_container a{
+    text-decoration: none;
+}
+.logo_container{
+    display: flex;
+    margin-left: 20px;
+    align-items: center;
+}
+.container{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background:#105590;
+}
+.navegacion a{
+    text-decoration: none;
+    font-family: "Lexend Deca",sans-serif;
+    color:white;
+    font-weight: bolder;
+}
+.navegacion{
+   display: flex;
+   gap:30px;/*espacio entre los link de navegacion*/
+  margin-left: 900px ;
+}
+.avatar_container {
+    display: flex;
+    align-items: center;
+    margin-right: 30px; /* Ajusta el espacio a la derecha si es necesario */
+}
+.avatar {
+    width: 40px;   /* Ajusta el tamaño del avatar */
+    height: 40px;
+    border-radius: 50%; /* Hace que la imagen sea redonda */
+    border: 2px solid white; /* Puedes añadir un borde para el avatar */
+}
