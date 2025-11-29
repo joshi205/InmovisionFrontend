@@ -2,7 +2,9 @@ import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { Calificacion } from "../models/Calificacion";
-import { Subject } from "rxjs";
+
+import { Subject, Observable } from "rxjs";  
+import { ReporteCalificacionPromedioDTO } from "../models/ReporteCalificacionPromedioDTO";
 
 const base_url = environment.base;
 
@@ -42,4 +44,9 @@ export class CalificacionService {
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: "text" });
   }
+
+  getCalificacionPromedio():Observable<ReporteCalificacionPromedioDTO[]>{
+    return this.http.get<ReporteCalificacionPromedioDTO[]>(`${this.url}/ReporteCalificacionPromedio`)
+  }
+
 }

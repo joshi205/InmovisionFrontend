@@ -40,6 +40,7 @@ import { Visitainsertar } from './components/visita/visitainsertar/visitainserta
 import { Autenticador } from './components/autenticador/autenticador';
 import { seguridadGuard } from './guard/seguridad-guard';
 import { Home } from './components/home/home';
+import { Reportecalificacion } from './components/reportecalificacion/reportecalificacion';
 
 export const routes: Routes = [
   {
@@ -188,6 +189,12 @@ export const routes: Routes = [
     ],
     canActivate: [seguridadGuard],
   },
+  {
+    path: 'reportecalificaciones',
+    component: Reportecalificacion,
+    canActivate: [seguridadGuard],
+  },
+
   {
     path: 'homes',
     component: Home,
