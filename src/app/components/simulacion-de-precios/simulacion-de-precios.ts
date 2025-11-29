@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { SimulacionDePreciosListar } from './simulacion-de-precios-listar/simulacion-de-precios-listar';
+import { SimulacionDePreciosListar} from './simulacion-de-precios-listar/simulacion-de-precios-listar';
 
 @Component({
   selector: 'app-simulacion-de-precios',

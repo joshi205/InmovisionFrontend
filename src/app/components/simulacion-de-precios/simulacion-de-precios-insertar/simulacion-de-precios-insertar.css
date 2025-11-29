@@ -1,0 +1,135 @@
+/* ===== FORMULARIO DE SIMULACIÓN ===== */
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 24px 40px;
+}
+
+/* Título */
+.container h2 {
+  font-family: "Lexend Deca", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 auto 24px;
+  padding: 10px 28px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #105590, #2391ff);
+  display: inline-block;
+}
+
+/* Tarjeta del formulario */
+.example-form {
+  display: inline-block;
+  width: 100%;
+  max-width: 560px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 24px 20px 28px;
+  box-shadow: 0 14px 40px rgba(9, 33, 71, 0.18);
+  text-align: center; /* botones centrados */
+}
+
+/* Campos */
+.example-full-width {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-family: "Exo 2", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+/* Label */
+.mat-mdc-form-field .mat-mdc-floating-label {
+  font-size: 14px;
+}
+
+/* Input */
+.mat-mdc-input-element {
+  font-size: 14px;
+}
+
+/* Que los campos se vean alineados a la izquierda */
+.example-form .mat-mdc-form-field-infix,
+.example-form .mat-mdc-form-field {
+  text-align: left;
+}
+
+/* Errores */
+.mat-mdc-form-field-subscript-wrapper .mat-mdc-form-field-error {
+  font-size: 12px;
+}
+
+/* Botones del formulario */
+.example-form button[mat-raised-button] {
+  font-family: "Lexend Deca", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 999px;
+  padding: 10px 30px;
+  text-transform: none;
+  display: inline-flex;
+  justify-content: center;
+  margin: 4px 0;
+}
+
+/* Botón Registrar / Editar */
+.example-form button[type="submit"] {
+  background: #2391ff;
+  color: #ffffff !important;
+  box-shadow: 0 8px 18px rgba(35, 145, 255, 0.35);
+}
+
+.example-form button[type="submit"]:hover {
+  background: #0f6ecc;
+}
+
+.example-form button[type="submit"]:active {
+  background: #0c4f91;
+  box-shadow: 0 4px 10px rgba(12, 79, 145, 0.5);
+}
+
+.example-form button[type="submit"]:disabled {
+  background: #d6e4ff;
+  color: #9ca3b5 !important;
+  box-shadow: none;
+}
+
+/* Botón Cancelar */
+.example-form button[type="button"] {
+  background: #fef3f2;
+  color: #b3261e;
+}
+
+.example-form button[type="button"]:hover {
+  background: #fde0dd;
+}
+
+.example-form button[type="button"]:active {
+  background: #f9b5ae;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 24px 12px 32px;
+  }
+
+  .example-form {
+    max-width: 100%;
+    padding: 20px 14px 24px;
+  }
+
+  .container h2 {
+    font-size: 22px;
+    padding-inline: 18px;
+  }
+
+  .example-form button[mat-raised-button] {
+    width: 100%;
+  }
+}

@@ -1,45 +1,60 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { MatRadioModule } from '@angular/material/radio';
+import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
 
 import { Pago } from '../../../models/pago';
 import { Pagoservice } from '../../../services/pagoservice';
+import { Contrato } from '../../../models/contrato';
+import { Contratoservice } from '../../../services/contratoservice';
+import { Usuario } from '../../../models/Usuario';
+import { Usuarioservice } from '../../../services/usuarioservice';
 
 @Component({
   selector: 'app-pagoinsertar',
+  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatInputModule,
-    MatFormFieldModule,
     MatSelectModule,
-    MatRadioModule,
     MatDatepickerModule,
-    MatButtonModule
+    MatButtonModule,
+    MatNativeDateModule,
+    MatIconModule,
   ],
   templateUrl: './pagoinsertar.html',
-  providers: [provideNativeDateAdapter()],
   styleUrl: './pagoinsertar.css',
 })
 export class Pagoinsertar implements OnInit {
 
   form: FormGroup = new FormGroup({});
-  pago: Pago = new Pago();
   edicion: boolean = false;
   id: number = 0;
+  hoy: Date = new Date();
+  pago: Pago = new Pago();
+
+  listaContratos: Contrato[] = [];
+  listaUsuarios: Usuario[] = [];
 
   constructor(
     private pS: Pagoservice,
+    private cS: Contratoservice,
+    private uS: Usuarioservice,
     private router: Router,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
@@ -48,33 +63,50 @@ export class Pagoinsertar implements OnInit {
       this.init();
     });
 
+    // Llenar listas
+    this.cS.list().subscribe((data) => (this.listaContratos = data));
+    this.uS.list().subscribe((data) => (this.listaUsuarios = data));
+
     this.form = this.formBuilder.group({
       codigo: [''],
       monto: ['', Validators.required],
-      fecha: ['', Validators.required],
+      fecha: [this.hoy, Validators.required],
       metodo: ['', Validators.required],
-      contrato_id: ['', Validators.required]
+      contrato: ['', Validators.required],
+      usuario: ['', Validators.required],
     });
   }
 
   aceptar(): void {
     if (this.form.valid) {
-      this.pago.pago_id = this.id ? this.id : this.form.value.codigo;
+      this.pago.idPago = this.form.value.codigo;
       this.pago.monto = this.form.value.monto;
-      this.pago.fecha_pago = this.form.value.fecha;
-      this.pago.metodo_pago = this.form.value.metodo;
-      this.pago.contrato = this.form.value.contrato_id;
+      this.pago.fechaPago = this.form.value.fecha;
+      this.pago.metodoPago = this.form.value.metodo;
+
+      // estado opcional
+      this.pago.estado = this.pago.estado || 'PENDIENTE';
+
+      // mapear contrato (solo idContrato)
+      this.pago.contrato.idContrato = this.form.value.contrato;
+
+      // mapear usuario (solo idUser) -> evita id_usuario = 0
+      this.pago.usuario.idUser = this.form.value.usuario;
 
       if (this.edicion) {
         this.pS.update(this.pago).subscribe(() => {
-          this.pS.list().subscribe(data => this.pS.setList(data));
+          this.pS.list().subscribe((data) => {
+            this.pS.setList(data);
+          });
         });
-      }
-      else {
+      } else {
         this.pS.insert(this.pago).subscribe(() => {
-          this.pS.list().subscribe(data => this.pS.setList(data));
+          this.pS.list().subscribe((data) => {
+            this.pS.setList(data);
+          });
         });
       }
+
       this.router.navigate(['pagos']);
     }
   }
@@ -86,12 +118,15 @@ export class Pagoinsertar implements OnInit {
   init() {
     if (this.edicion) {
       this.pS.listId(this.id).subscribe((data) => {
+        this.pago = data;
+
         this.form = new FormGroup({
-          codigo: new FormControl(data.pago_id),
+          codigo: new FormControl(data.idPago),
           monto: new FormControl(data.monto),
-          fecha: new FormControl(data.fecha_pago),
-          metodo: new FormControl(data.metodo_pago),
-          contrato_id: new FormControl(data.contrato)
+          fecha: new FormControl(data.fechaPago),
+          metodo: new FormControl(data.metodoPago),
+          contrato: new FormControl(data.contrato.idContrato),
+          usuario: new FormControl(data.usuario.idUser),
         });
       });
     }
