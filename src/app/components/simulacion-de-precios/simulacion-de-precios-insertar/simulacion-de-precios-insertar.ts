@@ -65,10 +65,32 @@ export class Simulacioninsertar implements OnInit {
       codigo: [''],
       usuario: ['', Validators.required],
       propiedad: ['', Validators.required],
-      montoInicial: ['', Validators.required],
-      tasaIntereses: ['', Validators.required],
-      plazoMeses: ['', Validators.required],
-      cuotaMensual: ['', Validators.required],
+      montoInicial: ['', [
+          Validators.required,
+          Validators.min(1),
+          Validators.pattern(/^\d+(\.\d{1,2})?$/)
+        ]
+      ],
+      tasaIntereses: ['', [
+          Validators.required,
+          Validators.min(0),
+          Validators.max(100),
+          Validators.pattern(/^\d+(\.\d{1,2})?$/)
+        ]
+      ],
+      plazoMeses: ['', [
+          Validators.required,
+          Validators.min(1),
+          Validators.max(480),
+          Validators.pattern(/^[0-9]+$/)
+        ]
+      ],
+      cuotaMensual: ['', [
+          Validators.required,
+          Validators.min(100),
+          Validators.pattern(/^\d+(\.\d{1,2})?$/)
+        ]
+      ],
       fecha: [this.hoy, Validators.required],
     });
   }
