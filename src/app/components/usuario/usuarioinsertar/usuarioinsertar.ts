@@ -117,7 +117,7 @@ export class Usuarioinsertar {
               this.uS.setList(data)
           })
         })}
-        this.router.navigate(['usuarios'])
+        this.router.navigate(['homes'])
       }
   
     }
