@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common';
     MatSelectModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatButtonModule, CommonModule],
+    MatButtonModule,CommonModule],
   templateUrl: './usuarioinsertar.html',
   providers: [provideNativeDateAdapter()],
   styleUrl: './usuarioinsertar.css',
