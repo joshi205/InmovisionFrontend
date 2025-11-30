@@ -22,49 +22,49 @@ export class Reportecalificacion implements OnInit {
   hasData = false;
 
   barChartOptions: ChartOptions<'bar'> = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        labels: {
-          color: '#1C1C1C',
-          font: {
-            family: 'Lexend Deca, Arial, sans-serif',
-          },
-        },
-      },
-      title: {
-        display: true,
-        text: 'Promedio de calificación por propiedad',
-        color: '#105590',
-        font: {
-          size: 18,
-          family: 'Lexend Deca, Arial, sans-serif',
-          weight: 'bold',
-        },
+  responsive: true,
+  plugins: {
+    legend: {
+      labels: {
+        color: '#ffffff',
       },
     },
-    scales: {
-      x: {
-        ticks: {
-          color: '#1C1C1C',
-          font: {
-            family: 'Exo 2, Arial, sans-serif',
-          },
-        },
+    title: {
+      display: true,
+      text: 'Promedio de calificación por propiedad',
+      color: '#ffffff',
+      font: {
+        family: 'Poppins, sans-serif',
+        size: 16,
       },
-      y: {
-        beginAtZero: true,
-        max: 5, // calificaciones de 1 a 5
-        ticks: {
-          color: '#1C1C1C',
-          font: {
-            family: 'Exo 2, Arial, sans-serif',
-          },
-        },
+      padding: {
+        bottom: 16,
       },
     },
-  };
+  },
+  scales: {
+    x: {
+      ticks: {
+        color: '#e5f0ff',
+      },
+      grid: {
+        // líneas verticales más visibles
+        color: 'rgba(255, 255, 255, 0.10)',
+        lineWidth: 0.7,
+      },
+    },
+    y: {
+      ticks: {
+        color: '#e5f0ff',
+      },
+      grid: {
+        // líneas horizontales más marcadas
+        color: 'rgba(255, 255, 255, 0.25)',
+        lineWidth: 1,
+      },
+    },
+  },
+};
 
   barChartLegend = true;
   barChartType: 'bar' = 'bar';

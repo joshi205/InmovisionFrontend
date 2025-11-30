@@ -1,8 +1,9 @@
 import { environment } from "../../environments/environment";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Mensaje } from "../models/Mensaje";
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { Injectable } from "@angular/core";
+import { MensajeXUsuarioDTO } from "../models/MensajeXUsuarioDTO";
 
 const base_url = environment.base;
 
@@ -41,6 +42,19 @@ export class MensajeService {
 
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: "text" });
+  }
+
+  getMensajesPorUsuario(
+    inicio?: string,
+    fin?: string
+  ): Observable<MensajeXUsuarioDTO[]> {
+    let params = new HttpParams();
+    if (inicio) params = params.set('inicio', inicio);
+    if (fin)    params = params.set('fin', fin);
+
+    return this.http.get<MensajeXUsuarioDTO[]>(`${this.url}/por-usuario`, {
+      params,
+    });
   }
 }
 
