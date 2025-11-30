@@ -1,8 +1,10 @@
-import { HttpClient } from "@angular/common/http"
+import { HttpClient, HttpParams } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { environment } from "../../environments/environment"
 import { Pago } from "../models/pago"
-import { Subject } from "rxjs"
+import { Observable, Subject } from "rxjs"
+import { PagoXUsuarioDTO } from "../models/PagoXUsuarioDTO"
+import { ReportePagosPorMetodoDTO } from "../models/ReportePagosPorMetodoDTO"
 
 const base_url = environment.base
 
@@ -39,5 +41,26 @@ export class Pagoservice {
 
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
+  }
+
+  getPagosPorUsuario(
+    inicio?: string,
+    fin?: string
+  ): Observable<PagoXUsuarioDTO[]> {
+    let params = new HttpParams();
+    if (inicio) params = params.set('inicio', inicio);
+    if (fin)    params = params.set('fin', fin);
+
+    return this.http.get<PagoXUsuarioDTO[]>(
+      `${this.url}/por-usuario`,
+      { params }
+    );
+  }
+
+  // 🔹 NUEVO: Reporte pagos por método (sin filtros)
+  getReportePagosPorMetodo(): Observable<ReportePagosPorMetodoDTO[]> {
+    return this.http.get<ReportePagosPorMetodoDTO[]>(
+      `${this.url}/ReportePagosPorMetodo`
+    );
   }
 }

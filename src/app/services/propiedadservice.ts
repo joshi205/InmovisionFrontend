@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Propiedad } from '../models/Propiedad';
 import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { ReportePropiedadesPorDistritoDTO } from '../models/ReportePropiedadesPorDistritoDTO';
 
 const base_url = environment.base;
 
@@ -42,4 +43,10 @@ export class Propiedadservice {
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
+
+  getReportePropiedadesPorDistrito() {
+  return this.http.get<ReportePropiedadesPorDistritoDTO[]>(
+    `${this.url}/ReportePropiedadesPorDistrito`
+  );
+}
 }

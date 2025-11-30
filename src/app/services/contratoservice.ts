@@ -1,8 +1,10 @@
 import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { environment } from "../../environments/environment"
-import { Subject } from "rxjs"
+import { Observable, Subject } from "rxjs"
 import { Contrato } from "../models/contrato"
+import { TopDistritoContratosDTO } from "../models/TopDistritoContratosDTO"
+import { PromedioMontoPorTipoDTO } from "../models/PromedioMontoPorTipoDTO"
 
 const base_url = environment.base
 
@@ -39,5 +41,13 @@ export class Contratoservice {
 
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
+  }
+
+  getTopdistritosContrato():Observable<TopDistritoContratosDTO[]>{
+    return this.http.get<TopDistritoContratosDTO[]>(`${this.url}/top_distritos`)
+  }
+
+  getPromedioMontoTipoContrato():Observable<PromedioMontoPorTipoDTO[]>{
+    return this.http.get<PromedioMontoPorTipoDTO[]>(`${this.url}/monto_promedio`)
   }
 }

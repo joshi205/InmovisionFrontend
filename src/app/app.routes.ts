@@ -41,6 +41,15 @@ import { Autenticador } from './components/autenticador/autenticador';
 import { seguridadGuard } from './guard/seguridad-guard';
 import { Home } from './components/home/home';
 import { Reportecalificacion } from './components/reportecalificacion/reportecalificacion';
+import { Reportetopdistritos } from './components/reportetopdistritos/reportetopdistritos';
+import { Reportemontopromediotipo } from './components/reportemontopromediotipo/reportemontopromediotipo';
+import { Reportefavoritospropiedad } from './components/reportefavoritospropiedad/reportefavoritospropiedad';
+import { Reportemensajesusuario } from './components/reportemensajesusuario/reportemensajesusuario';
+import { Reportepagosusuario } from './components/reportepagosusuario/reportepagosusuario';
+import { Reportepagosmetodo } from './components/reportepagosmetodo/reportepagosmetodo';
+import { Reportepropiedadesdistrito } from './components/reportepropiedadesdistrito/reportepropiedadesdistrito';
+import { Reporterecomendacionespropiedad } from './components/reporterecomendacionespropiedad/reporterecomendacionespropiedad';
+import { Reportevistaspropiedad } from './components/reportevistaspropiedad/reportevistaspropiedad';
 
 export const routes: Routes = [
   {
@@ -194,7 +203,55 @@ export const routes: Routes = [
     component: Reportecalificacion,
     canActivate: [seguridadGuard],
   },
+  {
+    path: 'reportetopdistritos',
+    component: Reportetopdistritos,
+    canActivate: [seguridadGuard],
+  },
 
+  {
+    path: 'reportemontopromediotipo',
+    component: Reportemontopromediotipo,
+    canActivate: [seguridadGuard],
+  },
+
+  {
+    path: 'reporte-favoritos-propiedad',
+    component: Reportefavoritospropiedad,
+    canActivate: [seguridadGuard],
+  },
+
+  {
+    path: 'reportemensajesusuario',
+    component: Reportemensajesusuario,
+    canActivate: [seguridadGuard],
+  },
+
+  {
+    path: 'reportepagosusuario',
+    component: Reportepagosusuario,
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'reportepagosmetodo',
+    component: Reportepagosmetodo,
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'reportepropiedadesdistrito',
+    component: Reportepropiedadesdistrito,
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'reporterecomendacionespropiedad',
+    component: Reporterecomendacionespropiedad,
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'reportevistaspropiedad',
+    component: Reportevistaspropiedad,
+    canActivate: [seguridadGuard],
+  },
   {
     path: 'homes',
     component: Home,
