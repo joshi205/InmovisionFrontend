@@ -37,6 +37,9 @@ import { Simulacioninsertar } from './components/simulacion-de-precios/simulacio
 import { Contrato } from './components/contrato/contrato';
 import { Pago } from './components/pago/pago';
 import { Visitainsertar } from './components/visita/visitainsertar/visitainsertar';
+
+import { MapapropiedadComponent } from './components/mapapropiedad/mapapropiedad';
+
 import { Autenticador } from './components/autenticador/autenticador';
 import { seguridadGuard } from './guard/seguridad-guard';
 import { Home } from './components/home/home';
@@ -256,4 +259,16 @@ export const routes: Routes = [
     component: Home,
     canActivate: [seguridadGuard],
   },
+
+  {
+  path: 'propiedades',
+  component: Propiedad,
+  children: [
+    { path: 'nuevo', component: Propiedadinsertar },
+    { path: 'edits/:id', component: Propiedadinsertar },
+    { path: ':id/mapa', component: MapapropiedadComponent }  // <-- aquí
+  ],
+},
+
+
 ];
