@@ -7,10 +7,12 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { LoginService } from '../../services/login-service';
+import { MatCheckboxModule } from '@angular/material/checkbox'; // 👈 NUEVO
+
 
 @Component({
   selector: 'app-autenticador',
-  imports: [MatFormFieldModule, FormsModule, MatInputModule, MatButtonModule],
+  imports: [MatFormFieldModule, FormsModule, MatInputModule, MatButtonModule, MatCheckboxModule],
   templateUrl: './autenticador.html',
   styleUrl: './autenticador.css',
 })
@@ -38,5 +40,9 @@ export class Autenticador implements OnInit {
         this.snackBar.open(this.mensaje, 'Aviso', { duration: 2000 });
       }
     );
+  }
+
+  goToRegister(): void {
+  this.router.navigate(['usuarios/nuevo']);
   }
 }
