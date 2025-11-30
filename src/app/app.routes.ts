@@ -78,7 +78,6 @@ export const routes: Routes = [
       { path: 'nuevo', component: Usuarioinsertar },
       { path: 'edits/:id', component: Usuarioinsertar },
     ],
-    canActivate: [seguridadGuard],
   },
   {
     path: 'roles',
