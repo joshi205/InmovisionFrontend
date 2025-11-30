@@ -1,0 +1,130 @@
+body{
+    margin:0;
+    background-color: #c6e4ff;
+}
+.logo_container img{
+    width: 40px;
+    height: 40px;
+}
+.logo_container p{
+    font-size: 25px;
+    color:white;
+    font-weight: bold;
+    margin-left: 15px;
+    font-family: "Lexend Deca",sans-serif;
+}
+.logo_container{
+    display: flex;
+    margin-left: 20px;
+    align-items: center;
+}
+.container{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background:#105590;
+}
+.navegacion a{
+    text-decoration: none;
+    font-weight: bolder;
+    color:white;
+    font-family: "Lexend Deca",sans-serif;
+}
+.navegacion{
+   display: flex;
+   gap:30px;/*espacio entre los link de navegacion*/
+   margin-right: 100px;
+}
+.container-logo-inicio_sesion{
+    margin-top:20px;
+    display: flex;
+    justify-content: center;
+}
+.logo-inicio_sesion{
+    background-color: #1b72b9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    height: 150px; 
+    color: white;
+    justify-content: center;
+    border-radius: 35px; 
+    font-family: "Exo 2",sans-serif;
+}
+.logo-inicio_sesion img{
+    margin-top:15px;
+    width: 60px;
+    height: 60px;
+}
+.logo-inicio_sesion p{
+    font-weight: bold;
+    font-size: 20px;
+}
+.contenedor-Inicio_sesion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:30px;
+}
+.sesion{
+    background-color: #105590;
+    padding: 20px;
+    border-radius: 15px;
+    width: 300px;
+    margin: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    margin-left: 600px;
+}
+.sesion h2{
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: "Lexend Deca",sans-serif;
+}
+.sesion p{
+    margin-bottom: 10px;
+    display: block;
+    font-weight: bolder;
+    font-family: "Exo 2",sans-serif;
+}
+.sesion input{
+    width: 89%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: none;
+}
+.contenedor-button-login{
+    display: flex;
+    justify-content: center;
+    
+}
+.button-login{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    width: 300px;
+}
+.button-login a{
+    width: 45%;
+    padding: 5px;
+    margin-bottom:20px ;
+    background-color: #105590;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+button{
+    width: 45%;
+    padding: 10px;
+    background-color: #105590;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;   
+}

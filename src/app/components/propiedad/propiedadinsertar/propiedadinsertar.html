@@ -54,6 +54,11 @@
             <mat-option value="Terreno">Terreno</mat-option>
             <mat-option value="Local">Local</mat-option>
           </mat-select>
+          <mat-error>
+            @if (form.get('tipo')?.hasError('required')) {
+              Seleccione un tipo!!
+            }
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="small">
@@ -63,6 +68,11 @@
             <mat-option value="Alquiler">Alquiler</mat-option>
             <mat-option value="Proyecto">Proyecto</mat-option>
           </mat-select>
+          <mat-error>
+            @if (form.get('categoria')?.hasError('required')) {
+              Seleccione una categoría!!
+            }
+          </mat-error>
         </mat-form-field>
       </div>
 
@@ -86,7 +96,7 @@
           </mat-select>
          <mat-error>
             @if (form.get('estado')?.hasError('required')) {
-              Selccione estado!!
+              Seleccione estado!!
             }
           </mat-error>
         </mat-form-field>
@@ -193,12 +203,12 @@
         <mat-form-field appearance="fill" class="small">
           <mat-label>Notas</mat-label>
           <textarea matInput rows="2" formControlName="notas"></textarea>
-        </mat-form-field>
-        <mat-error>
+          <mat-error>
             @if (form.get('notas')?.hasError('required')) {
               Ingrese notas!!
             }
           </mat-error>
+        </mat-form-field>
       </div>
 
       <!-- USUARIO / DISTRITO -->
@@ -210,6 +220,11 @@
               {{ u.nombre }} {{ u.apellido }}
             </mat-option>
           </mat-select>
+          <mat-error>
+            @if (form.get('usuario')?.hasError('required')) {
+              Seleccione un usuario!!
+            }
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="small">
@@ -219,6 +234,11 @@
               {{ d.nombreDistrito }}
             </mat-option>
           </mat-select>
+          <mat-error>
+            @if (form.get('distrito')?.hasError('required')) {
+              Seleccione un distrito!!
+            }
+          </mat-error>
         </mat-form-field>
       </div>
 

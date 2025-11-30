@@ -1,8 +1,9 @@
-import { Injectable } from "@angular/core";
-import { environment } from "../../environments/environment";
-import { HttpClient } from "@angular/common/http";
-import { Visita } from "../models/Visita";
-import { Subject } from "rxjs";
+import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Visita } from '../models/Visita';
+import { Subject } from 'rxjs';
+import { ReporteVisitasPorPropiedadDTO } from '../models/ReporteVisitasPorPropiedadDTO';
 
 const base_url = environment.base;
 
@@ -36,10 +37,14 @@ export class VisitaService {
   }
 
   update(v: Visita) {
-    return this.http.put(this.url, v, { responseType: "text" });
+    return this.http.put(this.url, v, { responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`, { responseType: "text" });
+    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
+  }
+
+  getReporteVisitasPorPropiedad() {
+    return this.http.get<ReporteVisitasPorPropiedadDTO[]>(`${this.url}/reportepor-propiedad`);
   }
 }

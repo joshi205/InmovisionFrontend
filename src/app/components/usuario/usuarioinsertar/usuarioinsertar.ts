@@ -10,6 +10,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Usuario } from '../../../models/Usuario';
 import { Usuarioservice } from '../../../services/usuarioservice';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-usuarioinsertar',
   imports: [ReactiveFormsModule,
@@ -18,7 +19,7 @@ import { Usuarioservice } from '../../../services/usuarioservice';
     MatSelectModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatButtonModule],
+    MatButtonModule,CommonModule],
   templateUrl: './usuarioinsertar.html',
   providers: [provideNativeDateAdapter()],
   styleUrl: './usuarioinsertar.css',
@@ -123,7 +124,7 @@ export class Usuarioinsertar {
   
   
     cancelar(): void {
-    this.router.navigate(['usuarios']);
+    this.router.navigate(['login']);
     }
   
     init() {

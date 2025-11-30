@@ -1,136 +1,168 @@
 <div class="container">
   <div style="text-align: center; margin: 5%">
-    <h2>{{ edicion ? 'Editar Simulación de Precios' : 'Registrar Simulación de Precios' }}</h2>
+    <h2>{{ edicion ? 'Edición de simulación' : 'Registrar simulación' }}</h2>
   </div>
 
-  <div>
-    <form [formGroup]="form" (ngSubmit)="aceptar()">
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
 
-      <!-- Código (solo lectura en edición) -->
-      @if(edicion){
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>ID</mat-label>
-        <input matInput formControlName="codigo" readonly />
-      </mat-form-field>
+      @if (edicion) {
+        <mat-form-field class="example-full-width">
+          <mat-label>ID:</mat-label>
+          <input matInput formControlName="codigo" readonly="true" />
+        </mat-form-field>
       }
-
       <br />
 
       <!-- Usuario -->
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field class="example-full-width">
         <mat-label>Usuario</mat-label>
-        <input matInput formControlName="usuario" />
+        <mat-select formControlName="usuario">
+          @for (u of listaUsuarios; track u) {
+            <mat-option [value]="u.idUser">
+              {{ u.nombre }} {{ u.apellido }}
+            </mat-option>
+          }
+        </mat-select>
         <mat-error>
           @if (form.get('usuario')?.hasError('required')) {
             Seleccione un usuario!!
           }
         </mat-error>
       </mat-form-field>
-
       <br />
 
       <!-- Propiedad -->
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field class="example-full-width">
         <mat-label>Propiedad</mat-label>
-        <input matInput formControlName="propiedad" />
+        <mat-select formControlName="propiedad">
+          @for (p of listaPropiedades; track p) {
+            <mat-option [value]="p.idPropiedad">
+              {{ p.titulo }}
+            </mat-option>
+          }
+        </mat-select>
         <mat-error>
           @if (form.get('propiedad')?.hasError('required')) {
             Seleccione una propiedad!!
           }
         </mat-error>
       </mat-form-field>
-
       <br />
 
-      <!-- Monto Inicial -->
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Monto Inicial</mat-label>
-        <input matInput type="number" formControlName="monto_inicial" />
+      <!-- Monto inicial -->
+      <mat-form-field class="example-full-width">
+        <mat-label>Monto inicial</mat-label>
+        <input matInput type="number" formControlName="montoInicial" />
         <mat-error>
-          @if (form.get('monto_inicial')?.hasError('required')) {
+          @if (form.get('montoInicial')?.hasError('required')) {
             Ingrese el monto inicial!!
           }
-          @if (form.get('monto_inicial')?.hasError('min')) {
-            El monto inicial debe ser mayor a 0!!
+          @if (form.get('montoInicial')?.hasError('min')) {
+            El monto debe ser mayor a 0.
+          }
+          @if (form.get('montoInicial')?.hasError('pattern')) {
+            Solo se permiten números con hasta 2 decimales.
           }
         </mat-error>
       </mat-form-field>
-
       <br />
 
-      <!-- Tasa de Interés -->
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Tasa de Interés (%)</mat-label>
-        <input matInput type="number" formControlName="tasa_intereses" />
+      <!-- Tasa de intereses -->
+      <mat-form-field class="example-full-width">
+        <mat-label>Tasa de intereses (%)</mat-label>
+        <input matInput type="number" formControlName="tasaIntereses" />
         <mat-error>
-          @if (form.get('tasa_intereses')?.hasError('required')) {
-            Ingrese la tasa de interés!!
+          @if (form.get('tasaIntereses')?.hasError('required')) {
+            Ingrese la tasa de intereses!!
           }
-          @if (form.get('tasa_intereses')?.hasError('min') || form.get('tasa_intereses')?.hasError('max')) {
-            La tasa debe estar entre 0.1% y 100%!!
+          @if (form.get('tasaIntereses')?.hasError('min')) {
+            La tasa no puede ser negativa.
+          }
+          @if (form.get('tasaIntereses')?.hasError('max')) {
+            La tasa no puede ser mayor a 100%.
+          }
+          @if (form.get('tasaIntereses')?.hasError('pattern')) {
+            Formato inválido. Solo números decimales válidos.
           }
         </mat-error>
       </mat-form-field>
-
       <br />
 
-      <!-- Plazo en Meses -->
-      <mat-form-field appearance="outline" class="full-width">
+      <!-- Plazo en meses -->
+      <mat-form-field class="example-full-width">
         <mat-label>Plazo (meses)</mat-label>
-        <input matInput type="number" formControlName="plazo_meses" />
+        <input matInput type="number" formControlName="plazoMeses" />
         <mat-error>
-          @if (form.get('plazo_meses')?.hasError('required')) {
-            Ingrese el plazo!!
+          @if (form.get('plazoMeses')?.hasError('required')) {
+            Ingrese el plazo en meses!!
           }
-          @if (form.get('plazo_meses')?.hasError('min') || form.get('plazo_meses')?.hasError('max')) {
-            El plazo debe estar entre 1 y 360 meses!!
+          @if (form.get('plazoMeses')?.hasError('min')) {
+            El plazo debe ser mínimo 1 mes.
+          }
+          @if (form.get('plazoMeses')?.hasError('max')) {
+            El plazo no puede superar los 480 meses.
+          }
+          @if (form.get('plazoMeses')?.hasError('pattern')) {
+            Solo se permiten números enteros.
           }
         </mat-error>
       </mat-form-field>
-
       <br />
 
-      <!-- Cuota Mensual -->
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Cuota Mensual</mat-label>
-        <input matInput type="number" formControlName="cuota_mensual" />
+      <!-- Cuota mensual -->
+      <mat-form-field class="example-full-width">
+        <mat-label>Cuota mensual</mat-label>
+        <input matInput type="number" formControlName="cuotaMensual" />
         <mat-error>
-          @if (form.get('cuota_mensual')?.hasError('required')) {
+          @if (form.get('cuotaMensual')?.hasError('required')) {
             Ingrese la cuota mensual!!
           }
-          @if (form.get('cuota_mensual')?.hasError('min')) {
-            La cuota debe ser mayor a 0!!
+          @if (form.get('cuotaMensual')?.hasError('min')) {
+            La cuota mensual debe ser mayor a 0.
+          }
+          @if (form.get('cuotaMensual')?.hasError('pattern')) {
+            Solo se permiten números con hasta 2 decimales.
           }
         </mat-error>
       </mat-form-field>
-
       <br />
 
       <!-- Fecha -->
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field class="example-full-width">
         <mat-label>Fecha</mat-label>
-        <input matInput [matDatepicker]="pickerFecha" formControlName="fecha" />
+        <input
+          matInput
+          [matDatepicker]="pickerFecha"
+          formControlName="fecha"
+        />
+        <mat-hint>DD/MM/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="pickerFecha"></mat-datepicker-toggle>
         <mat-datepicker #pickerFecha></mat-datepicker>
         <mat-error>
           @if (form.get('fecha')?.hasError('required')) {
-            Seleccione la fecha!!
+            La fecha es obligatoria.
           }
         </mat-error>
       </mat-form-field>
-
       <br />
 
-      <!-- Botones -->
-      <div class="button-group">
-        <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid">
-          {{ edicion ? 'Actualizar' : 'Registrar' }}
-        </button>
-        <button mat-stroked-button color="warn" type="button" (click)="cancelar()">
-          Cancelar
+      <div>
+        <button mat-raised-button color="primary" type="submit">
+          {{ edicion ? 'Editar' : 'Registrar' }}
         </button>
       </div>
 
+      <br />
+
+      <button
+        mat-raised-button
+        color="warn"
+        type="button"
+        (click)="cancelar()"
+      >
+        Cancelar
+      </button>
     </form>
   </div>
 </div>
