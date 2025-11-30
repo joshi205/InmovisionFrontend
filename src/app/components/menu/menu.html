@@ -1,50 +1,46 @@
 <div class="menu-container">
   @if (verificar()) {
-    <mat-toolbar class="custom-toolbar">
-      <!-- HOME -->
-      <button mat-button [routerLink]="['/homes']" class="btn-nav brand-btn">
-        <mat-icon>home</mat-icon>
-        <span class="brand-title">Inmovision</span>
-      </button>
+  <mat-toolbar class="custom-toolbar">
+    <!-- HOME -->
+    <button mat-button [routerLink]="['/homes']" class="btn-nav brand-btn">
+      <mat-icon>home</mat-icon>
+      <span class="brand-title">Inmovision</span>
+    </button>
 
-      <!-- GESTIÓN (solo admin si quieres) -->
-      @if (isAdmin()) {
-        <button
-          mat-button
-          class="btn-nav"
-          aria-label="Gestión Inmovision"
-          [matMenuTriggerFor]="menuGestion"
-        >
-          <mat-icon>menu</mat-icon>
-          <span>Gestión</span>
-        </button>
-      }
+    <!-- GESTIÓN (solo admin si quieres) -->
+    @if (isAdmin()) {
+    <button
+      mat-button
+      class="btn-nav"
+      aria-label="Gestión Inmovision"
+      [matMenuTriggerFor]="menuGestion"
+    >
+      <mat-icon>menu</mat-icon>
+      <span>Gestión</span>
+    </button>
+    }
 
-      <!-- REPORTES (puede ser admin/tester, ajusta como quieras) -->
-      @if (isAdmin() || isTester()) {
-        <button
-          mat-button
-          class="btn-nav"
-          aria-label="Reportes Inmovision"
-          [matMenuTriggerFor]="menuReportes"
-        >
-          <mat-icon>bar_chart</mat-icon>
-          <span>Reportes</span>
-        </button>
-      }
+    <!-- REPORTES (puede ser admin/tester, ajusta como quieras) -->
+    @if (isAdmin() || isTester()) {
+    <button
+      mat-button
+      class="btn-nav"
+      aria-label="Reportes Inmovision"
+      [matMenuTriggerFor]="menuReportes"
+    >
+      <mat-icon>bar_chart</mat-icon>
+      <span>Reportes</span>
+    </button>
+    }
 
-      <span class="spacer"></span>
+    <span class="spacer"></span>
 
-      <!-- USUARIO / ROL -->
-      <button
-        mat-button
-        class="btn-nav user-btn"
-        [matMenuTriggerFor]="menuUsuario"
-      >
-        <mat-icon>person</mat-icon>
-        <span>{{ usuario || 'Usuario' }}</span>
-      </button>
-    </mat-toolbar>
+    <!-- USUARIO / ROL -->
+    <button mat-button class="btn-nav user-btn" [matMenuTriggerFor]="menuUsuario">
+      <mat-icon>person</mat-icon>
+      <span>{{ usuario || 'Usuario' }}</span>
+    </button>
+  </mat-toolbar>
   }
 
   <!-- MENÚ GESTIÓN -->
@@ -113,16 +109,49 @@
       <mat-icon>bar_chart</mat-icon>
       <span>Rep. calificaciones</span>
     </button>
-    <!-- Ejemplos de otros reportes:
-    <button mat-menu-item routerLink="/reporte-contratos">
-      <mat-icon>insert_chart</mat-icon>
-      <span>Rep. contratos</span>
+
+    <button mat-menu-item routerLink="/reportetopdistritos">
+      <mat-icon>bar_chart</mat-icon>Top distritos Contrato
     </button>
-    <button mat-menu-item routerLink="/reporte-pagos">
-      <mat-icon>stacked_bar_chart</mat-icon>
-      <span>Rep. pagos</span>
+
+    <button mat-menu-item routerLink="/reportemontopromediotipo">
+      <mat-icon>pie_chart</mat-icon>Monto promedio por tipo Contrato
     </button>
-    -->
+
+    <button mat-menu-item routerLink="/reporte-favoritos-propiedad">
+      <mat-icon>favorite</mat-icon>
+      Rep. Favoritos por propiedad
+    </button>
+
+    <button mat-menu-item routerLink="/reportemensajesusuario">
+      <mat-icon>mail</mat-icon>
+      <span>Mensajes por usuario</span>
+    </button>
+
+    <button mat-menu-item routerLink="/reportepagosusuario">
+      <mat-icon>payments</mat-icon>
+      <span>Pagos por usuario</span>
+    </button>
+
+    <button mat-menu-item routerLink="/reportepagosmetodo">
+      <mat-icon>pie_chart</mat-icon>
+      <span>Pagos por método</span>
+    </button>
+
+    <button mat-menu-item routerLink="/reportepropiedadesdistrito">
+      <mat-icon>location_city</mat-icon>
+      <span>Propiedades por distrito</span>
+    </button>
+
+    <button mat-menu-item routerLink="/reporterecomendacionespropiedad">
+      <mat-icon>thumb_up</mat-icon>
+      <span>Recomendaciones por propiedad</span>
+    </button>
+
+    <button mat-menu-item routerLink="/reportevistaspropiedad">
+      <mat-icon>event</mat-icon>
+      <span>Visitas por propiedad</span>
+    </button>
   </mat-menu>
 
   <!-- MENÚ USUARIO -->
