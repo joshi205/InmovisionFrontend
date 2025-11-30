@@ -37,6 +37,7 @@ import { Simulacioninsertar } from './components/simulacion-de-precios/simulacio
 import { Contrato } from './components/contrato/contrato';
 import { Pago } from './components/pago/pago';
 import { Visitainsertar } from './components/visita/visitainsertar/visitainsertar';
+import { MapapropiedadComponent } from './components/mapapropiedad/mapapropiedad';
 
 export const routes: Routes = [
   {
@@ -160,4 +161,16 @@ export const routes: Routes = [
       { path: 'edits/:id', component: Simulacioninsertar },
     ],
   },
+
+  {
+  path: 'propiedades',
+  component: Propiedad,
+  children: [
+    { path: 'nuevo', component: Propiedadinsertar },
+    { path: 'edits/:id', component: Propiedadinsertar },
+    { path: ':id/mapa', component: MapapropiedadComponent }  // <-- aquí
+  ],
+},
+
+
 ];
