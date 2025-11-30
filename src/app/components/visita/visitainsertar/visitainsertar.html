@@ -29,6 +29,9 @@
         <mat-option value="Completada">Completada</mat-option>
         <mat-option value="Cancelada">Cancelada</mat-option>
       </mat-select>
+      <mat-error>
+          @if (form.get('estado')?.hasError('required')) { Selccione estado. }
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -38,6 +41,9 @@
         <mat-option [value]="u.idUser">{{ u.nombre }} {{ u.apellido }}</mat-option>
         }
       </mat-select>
+      <mat-error>
+          @if (form.get('usuario')?.hasError('required')) { Selccione un usuario. }
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -47,6 +53,9 @@
         <mat-option [value]="p.idPropiedad">{{ p.titulo }}</mat-option>
         }
       </mat-select>
+      <mat-error>
+          @if (form.get('propiedad')?.hasError('required')) { Selccione una propiedad. }
+      </mat-error>
     </mat-form-field>
 
     

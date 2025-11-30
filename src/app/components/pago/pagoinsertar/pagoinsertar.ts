@@ -69,7 +69,12 @@ export class Pagoinsertar implements OnInit {
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      monto: ['', Validators.required],
+      monto: ['', [
+          Validators.required,
+          Validators.min(1),
+          Validators.pattern(/^\d+(\.\d{1,2})?$/)
+        ]
+      ],
       fecha: [this.hoy, Validators.required],
       metodo: ['', Validators.required],
       contrato: ['', Validators.required],
