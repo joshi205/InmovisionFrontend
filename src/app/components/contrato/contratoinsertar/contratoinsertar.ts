@@ -76,9 +76,12 @@ export class Contratoinsertar implements OnInit {
     },
     {
       validators: this.validarRangoFechas.bind(this)
-    }
-  );
-  }
+    });
+
+    this.form.get('fechaInicio')?.valueChanges.subscribe(() => {
+    this.form.get('fechaFin')?.updateValueAndValidity();
+    });
+}
 
   validarFechaNoPasada(control: AbstractControl) {
     if (!control.value) return null;
@@ -142,8 +145,12 @@ export class Contratoinsertar implements OnInit {
           terminosYCondiciones: new FormControl(data.terminosYCondiciones),
           propiedad: new FormControl(data.propiedad.idPropiedad),
 
-
-
+        },
+        {
+          validators: this.validarRangoFechas.bind(this)
+        });
+          this.form.get('fechaInicio')?.valueChanges.subscribe(() => {
+          this.form.get('fechaFin')?.updateValueAndValidity();
         });
       });
     }
