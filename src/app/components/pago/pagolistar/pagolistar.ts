@@ -6,10 +6,11 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { Pago } from '../../../models/pago';
 import { Pagoservice } from '../../../services/pagoservice';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-pagolistar',
-  imports: [MatTableModule, MatIconModule, MatButtonModule, RouterLink],
+  imports: [MatTableModule, MatIconModule, MatButtonModule, RouterLink, CommonModule],
   templateUrl: './pagolistar.html',
   styleUrl: './pagolistar.css',
 })

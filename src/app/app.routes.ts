@@ -37,9 +37,34 @@ import { Simulacioninsertar } from './components/simulacion-de-precios/simulacio
 import { Contrato } from './components/contrato/contrato';
 import { Pago } from './components/pago/pago';
 import { Visitainsertar } from './components/visita/visitainsertar/visitainsertar';
+
 import { MapapropiedadComponent } from './components/mapapropiedad/mapapropiedad';
 
+import { Autenticador } from './components/autenticador/autenticador';
+import { seguridadGuard } from './guard/seguridad-guard';
+import { Home } from './components/home/home';
+import { Reportecalificacion } from './components/reportecalificacion/reportecalificacion';
+import { Reportetopdistritos } from './components/reportetopdistritos/reportetopdistritos';
+import { Reportemontopromediotipo } from './components/reportemontopromediotipo/reportemontopromediotipo';
+import { Reportefavoritospropiedad } from './components/reportefavoritospropiedad/reportefavoritospropiedad';
+import { Reportemensajesusuario } from './components/reportemensajesusuario/reportemensajesusuario';
+import { Reportepagosusuario } from './components/reportepagosusuario/reportepagosusuario';
+import { Reportepagosmetodo } from './components/reportepagosmetodo/reportepagosmetodo';
+import { Reportepropiedadesdistrito } from './components/reportepropiedadesdistrito/reportepropiedadesdistrito';
+import { Reporterecomendacionespropiedad } from './components/reporterecomendacionespropiedad/reporterecomendacionespropiedad';
+import { Reportevistaspropiedad } from './components/reportevistaspropiedad/reportevistaspropiedad';
+
 export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: Autenticador,
+  },
+
   {
     path: 'distritos',
     component: Distrito,
@@ -47,6 +72,7 @@ export const routes: Routes = [
       { path: 'nuevo', component: Distritoinsertar },
       { path: 'edits/:id', component: Distritoinsertar },
     ],
+    canActivate: [seguridadGuard],
   },
   {
     path: 'usuarios',
@@ -63,6 +89,7 @@ export const routes: Routes = [
       { path: 'nuevo', component: Rolinsertar },
       { path: 'edits/:id', component: Rolinsertar },
     ],
+    canActivate: [seguridadGuard],
   },
   {
     path: 'propiedades',
@@ -71,6 +98,8 @@ export const routes: Routes = [
       { path: 'nuevo', component: Propiedadinsertar },
       { path: 'edits/:id', component: Propiedadinsertar },
     ],
+
+    canActivate: [seguridadGuard],
   },
 
   {
@@ -80,6 +109,7 @@ export const routes: Routes = [
       { path: 'nuevo', component: Mensajeinsertar },
       { path: 'edits/:id', component: Mensajeinsertar },
     ],
+    canActivate: [seguridadGuard],
   },
 
   {
@@ -89,6 +119,7 @@ export const routes: Routes = [
       { path: 'nuevo', component: Visitainsertar },
       { path: 'edits/:id', component: Visitainsertar },
     ],
+    canActivate: [seguridadGuard],
   },
 
   {
@@ -98,6 +129,7 @@ export const routes: Routes = [
       { path: 'nuevo', component: Calificacioninsertar },
       { path: 'edits/:id', component: Calificacioninsertar },
     ],
+    canActivate: [seguridadGuard],
   },
 
   {
@@ -107,6 +139,7 @@ export const routes: Routes = [
       { path: 'nuevo', component: Recomendacioninsertar },
       { path: 'edits/:id', component: Recomendacioninsertar },
     ],
+    canActivate: [seguridadGuard],
   },
 
   {
@@ -116,6 +149,7 @@ export const routes: Routes = [
       { path: 'nuevo', component: Comparacioninsertar },
       { path: 'edits/:id', component: Comparacioninsertar },
     ],
+    canActivate: [seguridadGuard],
   },
   {
     path: 'favoritos',
@@ -124,6 +158,7 @@ export const routes: Routes = [
       { path: 'nuevo', component: Favoritoinsertar },
       { path: 'edit/:id', component: Favoritoinsertar },
     ],
+    canActivate: [seguridadGuard],
   },
 
   {
@@ -133,6 +168,7 @@ export const routes: Routes = [
       { path: 'nuevo', component: Lista_favoritosinsertar },
       { path: 'edit/:id', component: Lista_favoritosinsertar },
     ],
+    canActivate: [seguridadGuard],
   },
 
   {
@@ -142,6 +178,7 @@ export const routes: Routes = [
       { path: 'nuevo', component: Pagoinsertar },
       { path: 'edits/:id', component: Pagoinsertar },
     ],
+    canActivate: [seguridadGuard],
   },
 
   {
@@ -151,15 +188,76 @@ export const routes: Routes = [
       { path: 'nuevo', component: Contratoinsertar },
       { path: 'edits/:id', component: Contratoinsertar },
     ],
+    canActivate: [seguridadGuard],
   },
 
   {
-    path: 'simulaciones-de-precios',
+    path: 'simulacion-de-precios',
     component: SimulacionDePrecios,
     children: [
       { path: 'nuevo', component: Simulacioninsertar },
       { path: 'edits/:id', component: Simulacioninsertar },
     ],
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'reportecalificaciones',
+    component: Reportecalificacion,
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'reportetopdistritos',
+    component: Reportetopdistritos,
+    canActivate: [seguridadGuard],
+  },
+
+  {
+    path: 'reportemontopromediotipo',
+    component: Reportemontopromediotipo,
+    canActivate: [seguridadGuard],
+  },
+
+  {
+    path: 'reporte-favoritos-propiedad',
+    component: Reportefavoritospropiedad,
+    canActivate: [seguridadGuard],
+  },
+
+  {
+    path: 'reportemensajesusuario',
+    component: Reportemensajesusuario,
+    canActivate: [seguridadGuard],
+  },
+
+  {
+    path: 'reportepagosusuario',
+    component: Reportepagosusuario,
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'reportepagosmetodo',
+    component: Reportepagosmetodo,
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'reportepropiedadesdistrito',
+    component: Reportepropiedadesdistrito,
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'reporterecomendacionespropiedad',
+    component: Reporterecomendacionespropiedad,
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'reportevistaspropiedad',
+    component: Reportevistaspropiedad,
+    canActivate: [seguridadGuard],
+  },
+  {
+    path: 'homes',
+    component: Home,
+    canActivate: [seguridadGuard],
   },
 
   {
