@@ -1,35 +1,59 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterLink } from '@angular/router';
 import { LoginService } from '../../services/login-service';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-menu',
-  imports: [MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, RouterLink],
+  standalone: true,
+  imports: [
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    RouterLink,
+    MatSidenavModule,
+    MatExpansionModule,
+    RouterOutlet,
+    CommonModule,
+  ],
   templateUrl: './menu.html',
   styleUrl: './menu.css',
 })
-export class Menu {
+export class Menu implements OnInit {
   role: string = '';
   usuario: string = '';
+  collapsed = false;
 
-  constructor(private loginService: LoginService) {}
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    public route: ActivatedRoute
+  ) {}
+
+  ngOnInit() {
+    this.role = this.loginService.showRole();
+    this.usuario =
+      (this.loginService as any).showUser?.() || sessionStorage.getItem('username') || '';
+  }
 
   cerrar() {
     sessionStorage.clear();
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+    });
   }
 
   verificar() {
-    // actualizamos rol/usuario cada vez que se evalúa el menú
     this.role = this.loginService.showRole();
     this.usuario =
-      (this.loginService as any).showUser?.() ||
-      sessionStorage.getItem('username') ||
-      '';
-
+      (this.loginService as any).showUser?.() || sessionStorage.getItem('username') || '';
     return this.loginService.verificar();
   }
 
