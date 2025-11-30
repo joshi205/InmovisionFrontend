@@ -1,31 +1,168 @@
-<div class="container">
+<div class="menu-container">
+  @if (verificar()) {
   <mat-toolbar class="custom-toolbar">
+    <!-- HOME -->
+    <button mat-button [routerLink]="['/homes']" class="btn-nav brand-btn">
+      <mat-icon>home</mat-icon>
+      <span class="brand-title">Inmovision</span>
+    </button>
+
+    <!-- GESTIÓN (solo admin si quieres) -->
+    @if (isAdmin()) {
     <button
-      matButton
-      class="btn-rojo"
-      aria-label="Example icon-button with menu icon"
-      [matMenuTriggerFor]="menuDevice"
+      mat-button
+      class="btn-nav"
+      aria-label="Gestión Inmovision"
+      [matMenuTriggerFor]="menuGestion"
     >
-      <mat-icon>menu</mat-icon>Inmovision
+      <mat-icon>menu</mat-icon>
+      <span>Gestión</span>
+    </button>
+    }
+
+    <!-- REPORTES (puede ser admin/tester, ajusta como quieras) -->
+    @if (isAdmin() || isTester()) {
+    <button
+      mat-button
+      class="btn-nav"
+      aria-label="Reportes Inmovision"
+      [matMenuTriggerFor]="menuReportes"
+    >
+      <mat-icon>bar_chart</mat-icon>
+      <span>Reportes</span>
+    </button>
+    }
+
+    <span class="spacer"></span>
+
+    <!-- USUARIO / ROL -->
+    <button mat-button class="btn-nav user-btn" [matMenuTriggerFor]="menuUsuario">
+      <mat-icon>person</mat-icon>
+      <span>{{ usuario || 'Usuario' }}</span>
     </button>
   </mat-toolbar>
-  <mat-menu #menuDevice="matMenu">
-    <button mat-menu-item routerLink="/distritos">Distritos</button>
-    <button mat-menu-item routerLink="/usuarios">Usuarios</button>
-    <button mat-menu-item routerLink="/roles">Roles</button>
-    <button mat-menu-item routerLink="/propiedades">Propiedades</button>
-    <button mat-menu-item routerLink="/mensajes">Mensajes</button>
-    <button mat-menu-item routerLink="/visitas">Visitas</button>
-    <button mat-menu-item routerLink="/calificaciones">Calificaciones</button>
+  }
 
-    <button mat-menu-item routerLink="/contratos">Contratos</button>
+  <!-- MENÚ GESTIÓN -->
+  <mat-menu #menuGestion="matMenu">
+    <button mat-menu-item routerLink="/distritos">
+      <mat-icon>location_city</mat-icon>
+      <span>Distritos</span>
+    </button>
+    <button mat-menu-item routerLink="/usuarios">
+      <mat-icon>group</mat-icon>
+      <span>Usuarios</span>
+    </button>
+    <button mat-menu-item routerLink="/roles">
+      <mat-icon>verified_user</mat-icon>
+      <span>Roles</span>
+    </button>
+    <button mat-menu-item routerLink="/propiedades">
+      <mat-icon>home_work</mat-icon>
+      <span>Propiedades</span>
+    </button>
+    <button mat-menu-item routerLink="/mensajes">
+      <mat-icon>mail</mat-icon>
+      <span>Mensajes</span>
+    </button>
+    <button mat-menu-item routerLink="/visitas">
+      <mat-icon>event</mat-icon>
+      <span>Visitas</span>
+    </button>
+    <button mat-menu-item routerLink="/calificaciones">
+      <mat-icon>star_rate</mat-icon>
+      <span>Calificaciones</span>
+    </button>
+    <button mat-menu-item routerLink="/contratos">
+      <mat-icon>description</mat-icon>
+      <span>Contratos</span>
+    </button>
+    <button mat-menu-item routerLink="/favoritos">
+      <mat-icon>favorite</mat-icon>
+      <span>Favoritos</span>
+    </button>
+    <button mat-menu-item routerLink="/listas-favoritos">
+      <mat-icon>list</mat-icon>
+      <span>Lista favoritos</span>
+    </button>
+    <button mat-menu-item routerLink="/recomendaciones">
+      <mat-icon>thumb_up</mat-icon>
+      <span>Recomendaciones</span>
+    </button>
+    <button mat-menu-item routerLink="/comparaciones">
+      <mat-icon>compare</mat-icon>
+      <span>Comparaciones</span>
+    </button>
+    <button mat-menu-item routerLink="/pagos">
+      <mat-icon>payments</mat-icon>
+      <span>Pagos</span>
+    </button>
+    <button mat-menu-item routerLink="/simulacion-de-precios">
+      <mat-icon>calculate</mat-icon>
+      <span>Simulaciones de precios</span>
+    </button>
+  </mat-menu>
 
-    <button mat-menu-item routerLink="/favoritos">Favoritos</button>
-    <button mat-menu-item routerLink="/listas-favoritos">Lista favoritos</button>
+  <!-- MENÚ REPORTES (aquí agregas todos tus reportes de queries) -->
+  <mat-menu #menuReportes="matMenu">
+    <button mat-menu-item routerLink="/reportecalificaciones">
+      <mat-icon>bar_chart</mat-icon>
+      <span>Rep. calificaciones</span>
+    </button>
 
-    <button mat-menu-item routerLink="/recomendaciones">Recomendaciones</button>
-    <button mat-menu-item routerLink="/comparaciones">Comparaciones</button>
-    <button mat-menu-item routerLink="/pagos">Pagos</button>
-    <button mat-menu-item routerLink="/simulaciones-de-precios">Simulaciones de precios</button>
+    <button mat-menu-item routerLink="/reportetopdistritos">
+      <mat-icon>bar_chart</mat-icon>Top distritos Contrato
+    </button>
+
+    <button mat-menu-item routerLink="/reportemontopromediotipo">
+      <mat-icon>pie_chart</mat-icon>Monto promedio por tipo Contrato
+    </button>
+
+    <button mat-menu-item routerLink="/reporte-favoritos-propiedad">
+      <mat-icon>favorite</mat-icon>
+      Rep. Favoritos por propiedad
+    </button>
+
+    <button mat-menu-item routerLink="/reportemensajesusuario">
+      <mat-icon>mail</mat-icon>
+      <span>Mensajes por usuario</span>
+    </button>
+
+    <button mat-menu-item routerLink="/reportepagosusuario">
+      <mat-icon>payments</mat-icon>
+      <span>Pagos por usuario</span>
+    </button>
+
+    <button mat-menu-item routerLink="/reportepagosmetodo">
+      <mat-icon>pie_chart</mat-icon>
+      <span>Pagos por método</span>
+    </button>
+
+    <button mat-menu-item routerLink="/reportepropiedadesdistrito">
+      <mat-icon>location_city</mat-icon>
+      <span>Propiedades por distrito</span>
+    </button>
+
+    <button mat-menu-item routerLink="/reporterecomendacionespropiedad">
+      <mat-icon>thumb_up</mat-icon>
+      <span>Recomendaciones por propiedad</span>
+    </button>
+
+    <button mat-menu-item routerLink="/reportevistaspropiedad">
+      <mat-icon>event</mat-icon>
+      <span>Visitas por propiedad</span>
+    </button>
+  </mat-menu>
+
+  <!-- MENÚ USUARIO -->
+  <mat-menu #menuUsuario="matMenu">
+    <button mat-menu-item disabled>
+      <mat-icon>badge</mat-icon>
+      <span>Rol: {{ role || 'Sin rol' }}</span>
+    </button>
+    <button mat-menu-item routerLink="/login" (click)="cerrar()">
+      <mat-icon>logout</mat-icon>
+      <span>Cerrar sesión</span>
+    </button>
   </mat-menu>
 </div>

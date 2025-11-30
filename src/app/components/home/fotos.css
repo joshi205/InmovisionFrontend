@@ -1,0 +1,219 @@
+body{
+    margin: 0;
+    background-color: #c6e4ff ;
+}
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Para que ocupe todo el ancho de la pantalla */
+    z-index: 1000; /* Asegúrate de que el header esté por encima del resto del contenido */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Añadir sombra para distinguirlo mejor */
+}
+.logo_container img{
+    width: 40px;
+    height: 40px;
+}
+.logo_container p{
+    font-size: 25px;
+    color:white;
+    font-weight: bold;
+    margin-left: 15px;
+    font-family: "Lexend Deca",sans-serif;
+}
+.logo_container a{
+    text-decoration: none;
+}
+.logo_container{
+    display: flex;
+    margin-left: 20px;
+    align-items: center;
+}
+.container{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background:#105590;
+}
+.navegacion a{
+    text-decoration: none;
+    font-family: "Lexend Deca",sans-serif;
+    color:white;
+    font-weight: bolder;
+}
+.navegacion{
+   display: flex;
+   gap:30px;/*espacio entre los link de navegacion*/
+  margin-left: 900px ;
+}
+.avatar_container {
+    display: flex;
+    align-items: center;
+    margin-right: 30px; /* Ajusta el espacio a la derecha si es necesario */
+}
+.avatar {
+    width: 40px;   /* Ajusta el tamaño del avatar */
+    height: 40px;
+    border-radius: 50%; /* Hace que la imagen sea redonda */
+    border: 2px solid white; /* Puedes añadir un borde para el avatar */
+}
+.fondo_imagen{
+    background-image: linear-gradient(
+    rgba(0,0,0,0.5),
+    rgba(0,0,0,0.5)
+    ),url(/assets/propiedad4.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 434px; 
+}
+.titulo{
+    text-align: center;
+    color: #105590;
+    font-family: "Lexend Deca",sans-serif;
+    font-weight: bolder;
+    padding: 30px;
+}
+.galeria{
+    position: relative;
+    height: 440px;
+}
+.galeria-container{
+    display: flex;
+    position: absolute;
+    right:680px;
+    padding: 20px;
+}
+.foto-principal{
+    margin-right:15px;
+}
+.principal{
+    background-image: url(/assets/propiedad4.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height:400px;
+    width: 500px;
+    border-radius: 20px;
+}
+.foto-secundaria{
+    position:relative;
+}
+.foto-secundaria .card1{
+    background-image: url(/assets/propiedad4-images.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height:195px;
+    width: 195px;
+    position:absolute;
+    bottom:205px;
+    border-radius: 20px;
+    padding-left: 5px;
+}
+.foto-secundaria .card2{
+    background-image: url(/assets/propiedad-images2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height:195px;
+    width: 195px;
+    position:absolute;
+    left:210px;
+    bottom: 205px;
+    border-radius: 20px;
+    padding-left: 5px;
+}
+.foto-secundaria .card3{
+    background-image: url(/assets/propiedad4-images3.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height:195px;
+    width: 195px;
+    position:absolute;
+    border-radius: 20px;
+    padding-left: 5px;
+    top:205px;
+}
+.foto-secundaria .card4{
+    background-image: url(/assets/propiedad-images4.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height:195px;
+    width: 200px;
+    position:absolute;
+    left:210px;
+    border-radius: 20px;
+    top:205px;
+}
+.detalles{
+    margin-top:30px;
+    display: flex;
+    justify-content: center;
+}
+.info-card {
+   
+    padding: 20px;
+    margin-right: 100px;
+    width: 300px;
+   
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    color: #000;
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+
+.info-item i {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    color: #007bff; /* Color de los iconos */
+    font-size: 20px; /* Tamaño de los iconos */
+}
+.detalles .image{
+    background-image:linear-gradient(
+        rgba(0,0,0,0.5),
+        rgba(0,0,0,0.5)
+        ),url(/assets/VR.png);
+    background-repeat: no-repeat;
+   background-size:cover;
+    background-position:center;
+    width: 400px;
+    height: 407px;
+    margin-left: 100px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cuadro{    
+    color: white;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 300px;
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 20px;
+}
+.texto-imagen{
+    font-family: "Exo 2";
+    font-size: 20px;
+    font-weight: bold;
+}
+.btn-sim button{
+    background-color: #000;
+    border:4px solid #ffff;
+    color: #ffff;
+    padding:10px 24px;
+    border-radius: 10px;
+    cursor:pointer;
+}

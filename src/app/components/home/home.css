@@ -1,0 +1,312 @@
+*{
+    font-family: sans-serif;
+}
+body
+{
+    margin: 0;
+    background-color: #c6e4ff;
+}
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Para que ocupe todo el ancho de la pantalla */
+    z-index: 1000; /* Asegúrate de que el header esté por encima del resto del contenido */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Añadir sombra para distinguirlo mejor */
+}
+.container{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background:#105590;
+}
+.logo_container{
+    display: flex;
+    margin-left: 20px;
+    align-items: center;
+}
+.logo_container img
+{
+    width: 40px;
+    height: 40px;
+}
+.logo_container p{
+    font-size: 25px;
+    color:white;
+    font-weight: bold;
+    margin-left: 15px;
+    font-family: "Lexend Deca",sans-serif;
+}
+.navegacion{
+    display: flex;
+    align-items: center;
+}
+.navegacion a{
+    margin-right: 30px;
+    text-decoration: none;
+    font-family: "Lexend Deca",sans-serif;
+    color:white;
+    font-weight: bolder;
+
+}
+.imagen-fondo{
+    background-image: linear-gradient(
+        rgba(0,0,0,0.5),
+        rgba(0,0,0,0.5)
+        ),url(/assets/VR.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 590px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cuadro{
+    position: absolute;
+    color:#ffff;
+    margin-left: 10em;
+    font-size: larger;
+    margin-top: 100px;
+}
+.btn-simulation{
+    background-color: #105590;
+    height: 70.25px;
+    border-radius: 10px;
+    font-weight: bolder;
+    padding-left: 30px;
+    padding-right: 30px;
+    color:#ffff;
+    border-style: none;
+    margin-top: 25px;
+}
+.nosotros{
+    display: flex;
+    background-color: #105590;
+    justify-content: space-around;
+    color:#ffff;
+    padding: 60px;
+}
+
+.card1 h1{
+    padding-left: 130px;
+}
+.card2 h1{
+    padding-left: 100px;
+}
+.card3 h1{
+    padding-left: 100px;
+}
+.casa-inteligente{
+    display: flex;
+
+}
+.casa-imagen{
+    background-image: linear-gradient(
+        rgba(0,0,0,0.5),
+        rgba(0,0,0,0.5)
+        ),url(/assets/propiedad4.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 460px;
+    width: 100%;
+}
+.casa{
+    display: flex;
+    position:relative;
+}
+.descripcion{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.descripcion p{
+    font-size: 14.5px;
+}
+.info{
+    position:absolute;
+    left:870px;
+    background-color: #2391ff;
+    font-size: 16px;
+    padding: 4px 15px 1px 15px;
+    color:#ffff;
+}
+.btn-simulador button{
+    background-color: #105590;
+    border-radius: 8px;
+    border-style: none;
+    padding:20px;   
+    color: #ffff;
+    margin-bottom: 10.5px;
+    cursor:pointer;
+}
+.options{
+    background-color: #c6e4ff;
+    
+}
+.cartas{
+    padding: 90px ;
+    display: flex;
+    justify-content: space-around;
+}
+
+.cartas .card1{
+    background-image: linear-gradient(
+        rgba(0,0,0,0.5),
+        rgba(0,0,0,0.5)
+        ),url(/assets/card1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+    width: 200px;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffff;
+    transition: transform 0.3s ease-in-out;
+}
+.cartas .card1:hover {
+    transform: scale(1.05); /* Incrementa el tamaño de la imagen al pasar el mouse */
+}
+.cartas .card2{
+    background-image: linear-gradient(
+        rgba(0,0,0,0.5),
+        rgba(0,0,0,0.5)
+        ),url(/assets/card2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+    width: 200px;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffff;
+    transition: transform 0.3s ease-in-out;
+}
+.cartas .card2:hover {
+    transform: scale(1.05); /* Incrementa el tamaño de la imagen al pasar el mouse */
+}
+.cartas .card3{
+    background-image: linear-gradient(
+        rgba(0,0,0,0.5),
+        rgba(0,0,0,0.5)
+        ),url(/assets/card3.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+    width: 200px;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffff;
+    transition: transform 0.3s ease-in-out;
+}
+.cartas .card3:hover {
+    transform: scale(1.05); /* Incrementa el tamaño de la imagen al pasar el mouse */
+}
+.casa-imagen2{
+    background-image: linear-gradient(
+        rgba(0,0,0,0.5),
+        rgba(0,0,0,0.5)
+        ),url(/assets/card2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 460px;
+    width: 100%;
+}
+.casa2{
+    display: flex;
+    position:relative;
+}
+.descripcion2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.descripcion2 p{
+    font-size: 14.5px;
+}
+.info2{
+    position:absolute;
+    right:870px;
+    background-color: #2391ff;
+    font-size: 16px;
+    padding: 4px 15px 1px 15px;
+    color:#ffff;
+}
+.btn-simulador2{
+    margin-bottom: 10.5px;
+   
+}
+.btn-simulador2 button{
+    background-color: #105590;
+    border-radius: 8px;
+    border-style: none;
+    padding:20px;   
+    color: #ffff;
+    cursor: pointer;
+}
+footer {
+    background-color: #000;
+    color: #fff;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
+}
+
+.footer-container {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-column {
+    flex: 1;
+    padding: 0 15px;
+}
+
+.footer-column h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.footer-column a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.footer-column a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    font-size: 0.8em;
+}
+
+.footer-bottom a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+.footer-bottom a:hover {
+    text-decoration: underline;
+}
