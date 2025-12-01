@@ -28,7 +28,7 @@ export class LoginService {
 
  login(request: JwtRequestDTO) {
 
-  return this.http.post('http://localhost:8080/login', request);
+  return this.http.post('https://inmovision.onrender.com/login', request);
 
  }
 
