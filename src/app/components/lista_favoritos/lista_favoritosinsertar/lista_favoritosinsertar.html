@@ -5,7 +5,6 @@
 
   <div style="text-align: center; margin: 5%">
     <form [formGroup]="form" (submit)="aceptar()" class="example-form">
-
       @if (edicion) {
       <mat-form-field class="example-full-width">
         <mat-label>ID:</mat-label>
@@ -19,15 +18,9 @@
         <mat-label>Nombre</mat-label>
         <input matInput formControlName="nombre" />
         <mat-error>
-          @if (form.get('nombre')?.hasError('required')) { 
-            Ingrese el nombre de la lista!!
-          }
-          @if (form.get('nombre')?.hasError('minlength')) { 
-            Mínimo 3 caracteres
-          }
-          @if (form.get('nombre')?.hasError('maxlength')) { 
-            Máximo 50 caracteres
-          }
+          @if (form.get('nombre')?.hasError('required')) { Ingrese el nombre de la lista!! } @if
+          (form.get('nombre')?.hasError('minlength')) { Mínimo 3 caracteres } @if
+          (form.get('nombre')?.hasError('maxlength')) { Máximo 50 caracteres }
         </mat-error>
       </mat-form-field>
 
@@ -36,10 +29,8 @@
       <mat-form-field>
         <mat-label>Descripción</mat-label>
         <textarea matInput formControlName="descripcion"></textarea>
-        <mat-error>         
-          @if (form.get('descripcion')?.hasError('maxlength')) { 
-            Máximo 200 caracteres
-          }
+        <mat-error>
+          @if (form.get('descripcion')?.hasError('maxlength')) { Máximo 200 caracteres }
         </mat-error>
       </mat-form-field>
 
@@ -48,6 +39,15 @@
       <div style="margin-top: 20px">
         <button matButton="elevated">
           {{ edicion ? 'Editar' : 'Registrar' }}
+        </button>
+        <button
+          mat-stroked-button
+          type="button"
+          class="btn-cancelar"
+          color="warn"
+          (click)="cancelar()"
+        >
+          Cancelar
         </button>
       </div>
     </form>

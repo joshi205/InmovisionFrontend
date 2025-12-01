@@ -1,51 +1,44 @@
+// src/app/components/mensaje/mensajeinsertar/mensajeinsertar.ts
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
-import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 
 import { Mensaje } from '../../../models/Mensaje';
 import { MensajeService } from '../../../services/mensajeservice';
 import { Usuarioservice } from '../../../services/usuarioservice';
 import { Propiedadservice } from '../../../services/propiedadservice';
-import { Usuario } from '../../../models/Usuario';
 import { Propiedad } from '../../../models/Propiedad';
+import { Usuario } from '../../../models/Usuario';
 
 @Component({
   selector: 'app-mensaje-insert',
   standalone: true,
   imports: [
+    CommonModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatSelectModule,
-    MatDatepickerModule,
     MatButtonModule,
-    MatNativeDateModule,
     MatIconModule,
+    MatSelectModule,
   ],
   templateUrl: './mensajeinsertar.html',
   styleUrl: './mensajeinsertar.css',
 })
 export class Mensajeinsertar implements OnInit {
-  
   form: FormGroup = new FormGroup({});
-  edicion: boolean = false;
-  id: number = 0;
-  hoy: Date = new Date();
-  men: Mensaje = new Mensaje();
+  idPropiedad: number = 0;
 
+  // 🔹 Lista y usuario seleccionado desde el combo
   listaUsuarios: Usuario[] = [];
-  listaPropiedades: Propiedad[] = [];
+  usuarioSeleccionadoId: number | null = null;
+
+  propiedad: Propiedad = new Propiedad();
+  mensajes: Mensaje[] = [];
 
   constructor(
     private mS: MensajeService,
@@ -53,74 +46,105 @@ export class Mensajeinsertar implements OnInit {
     private pS: Propiedadservice,
     private router: Router,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((data: Params) => {
-      this.id = data['id'];
-      this.edicion = data['id'] != null;
-      this.init();
-    });
-
-    this.uS.list().subscribe((data) => (this.listaUsuarios = data));
-    this.pS.list().subscribe((data) => (this.listaPropiedades = data));
-
+    // 1) Form con usuario + contenido
     this.form = this.formBuilder.group({
-      codigo: [''],
-      contenido: ['', [
-          Validators.required,
-          Validators.minLength(5),   
-          Validators.maxLength(300)  
-        ]
-      ],
-      enviadoEn: [this.hoy, Validators.required],
-      usuario: ['', Validators.required],
-      propiedad: ['', Validators.required],
+      usuarioId: [null, Validators.required],
+      contenido: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(500)]],
+    });
+
+    // Para poder saber cuál es el usuario “actual” del combo (para colorear mis mensajes)
+    this.form.get('usuarioId')?.valueChanges.subscribe((id) => {
+      this.usuarioSeleccionadoId = id;
+    });
+
+    // 2) ID de propiedad por query param
+    this.route.queryParams.subscribe((params: Params) => {
+      this.idPropiedad = +(params['propiedadId'] || 0);
+      if (this.idPropiedad) {
+        this.cargarDatos();
+      }
+    });
+
+    // 3) Cargar usuarios para el combo
+    this.uS.list().subscribe({
+      next: (usuarios) => {
+        this.listaUsuarios = usuarios;
+      },
+      error: (err) => console.error('Error cargando usuarios', err),
     });
   }
 
-  aceptar(): void {
-    if (this.form.valid) {
-      this.men.idMensaje = this.form.value.codigo;
-      this.men.contenido = this.form.value.contenido;
-      this.men.enviadoEn = this.form.value.enviadoEn;
-      this.men.usuario.idUser = this.form.value.usuario;
-      this.men.propiedad.idPropiedad = this.form.value.propiedad;
+  cargarDatos(): void {
+    // Propiedad
+    this.pS.listId(this.idPropiedad).subscribe((data) => {
+      this.propiedad = data;
+    });
 
-      if (this.edicion) {
-        this.mS.update(this.men).subscribe(() => {
-          this.mS.list().subscribe((data) => {
-            this.mS.setList(data);
-          });
-        });
-      } else {
-        this.mS.insert(this.men).subscribe(() => {
-          this.mS.list().subscribe((data) => {
-            this.mS.setList(data);
-          });
-        });
-      }
-
-      this.router.navigate(['mensajes']);
-    }
+    // Mensajes de esa propiedad
+    this.mS.list().subscribe((data) => {
+      this.mensajes = data
+        .filter((m) => m.propiedad.idPropiedad === this.idPropiedad)
+        .sort((a, b) => new Date(a.enviadoEn).getTime() - new Date(b.enviadoEn).getTime());
+    });
   }
 
-  cancelar(): void {
+  enviarMensaje(): void {
+    if (this.form.invalid || !this.idPropiedad) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    const usuarioId = this.form.value.usuarioId as number;
+
+    const nuevo = new Mensaje();
+    nuevo.contenido = this.form.value.contenido;
+    nuevo.enviadoEn = new Date();
+    nuevo.usuario.idUser = usuarioId;
+    nuevo.propiedad.idPropiedad = this.idPropiedad;
+
+    this.mS.insert(nuevo).subscribe(() => {
+      // limpiamos solo el contenido, dejamos el usuario seleccionado
+      this.form.patchValue({ contenido: '' });
+      this.cargarDatos();
+    });
+  }
+
+  volver(): void {
     this.router.navigate(['mensajes']);
   }
 
-  init() {
-    if (this.edicion) {
-      this.mS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          codigo: new FormControl(data.idMensaje),
-          contenido: new FormControl(data.contenido),
-          enviadoEn: new FormControl(data.enviadoEn),
-          usuario: new FormControl(data.usuario.idUser),
-          propiedad: new FormControl(data.propiedad.idPropiedad),
-        });
+  // “Mis mensajes” = los que coinciden con el usuario elegido en el combo
+  esMiMensaje(mensaje: Mensaje): boolean {
+    return !!this.usuarioSeleccionadoId && mensaje.usuario?.idUser === this.usuarioSeleccionadoId;
+  }
+
+  formatearFecha(fecha: Date): string {
+    const f = new Date(fecha);
+    const hoy = new Date();
+
+    if (f.toDateString() === hoy.toDateString()) {
+      return f.toLocaleTimeString('es-PE', {
+        hour: '2-digit',
+        minute: '2-digit',
       });
+    }
+
+    return f.toLocaleDateString('es-PE', {
+      day: '2-digit',
+      month: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  }
+
+  eliminar(id: number | undefined): void {
+    if (!id) return;
+    if (confirm('¿Eliminar este mensaje?')) {
+      this.mS.delete(id).subscribe(() => this.cargarDatos());
     }
   }
 }
