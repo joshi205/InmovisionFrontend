@@ -5,7 +5,6 @@
 
   <div style="text-align: center; margin: 5%">
     <form [formGroup]="form" (submit)="aceptar()" class="example-form">
-
       @if (edicion) {
       <mat-form-field class="example-full-width">
         <mat-label>ID:</mat-label>
@@ -22,9 +21,7 @@
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error>
-          @if (form.get('fechaAgregado')?.hasError('required')) { 
-            Seleccione la fecha!!
-          }
+          @if (form.get('fechaAgregado')?.hasError('required')) { Seleccione la fecha!! }
         </mat-error>
       </mat-form-field>
 
@@ -38,9 +35,7 @@
           }
         </mat-select>
         <mat-error>
-          @if (form.get('usuarioFK')?.hasError('required')) { 
-            Seleccione un usuario!!
-          }
+          @if (form.get('usuarioFK')?.hasError('required')) { Seleccione un usuario!! }
         </mat-error>
       </mat-form-field>
 
@@ -54,9 +49,7 @@
           }
         </mat-select>
         <mat-error>
-          @if (form.get('propiedadFK')?.hasError('required')) { 
-            Seleccione una propiedad!!
-          }
+          @if (form.get('propiedadFK')?.hasError('required')) { Seleccione una propiedad!! }
         </mat-error>
       </mat-form-field>
 
@@ -70,9 +63,7 @@
           }
         </mat-select>
         <mat-error>
-          @if (form.get('listaFavoritoFK')?.hasError('required')) { 
-            Seleccione una lista!!
-          }
+          @if (form.get('listaFavoritoFK')?.hasError('required')) { Seleccione una lista!! }
         </mat-error>
       </mat-form-field>
 
@@ -83,6 +74,15 @@
           {{ edicion ? 'Editar' : 'Registrar' }}
         </button>
       </div>
+      <button
+        mat-stroked-button
+        color="warn"
+        class="btn-cancelar"
+        type="button"
+        (click)="cancelar()"
+      >
+        Cancelar
+      </button>
     </form>
   </div>
 </div>

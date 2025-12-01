@@ -33,6 +33,7 @@
     "@auth0/angular-jwt": "^5.2.0",
     "aframe": "^1.7.1",
     "chart.js": "^4.5.1",
+    "jwt-decode": "^4.0.0",
     "leaflet": "^1.9.4",
     "ng2-charts": "^8.0.0",
     "ol": "^10.7.0",

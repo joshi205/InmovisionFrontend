@@ -63,7 +63,9 @@ export class Recomendacioninsertar implements OnInit{
       propiedadFK: ['', Validators.required],
     });
   }
-
+cancelar(): void {
+    this.router.navigate(['recomendaciones']);
+  }
   aceptar(): void {
     if(this.form.valid) {
       this.rec.idRecomendacion = this.form.value.codigo;

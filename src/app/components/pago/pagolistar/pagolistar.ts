@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 })
 export class Pagolistar implements OnInit {
 
+  pagos: Pago[] = []; // Array para @for
   dataSource: MatTableDataSource<Pago> = new MatTableDataSource();
   displayedColumns: string[] = [
     'c1', 'c2', 'c3', 'c4', 'c5', 'acciones'
@@ -25,10 +26,12 @@ export class Pagolistar implements OnInit {
 
   ngOnInit(): void {
     this.pS.list().subscribe(data => {
+      this.pagos = data; // Guarda en el array
       this.dataSource = new MatTableDataSource(data);
     });
 
     this.pS.getList().subscribe(data => {
+      this.pagos = data; // Guarda en el array
       this.dataSource = new MatTableDataSource(data);
     });
   }
@@ -36,6 +39,8 @@ export class Pagolistar implements OnInit {
   eliminar(id: number) {
     this.pS.delete(id).subscribe(() => {
       this.pS.list().subscribe(data => {
+        this.pagos = data; // Actualiza el array
+        this.dataSource = new MatTableDataSource(data);
         this.pS.setList(data);
       });
     });
