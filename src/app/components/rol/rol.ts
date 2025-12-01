@@ -10,5 +10,4 @@ import { Rollistar } from './rollistar/rollistar';
 })
 export class Rol {
     constructor(public route:ActivatedRoute){}
-
 }
