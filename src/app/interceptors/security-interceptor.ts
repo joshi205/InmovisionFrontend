@@ -11,16 +11,10 @@ export class SecurityInterceptor implements HttpInterceptor {
   constructor(private snack: MatSnackBar) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem("token");
-
-    // Si hay token, lo inyecta en cada request
-    const secureReq = token
-      ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
-      : req;
-
-    return next.handle(secureReq).pipe(
+    return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
-        if (error instanceof HttpErrorResponse && error.status === 403) {
+        // Solo mostrar mensaje si es error 403 (permiso denegado)
+        if (error.status === 403) {
           this.snack.open("⛔ No tienes permiso para realizar esta acción", "Cerrar", { duration: 3000 });
         }
         return throwError(() => error);
