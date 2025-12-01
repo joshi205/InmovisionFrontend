@@ -10,6 +10,4 @@ import { Visitalistar } from './visitalistar/visitalistar';
 })
 export class Visita {
       constructor(public route:ActivatedRoute){}
-
-
 }
