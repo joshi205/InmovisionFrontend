@@ -4,10 +4,11 @@
       {{ edicion ? 'Editar Propiedad' : 'Registrar Propiedad' }}
     </h2>
 
-    <form [formGroup]="form" (ngSubmit)="aceptar()" class="grid">
-      <!-- IZQUIERDA -->
-      <div class="col">
-        <mat-form-field appearance="fill" class="small">
+    <form [formGroup]="form" (ngSubmit)="aceptar()" class="form-grid">
+
+      <!-- FILA 1: TÍTULO / DIRECCIÓN -->
+      <div class="row">
+        <mat-form-field appearance="fill" class="field">
           <mat-label>Título</mat-label>
           <input matInput formControlName="titulo" />
           <mat-error>
@@ -20,20 +21,20 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="small">
-          <mat-label>Descripción</mat-label>
-          <textarea matInput rows="2" formControlName="descripcion"></textarea>
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>Dirección</mat-label>
+          <input matInput formControlName="direccion" />
           <mat-error>
-              @if (form.get('descripcion')?.hasError('required')) {
-                Ingrese descripción!!
-              }
-              @if (form.get('descripcion')?.hasError('minlength')) {
-                Mínimo 10 caracteres
-              }
+            @if (form.get('direccion')?.hasError('required')) {
+              Ingrese dirección!!
+            }
           </mat-error>
         </mat-form-field>
+      </div>
 
-        <mat-form-field appearance="fill" class="small">
+      <!-- FILA 2: PRECIO / ESTADO / FECHA -->
+      <div class="row row-3">
+        <mat-form-field appearance="fill" class="field">
           <mat-label>Precio</mat-label>
           <input matInput type="number" formControlName="precio" />
           <mat-error>
@@ -46,7 +47,41 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="small">
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>Estado</mat-label>
+          <mat-select formControlName="estado">
+            <mat-option value="Disponible">Disponible</mat-option>
+            <mat-option value="No disponible">No disponible</mat-option>
+          </mat-select>
+          <mat-error>
+            @if (form.get('estado')?.hasError('required')) {
+              Seleccione estado!!
+            }
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>Fecha publicación</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [min]="hoy"
+            [max]="hoy"
+            formControlName="fechaPublicacion"
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error>
+            @if (form.get('fechaPublicacion')?.hasError('required')) {
+              Seleccione una fecha!!
+            }
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- FILA 3: TIPO / CATEGORÍA / METROS -->
+      <div class="row row-3">
+        <mat-form-field appearance="fill" class="field">
           <mat-label>Tipo</mat-label>
           <mat-select formControlName="tipo">
             <mat-option value="Casa">Casa</mat-option>
@@ -61,7 +96,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="small">
+        <mat-form-field appearance="fill" class="field">
           <mat-label>Categoría</mat-label>
           <mat-select formControlName="categoria">
             <mat-option value="Venta">Venta</mat-option>
@@ -74,52 +109,8 @@
             }
           </mat-error>
         </mat-form-field>
-      </div>
 
-      <!-- DERECHA -->
-      <div class="col">
-        <mat-form-field appearance="fill" class="small">
-          <mat-label>Dirección</mat-label>
-          <input matInput formControlName="direccion" />
-          <mat-error>
-            @if (form.get('direccion')?.hasError('required')) {
-              Ingrese dirección!!
-            }
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" class="small">
-          <mat-label>Estado</mat-label>
-          <mat-select formControlName="estado">
-            <mat-option value="Disponible">Disponible</mat-option>
-            <mat-option value="No disponible">No disponible</mat-option>
-          </mat-select>
-         <mat-error>
-            @if (form.get('estado')?.hasError('required')) {
-              Seleccione estado!!
-            }
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" class="small">
-          <mat-label>Fecha publicación</mat-label>
-          <input 
-            matInput 
-            [matDatepicker]="picker" 
-            [min]="hoy"
-            [max]="hoy"
-            formControlName="fechaPublicacion" 
-          />
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-          <mat-error>
-            @if (form.get('fechaPublicacion')?.hasError('required')) {
-              Seleccione una fecha!!
-            }
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" class="small">
+        <mat-form-field appearance="fill" class="field">
           <mat-label>Metros cuadrados</mat-label>
           <input matInput type="number" formControlName="metrosCuadrados" />
           <mat-error>
@@ -131,8 +122,11 @@
             }
           </mat-error>
         </mat-form-field>
+      </div>
 
-        <mat-form-field appearance="fill" class="small">
+      <!-- FILA 4: HABITACIONES / BAÑOS / DESTACADA -->
+      <div class="row row-3 align-center">
+        <mat-form-field appearance="fill" class="field">
           <mat-label>Habitaciones</mat-label>
           <input matInput type="number" formControlName="habitaciones" />
           <mat-error>
@@ -145,7 +139,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="small">
+        <mat-form-field appearance="fill" class="field">
           <mat-label>Baños</mat-label>
           <input matInput type="number" formControlName="banos" />
           <mat-error>
@@ -158,13 +152,16 @@
           </mat-error>
         </mat-form-field>
 
-        <!-- DESTACADA -->
-        <mat-slide-toggle formControlName="destacada" color="primary"> Destacada </mat-slide-toggle>
+        <div class="field toggle-field">
+          <mat-slide-toggle formControlName="destacada" color="primary">
+            Destacada
+          </mat-slide-toggle>
+        </div>
       </div>
 
-      <!-- FILA FULL -->
-      <div class="col-full">
-        <mat-form-field appearance="fill" class="small">
+      <!-- FILA 5: LAT / LNG -->
+      <div class="row">
+        <mat-form-field appearance="fill" class="field">
           <mat-label>Latitud</mat-label>
           <input matInput type="number" formControlName="latitud" />
           <mat-error>
@@ -177,7 +174,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="small">
+        <mat-form-field appearance="fill" class="field">
           <mat-label>Longitud</mat-label>
           <input matInput type="number" formControlName="longitud" />
           <mat-error>
@@ -189,8 +186,11 @@
             }
           </mat-error>
         </mat-form-field>
+      </div>
 
-        <mat-form-field appearance="fill" class="small">
+      <!-- FILA 6: URL VR -->
+      <div class="row">
+        <mat-form-field appearance="fill" class="field">
           <mat-label>URL VR</mat-label>
           <input matInput formControlName="urlVr" />
           <mat-error>
@@ -199,8 +199,26 @@
             }
           </mat-error>
         </mat-form-field>
+      </div>
 
-        <mat-form-field appearance="fill" class="small">
+      <!-- FILA 7: DESCRIPCIÓN / NOTAS -->
+      <div class="row">
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput rows="2" formControlName="descripcion"></textarea>
+          <mat-error>
+            @if (form.get('descripcion')?.hasError('required')) {
+              Ingrese descripción!!
+            }
+            @if (form.get('descripcion')?.hasError('minlength')) {
+              Mínimo 10 caracteres
+            }
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="fill" class="field">
           <mat-label>Notas</mat-label>
           <textarea matInput rows="2" formControlName="notas"></textarea>
           <mat-error>
@@ -211,9 +229,9 @@
         </mat-form-field>
       </div>
 
-      <!-- USUARIO / DISTRITO -->
-      <div class="col-full">
-        <mat-form-field appearance="fill" class="small">
+      <!-- FILA 8: USUARIO / DISTRITO -->
+      <div class="row">
+        <mat-form-field appearance="fill" class="field">
           <mat-label>Usuario</mat-label>
           <mat-select formControlName="usuario">
             <mat-option *ngFor="let u of listaUsuarios" [value]="u.idUser">
@@ -227,7 +245,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="small">
+        <mat-form-field appearance="fill" class="field">
           <mat-label>Distrito</mat-label>
           <mat-select formControlName="distrito">
             <mat-option *ngFor="let d of listaDistritos" [value]="d.idDistrito">
@@ -243,10 +261,9 @@
       </div>
 
       <!-- IMÁGENES -->
-      <div class="col-full">
+      <div class="row row-column">
         <span class="subtitle">Imágenes</span>
 
-        <!-- BOTÓN ESTILIZADO -->
         <label class="btn-upload">
           <input type="file" multiple (change)="onFileSelected($event)" />
           📁 Elegir archivos
@@ -259,15 +276,15 @@
         </div>
       </div>
 
-      
-
       <!-- BOTONES -->
       <div class="actions">
         <button mat-raised-button color="primary" type="submit">
           {{ edicion ? 'Actualizar' : 'Registrar' }}
         </button>
 
-        <button mat-raised-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+        <button mat-raised-button color="warn" type="button" (click)="cancelar()">
+          Cancelar
+        </button>
       </div>
     </form>
   </div>

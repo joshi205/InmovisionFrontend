@@ -86,7 +86,9 @@ export class Favoritoinsertar implements OnInit {
       listaFavoritoFK: ['', Validators.required],
     });
   }
-
+  cancelar() {
+    this.router.navigate(['favoritos']);
+  }
   aceptar(): void {
     if (this.form.valid) {
       this.fav.idFavorito = this.form.value.id;
