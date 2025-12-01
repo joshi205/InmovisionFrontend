@@ -1,9 +1,20 @@
-import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideBrowserGlobalErrorListeners,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';  
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withFetch,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
+import { SecurityInterceptor } from './interceptors/security-interceptor';
 
 export function tokenGetter() {
   if (typeof window === 'undefined') {
@@ -14,14 +25,13 @@ export function tokenGetter() {
   return token && token.split('.').length === 3 ? token : null;
 }
 
-
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withFetch(),withInterceptorsFromDi()),
-       importProvidersFrom(
+    provideHttpClient(withFetch(), withInterceptorsFromDi()),
+    importProvidersFrom(
       JwtModule.forRoot({
         config: {
           tokenGetter: tokenGetter,
@@ -29,6 +39,11 @@ export const appConfig: ApplicationConfig = {
           disallowedRoutes: ['http://localhost:8080/login/forget'],
         },
       })
-    )
-  ]
+    ),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SecurityInterceptor,
+      multi: true,
+    },
+  ],
 };

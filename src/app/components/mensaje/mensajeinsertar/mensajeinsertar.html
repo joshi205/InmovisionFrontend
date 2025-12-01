@@ -1,83 +1,105 @@
-<div class="container">
-  <div style="text-align: center; margin: 5%">
-    <h2>{{ edicion ? 'Edición de mensaje' : 'Registrar mensaje' }}</h2>
-  </div>
+<!-- src/app/components/mensaje/mensajeinsertar/mensajeinsertar.html -->
+<div class="chat-wrapper">
+  <!-- HEADER -->
+  <header class="chat-header">
+    <button mat-icon-button class="btn-back" (click)="volver()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
 
-  <div style="text-align: center; margin: 5%">
-    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
-      @if (edicion) {
-      <mat-form-field class="example-full-width">
-        <mat-label>ID:</mat-label>
-        <input matInput formControlName="codigo" readonly="true" />
-      </mat-form-field>
-      }
-      <br />
-
-      <mat-form-field>
-        <mat-label>Usuario</mat-label>
-        <mat-select formControlName="usuario">
-          @for (u of listaUsuarios; track u) {
-          <mat-option [value]="u.idUser">{{ u.nombre }} {{ u.apellido }}</mat-option>
-          }
-        </mat-select>
-        <mat-error>
-          @if (form.get('idUsuario')?.hasError('required')) { Seleccione un usuario!! }
-        </mat-error>
-      </mat-form-field>
-      <br />
-
-      <!-- Contenido -->
-      <mat-form-field>
-        <mat-label>Contenido</mat-label>
-        <textarea matInput formControlName="contenido"></textarea>
-        <mat-error>
-          @if (form.get('contenido')?.hasError('required')) { Ingrese el contenido!! }
-          @if (form.get('contenido')?.hasError('minlength')) { Debe tener al menos 5 caracteres. }
-          @if (form.get('contenido')?.hasError('maxlength')) { Máximo 300 caracteres permitidos. }
-        </mat-error>
-      </mat-form-field>
-      <br />
-
-      <!-- Fecha -->
-      <mat-form-field>
-        <mat-label>Fecha de envío</mat-label>
-        <input 
-          matInput 
-          [matDatepicker]="picker" 
-          formControlName="enviadoEn"
-          [min]="hoy"
-          [max]="hoy"
+    <div class="header-main">
+      <div class="property-thumb">
+        <img
+          [src]="(propiedad.imagenes.length || 0) > 0 ? propiedad.imagenes[0].urlImagen : 'assets/propiedad4.jpg'"
+          [alt]="propiedad.titulo || 'Propiedad'"
         />
-        <mat-hint>DD/MM/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error>
-          @if (form.get('enviadoEn')?.hasError('required')) { La fecha es obligatoria. }
-        </mat-error>
-      </mat-form-field>
-      <br />
+      </div>
+      <div class="property-info">
+        <h2>{{ propiedad.titulo || 'Propiedad' }}</h2>
+        <p>
+          <mat-icon>location_on</mat-icon>
+          {{ propiedad.distrito.nombreDistrito || 'Sin ubicación' }}
+        </p>
+      </div>
+    </div>
 
-      <!-- Usuario -->
+    <div class="header-chip">
+      <span>Chat activo</span>
+    </div>
+  </header>
 
-      <!-- Propiedad -->
-      <mat-form-field>
-        <mat-label>Propiedad</mat-label>
-        <mat-select formControlName="propiedad">
-          @for (p of listaPropiedades; track p) {
-          <mat-option [value]="p.idPropiedad">{{ p.titulo }}</mat-option>
+  <!-- PANEL DE MENSAJES -->
+  <section class="messages-panel">
+    @if (mensajes.length === 0) {
+      <div class="empty-messages">
+        <mat-icon>chat_bubble_outline</mat-icon>
+        <p>No hay mensajes aún</p>
+        <span>Escribe el primero sobre esta propiedad</span>
+      </div>
+    }
+
+    @for (mensaje of mensajes; track mensaje.idMensaje) {
+      <div class="message-row" [class.my-message]="esMiMensaje(mensaje)">
+        <div class="message-bubble">
+          <div class="message-header">
+            <span class="sender">{{ mensaje.usuario.nombre }}</span>
+            <span class="time">{{ formatearFecha(mensaje.enviadoEn) }}</span>
+          </div>
+          <p class="message-text">
+            {{ mensaje.contenido }}
+          </p>
+
+          @if (esMiMensaje(mensaje)) {
+            <button
+              mat-icon-button
+              class="btn-delete-msg"
+              (click)="eliminar(mensaje.idMensaje)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          }
+        </div>
+      </div>
+    }
+  </section>
+
+  <!-- INPUT BAR -->
+  <footer class="chat-input-bar">
+    <form [formGroup]="form" (ngSubmit)="enviarMensaje()" class="input-form">
+      <!-- COMBO USUARIO -->
+      <div class="user-select-wrapper">
+        <mat-icon class="user-icon">person</mat-icon>
+        <mat-select
+          formControlName="usuarioId"
+          class="user-select"
+          placeholder="Selecciona usuario"
+          panelClass="user-select-panel"
+        >
+          @for (u of listaUsuarios; track u.idUser) {
+            <mat-option [value]="u.idUser">
+              {{ u.nombre }} {{ u.apellido }}
+            </mat-option>
           }
         </mat-select>
-        <mat-error>
-          @if (form.get('idPropiedad')?.hasError('required')) { Seleccione una propiedad!! }
-        </mat-error>
-      </mat-form-field>
-      <br />
-
-      <div>
-        <button matButton="elevated">{{ edicion ? 'Editar' : 'Registrar' }}</button>
       </div>
 
-      <button mat-raised-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+      <!-- INPUT MENSAJE -->
+      <input
+        type="text"
+        class="message-input"
+        formControlName="contenido"
+        placeholder="Escribe tu mensaje..."
+        autocomplete="off"
+      />
+
+      <!-- BOTÓN ENVIAR -->
+      <button
+        mat-icon-button
+        type="submit"
+        class="btn-send"
+        [disabled]="form.invalid"
+      >
+        <mat-icon>send</mat-icon>
+      </button>
     </form>
-  </div>
+  </footer>
 </div>

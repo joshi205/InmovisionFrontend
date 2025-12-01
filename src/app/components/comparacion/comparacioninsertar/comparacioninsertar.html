@@ -1,63 +1,73 @@
-<div class="container">
-  <div style="text-align: center; margin: 5%">
-    <h2>{{ edicion ? 'Editar Comparación' : 'Registrar Comparación' }}</h2>
-  </div>
-  <div style="text-align: center; margin: 5%">
-    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+<!-- src/app/components/comparacion/comparacion-insert/comparacion-insert.html -->
+
+<div class="comp-insert-page">
+  <div class="comp-insert-card">
+    <h2 class="comp-insert-title">
+      {{ edicion ? 'Editar comparación' : 'Registrar comparación' }}
+    </h2>
+
+    <form [formGroup]="form" (ngSubmit)="aceptar()" class="comp-form">
       <!-- ID solo en edición -->
       @if (edicion) {
-      <mat-form-field class="example-full-width">
-        <mat-label>ID</mat-label>
-        <input matInput formControlName="codigo" readonly />
-      </mat-form-field>
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="codigo" readonly />
+        </mat-form-field>
       }
 
-      <br />
-
       <!-- Usuario -->
-      <mat-form-field>
+      <mat-form-field appearance="fill" class="field">
         <mat-label>Usuario</mat-label>
         <mat-select formControlName="usuario">
           @for (u of listaUsuarios; track u) {
-          <mat-option [value]="u.idUser">{{ u.nombre }} {{ u.apellido }}</mat-option>
+            <mat-option [value]="u.idUser">
+              {{ u.nombre }} {{ u.apellido }}
+            </mat-option>
           }
         </mat-select>
         <mat-error>Seleccione un usuario</mat-error>
       </mat-form-field>
 
-      <br />
-
       <!-- Propiedad 1 -->
-      <mat-form-field>
+      <mat-form-field appearance="fill" class="field">
         <mat-label>Propiedad 1</mat-label>
         <mat-select formControlName="propiedad1">
           @for (p of listaPropiedades; track p) {
-          <mat-option [value]="p.idPropiedad">{{ p.titulo }}</mat-option>
+            <mat-option [value]="p.idPropiedad">{{ p.titulo }}</mat-option>
           }
         </mat-select>
         <mat-error>Seleccione una propiedad</mat-error>
       </mat-form-field>
 
-      <br />
-
       <!-- Propiedad 2 -->
-      <mat-form-field>
+      <mat-form-field appearance="fill" class="field">
         <mat-label>Propiedad 2</mat-label>
         <mat-select formControlName="propiedad2">
           @for (p of listaPropiedades; track p) {
-          <mat-option [value]="p.idPropiedad">{{ p.titulo }}</mat-option>
+            <mat-option [value]="p.idPropiedad">{{ p.titulo }}</mat-option>
           }
         </mat-select>
         <mat-error>Seleccione una propiedad</mat-error>
       </mat-form-field>
 
-      <br />
-      <div class="actions">
-        <button mat-raised-button color="primary" type="submit">
+      <!-- Botones -->
+      <div class="comp-actions-form">
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+        >
           {{ edicion ? 'Actualizar' : 'Registrar' }}
         </button>
 
-        <button mat-raised-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+        <button
+          mat-stroked-button
+          color="warn"
+          type="button"
+          (click)="cancelar()"
+        >
+          Cancelar
+        </button>
       </div>
     </form>
   </div>

@@ -53,6 +53,10 @@ export class Lista_favoritosinsertar implements OnInit {
     });
   }
 
+  cancelar() {
+    this.router.navigate(['listas-favoritos']);
+  }
+
   aceptar(): void {
     if (this.form.valid) {
       this.listaFav.idLista = this.form.value.id;
